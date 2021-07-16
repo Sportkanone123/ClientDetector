@@ -1,0 +1,4 @@
+name: ClientDetector
+version: 2.0 BETA
+author: Sportkanone123
+main: de.sportkanone123.clientdetector.bungeecord.ClientDetectorBungee

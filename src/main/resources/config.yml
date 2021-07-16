@@ -1,0 +1,95 @@
+#  _____ _ _            _   _____       _            _
+# / ____| (_)          | | |  __ \     | |          | |
+#| |    | |_  ___ _ __ | |_| |  | | ___| |_ ___  ___| |_ ___  _ __
+#| |    | | |/ _ \ '_ \| __| |  | |/ _ \ __/ _ \/ __| __/ _ \| '__|
+#| |____| | |  __/ | | | |_| |__| |  __/ ||  __/ (__| || (_) | |
+# \_____|_|_|\___|_| |_|\__|_____/ \___|\__\___|\___|\__\___/|_|
+
+#  ┌─────────────────────────────┐
+#  │  Client detection settings  │
+#  └─────────────────────────────┘
+client:
+  #Should ClientDetector try to detect the client that a player uses? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+  enableClientDetection: true
+  #Should ClientDetector try to detect the version of the client that the player is using? Only a few client's (Lunar, Labymod, ...) support this detection! [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+  enableVersionDetection: true
+  #Should ClientDetector detect the MC version of a player? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+  enableMinecraftVersionDetection: true
+
+
+#  ┌─────────────────────────────┐
+#  │   Mod detection settings    │
+#  └─────────────────────────────┘
+mods:
+  #Should ClientDetector try to detect the mods that a player uses (not only forge mods)? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+  enableModDetection: true
+
+  #If a player joins with mods the plugin will check if all mods are whitelisted, if not the punish command will be executed (only if this is enabled). [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
+  enableWhitelist: false
+  #Command that will be executed trough the console if not all mods that a player are whitelisted. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
+  punishCommandWhitelist: "kick %player_name% %mod_name% is not allowed on this server"
+  #List of whitelisted mods. [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- exampleMod]]
+  whitelistedMods:
+    - exampleMod
+
+  #If a player join and one or more of his mods are on this list, the punish command will be executed trough the console (only if this is enabled). [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
+  enableBlacklist: false
+  #Command that will be executed trough the console if one or more of his mods are on the blacklist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
+  punishCommandBlacklist: "kick %player_name% %mod_name% is not allowed on this server"
+  #List of blacklisted mods. [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- exampleMod]]
+  blacklistedMods:
+    - exampleMod
+
+
+#  ┌─────────────────────────────┐
+#  │       Alerts settings       │
+#  └─────────────────────────────┘
+alerts:
+  #Should the notifications be sent when a player's client/mods are detected? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+  enableNotifications: true
+  #Should the notifications be sent on every server that ClientDetector is installed on, on your network? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+  crossServerNotifications: true
+  #Should only important notifications be sent to the player's to avoid spamming? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
+  limitNotifications: false
+  #Everybody with this permission will get notifications about a player's client [OPTIONS: 'any.valid.permission', PLACEHOLDERS: none, DEFAULT:'clientdetecor.notify']
+  notificationPermission: 'clientdetector.notify'
+
+
+#  ┌─────────────────────────────┐
+#  │    Placeholder settings     │
+#  └─────────────────────────────┘
+placeholder:
+  #Should placeholder be enabled? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+  enablePlaceholder: true
+
+
+#  ┌─────────────────────────────┐
+#  │       Forge settings        │
+#  └─────────────────────────────┘
+forge:
+  #Should forge mod detection be enabled for legacy(1.8-1.12.2) version? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+  enableLegacyDetection: true
+  #Should forge mod detection be enabled for newer(1.13-1.16.5) version? !!1.13+ detection is not yet implemented!! [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+  enableNewerVersionDetection: true
+  #Should the plugin send a "fake" handshake, this is required to get the modlist of a forge player. [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+  simulateForgeHandshake: true
+  #Should all player's that join with forge get kicked? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
+  blockForge: false
+  #Command that will be executed trough the console if one or more of his mods are on the blacklist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%'], DEFAULT:'kick %player_name% Forge is not allowed on this server']
+  punishCommandForge: "kick %player_name% Forge is not allowed on this Server"
+
+  #If a player joins with forge the plugin will check if all forge mods are whitelisted, if not the punish command will be executed (only if this is enabled). [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
+  enableWhitelist: false
+  #Command that will be executed trough the console if not all forge mods that a player are whitelisted. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
+  punishCommandWhitelist: "kick %player_name% %mod_name% is not allowed on this server"
+  #List of whitelisted mods. [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- exampleMod]]
+  whitelistedMods:
+    - exampleMod
+
+  #If a player join and one or more of his forge mods are on this list, the punish command will be executed trough the console (only if this is enabled). [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
+  enableBlacklist: false
+  #Command that will be executed trough the console if one or more of his forge mods are on the blacklist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
+  punishCommandBlacklist: "kick %player_name% %mod_name% is not allowed on this server"
+  #List of blacklisted mods. [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- exampleMod]]
+  blacklistedMods:
+    - exampleMod

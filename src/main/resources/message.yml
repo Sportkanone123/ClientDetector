@@ -1,0 +1,51 @@
+prefix: "&7[&3ClientDetector&7]"
+
+detection:
+  #Message that will be sent when a player's client (and client version) was detected. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%player_name%', '%player_uuid%', '%client_name%', '%client_version%'], DEFAULT: "%prefix% &c%player_name% &7joined using &c%client_name% &7(&8version: &c%client_version%&7)"]
+  clientdetectionmessagewithversion: "%prefix% &c%player_name% &7joined using &c%client_name% &7(&8version: &c%client_version%&7)"
+  #Message that will be sent when a player's client was detected. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%player_name%', '%player_uuid%', '%client_name%'], DEFAULT: "%prefix% &c%player_name% &7joined using &c%client_name%"]
+  clientdetectionmessagewithoutversion: "%prefix% &c%player_name% &7joined using &c%client_name%"
+  #Message that will be sent if CrossServerNotifications are enabled. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%server_name%', '%%cross_server_message%'], DEFAULT: "%prefix% &c%player_name% &7joined using &c%client_name%"]
+  clientdetectionmessagecrossserver: "&7[&c%server_name%&7] %cross_server_message%"
+  #Message that will be sent when a bedrock player joins your server. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%player_name%', '%player_uuid%'], DEFAULT: "%prefix% &c%player_name% &7uses &cMinecarft Bedrock Edition"]
+  geyserdetectionmessage: "%prefix% &c%player_name% &7uses &cMinecarft Bedrock Edition"
+  #Message that will be sent when player joins and one or more mods are detected. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT: "%prefix% &c%player_name% &7joined using &c%mod_name%"]
+  moddetectionmessage: "%prefix% &c%player_name% &7joined using &c%mod_name%"
+
+forge:
+  #Answer to command when the player does not use forge. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%player_name%', '%player_uuid%'], DEFAULT: "%prefix% &c%player_name% &7does not use Forge!"]
+  notusingforge: "%prefix% &c%player_name% &7does not use Forge!"
+  #Answer to command when the player uses forge, but no modlist was detected. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%player_name%', '%player_uuid%'], DEFAULT: "%prefix% &c%player_name% &7uses Forge, but his Forge modlist was not detected!"]
+  usingforgebutnomodlistreceived: "%prefix% &c%player_name% &7uses Forge, but his Forge modlist was not detected!"
+  #Answer to command when the player uses forge, and his modlist was detected. [OPTIONS: "List[anyString]", PLACEHOLDERS: ['%prefix%', '%player_name%', '%player_uuid%'], DEFAULT: ["&7&m------------------- %prefix% &7&m-------------------", "&c%player_name%&7's mods:", " ", "&8&m- &c%mod_name% &7(&c%mod_version%&7)", "&7&m------------------- %prefix% &7&m-------------------"]]
+  usingforgemodlist:
+    - "&7&m------------------- %prefix% &7&m-------------------"
+    - "&c%player_name%&7's Forge mods:"
+    - ""
+    - "&8&m- &c%mod_name% &7(&c%mod_version%&7)"
+    - "&7&m------------------- %prefix% &7&m-------------------"
+
+player:
+  #Answer to command when a player's client was detected. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%player_name%', '%client_name%', '%client_version%'], DEFAULT: "%prefix% &c%player_name% &7is using &c%client_name% &7(&8version: &c%client_version%&7)"]
+  clientwithversion: "%prefix% &c%player_name% &7is using &c%client_name% &7(&8version: &c%client_version%&7)"
+  #Answer to command when a player's client was detected, but not it's version. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%player_name%', '%client_name%'], DEFAULT: "%prefix% &c%player_name% &7is using &c%client_name%"]
+  clientwithoutversion: "%prefix% &c%player_name% &7is using &c%client_name%"
+  #Answer to command when a player's MC version was detected. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%player_name%', '%mc_version%'], DEFAULT: "%prefix% &c%player_name% &7is using &c%mc_version%"]
+  mcversion: "%prefix% &c%player_name% &7is using &c%mc_version%"
+  #Answer to command when mods were detected. [OPTIONS: "List[anyString]", PLACEHOLDERS: ['%player_name%', '%mod_name%'], DEFAULT: ["&c%player_name%&7's mods:", "&8&m- &c%mod_name%"]]
+  playermods:
+    - "&c%player_name%&7's mods:"
+    - "&8&m- &c%mod_name%"
+  #Answer to command when LabyMod addons were detected. [OPTIONS: "List[anyString]", PLACEHOLDERS: ['%player_name%', '%mod_name%'], DEFAULT: ["&c%player_name%&7's mods:", "&8&m- &c%mod_name%"]]
+  playerlabymods:
+    - "&c%player_name%&7's LabyMod mods:"
+    - "&8&m- &c%mod_name%"
+
+
+error:
+  #Answer to command when the player is not online. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%player_name%', '%player_uuid%'], DEFAULT: "%prefix% &c%player_name% &7is not online!"]
+  playernotfound: "%prefix% &c%player_name% &7is not online!"
+  #Answer to command when the player has no permission to execute it. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%'], DEFAULT: "%prefix% &cYou do not have permission to do that!"]
+  nopermission: "%prefix% &cYou do not have permission to do that!"
+  #Answer to command when it was executed through the console, but the command can only be used by players. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%'], DEFAULT: "%prefix% &cThis command can only be used by players!"]
+  onlyplayercanusecommand: "%prefix% &cThis command can only be used by players!"

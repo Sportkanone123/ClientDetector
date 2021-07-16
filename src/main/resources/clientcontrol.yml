@@ -1,0 +1,309 @@
+#  ┌─────────────────────────────┐
+#  │     BetterSprinting Mod     │
+#  └─────────────────────────────┘
+#  A popular PvP modification, that allows you to enhance the sprinting behaviour (1.12 - 1.16.3)
+#  This clientcontrol is marked as STABLE
+
+bettersprinting:
+  #Should the whole mod get disabled (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disableAll: false
+  #Should players be able to modify their fly speed (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true')
+  disableSurvivalFlyBoost: true
+  #Should the sprint in all directions (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true')
+  disableAllDirs: true
+
+#  ┌─────────────────────────────┐
+#  │      5zig Mod (Reborn)      │
+#  └─────────────────────────────┘
+#  A popular PVP modification, that provides additional information in HUDs, Capes, Friends & Chats (1.8.9-1.12.2)
+#  This clientcontrol is marked as STABLE
+fivezig:
+  #Shows a players effect on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disablePotionEffectHud: false
+  #Displays a vignette with different colors depending on the potion effect(s) (positive=green, negative=red) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disablePotionIndicatorVignette: false
+  #Shows a players armour(+durability) on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disableArmourHud: false
+  #Shows the players saturation(additional to food) on screen (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disablePlayerSaturation: false
+  #Shows the health of entities on screen(HUD), this is considered as an unfair advantage (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true')
+  disableEntityHealthIndicator: false
+  #Automatically reconnect to a server (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disableAutoReconnect: false
+
+#  ┌─────────────────────────────┐
+#  │        LabyMod Client       │
+#  └─────────────────────────────┘
+#  An all-in-one modification for minecraft (1.8.9, 1.12.2, 1.16.5)
+#  This clientcontrol is marked as STABLE
+labymod:
+  #Feature to switch back to the old animations of MC 1.7 (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disableAnimations: false
+  #Feature that was removed from LabyMod, but still usable in older versions. Purely cosmetic feature (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  diableBlockBuild: false
+  #Provides additional features to the chat (AutoText, Channels, Special Characters) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disableChat: false
+  #Fixes a rendering bug in minecraft, can be considered as an unfair advantage (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disableCrosshairSync: false
+  #Fixes a rendering bug in minecraft with fast lava placement (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disableImprovedLava: false
+  #Fixes some inventory bugs (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disableRefillFix: false
+  #Renders the saturation of a player additional to the current food (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disableSaturationBar: false
+  #Dispalys additional information above a player (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disableTags: false
+  #General GUI, such as position, direction and current system time (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  disableGuiAll: false
+  gui:
+    #Shows a players armour(+durability) on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+    disableArmorHud: false
+    #Shows a players item(s) on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+    disableItemHud: false
+    #Shows a players effect on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+    disablePotionEffects: false
+
+#  ┌─────────────────────────────┐
+#  │       WorldDownloader       │
+#  └─────────────────────────────┘
+#  Popular modification to download minecraft maps (of servers)  (1.9 - 1.16.3)
+#  This clientcontrol is marked as STABLE
+worlddownloader:
+  #Should the whole mod get disabled (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true')
+  disableAll: false
+
+#  ┌─────────────────────────────┐
+#  │         Lunar Client        │
+#  └─────────────────────────────┘
+#  An all-in-one modification for minecraft (1.7-1.17)
+#  This clientcontrol is marked as STABLE
+lunar_disable:
+  #Feature to switch back to the old animations of MC 1.7 (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  one_seven_visuals: false
+  #Shows a players fps on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  fps: false
+  #Shows a players cps on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  cps: false
+  #Makes the player sprint all the time (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  toggleSneak: false
+  #A collection of mods for the hypixel.net server (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  hypixel_mod: false
+  #Shows a players armor on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  armorstatus: false
+  #Shows a players mouse, space bar, keys on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  keystrokes: false
+  #Shows a players coordinates on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  coords: false
+  #Changes a players crosshair (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  crosshair: false
+  #Shows a players potion effects on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  potioneffects: false
+  #Shows a players direction on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  directionhud: false
+  #Lets a player set waypoints, they are shown as a beam (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  waypoints: false
+  #Allows the player to hide, customize scoreboards (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  scoreboard: false
+  #Shows a player the number of healing potion he has on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  potion_counter: false
+  #Shows a players ping on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  ping: false
+  #Blurs surroundings on movement (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  motionBlur: false
+  #Allows you to modify your chat (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  chat: false
+  #Allow you to read long item descriptions (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  scrollable_tooltips: false
+  #Resizes some items, that are important in uhc (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  uhc_overlay: false
+  #Renders more particles (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  particleMultiplierMod: false
+  #Displays countdowns on screen (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  cooldowns: false
+  #Client-side interface for WorldEdit plugin (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  worldedit_cui: false
+  #Shows a player a clock on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  clock: false
+  #Shows a player a stopwatch on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  stopwatch: false
+  #Shows a player used memory on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  memory: false
+  #Shows a player his combos on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  combo: false
+  #Shows a player his range on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  range: false
+  #Allows the player to change the time client-side (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  timer_change: false
+  #Shows a player the ip of the server he is on, on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  serverAddressMod: false
+  #Shows a players saturation on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  saturation: false
+  #Gives items physic (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  itemPhysic: false
+  #Shows a player when and how much items he can pick up or drop (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  itemTracker: false
+  #Lets pots shine (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  shinyPots: false
+  #Outlines blocks on a players screen (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  block_outline: false
+  #Allows a player to modify what happens after he takes a screenshot (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  screenshot: false
+  #Allows a player to modify his fov (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  fov_mod: false
+  #Allows a player to send texts in chat with hotkeys (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  textHotKey: false
+  #Allows a player to connect mumble with minecraft (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  mumble-link: false
+  #Allows a player to disable/modify his bossbar (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  bossbar: false
+  #Allows a player to change their camera perspective without rotation (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  freelook: false
+  #Allows a player to use a client-side replay (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  replaymod: false
+  #Hides a player's nick (client-side) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  nickHider: false
+
+#  ┌─────────────────────────────┐
+#  │     Badlion Client (BAC)    │
+#  └─────────────────────────────┘
+#  An all-in-one PVP modification for minecraft (1.7 - 1.17)
+#  This clientcontrol is marked as STABLE
+badlion_disable:
+  #Feature to customize animations (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Animations: false
+  #Shows a players armor on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  ArmorStatus: false
+  #Feature to automatically accepts friend request (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  AutoFriend: false
+  #Sends a "gg" after a match (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  AutoGG: false
+  #Allows a player to send texts in chat with hotkeys (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  AutoText: false
+  #Feature that automatically tips players on Hypixel (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  AutoTip: false
+  #Outlines blocks on a players screen (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Block Overlay: false
+  #Shows information about a block that the player is looking at (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  BlockInfo: false
+  #Allows a player to disable/modify his bossbar (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  BossBar: false
+  #Allows a player to modify his chat (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Chat: false
+  #Shows a boarder outline of the chunk the player is in (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Chunk Borders: false
+  #Allows a player to modify glass (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Clear Glass: false
+  #Allows a player to modify his chat (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  ClearWater: false
+  #Shows a player a clock on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Clock: false
+  #Shows a player his combos on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Combo Counter: false
+  #Shows a player his coordinates on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Coordinates: false
+  #Shows a player his cps on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  CPS: false
+  #Allows the player to modify his crosshair (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Crosshair: false
+  #Shows a player his direction on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Direction: false
+  #Makes enchanted items glint in a players inventory (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  EnchantGlint: false
+  #Allows the player to change his FOV (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  FOV Changer: false
+  #Shows a player his fps on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  FPS: false
+  #Makes a players game brighter (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Fullbright: false
+  #Allows the player to modify damage colors for entities (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Hit Color: false
+  #Displays hitboxes of entities in-game (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Hitboxes: false
+  #Blures the background when a player opened his inventory (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  InventoryBlur: false
+  #Shows a player his items on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Item Counter: false
+  #Shows a player information about a item on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Item Info: false
+  #Adds physics to items (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Item Physics: false
+  #Shows recently dropped or picked up items (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Item Tracker: false
+  #Shows all crafting recipes per item in a list (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  JustEnoughItems: false
+  #Shows a players mouse, space bar, keys on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Keystrokes: false
+  #Shows Hypixel player levels above their heads (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  LevelHead: false
+  #Displays possible mob spawn areas on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Light Overlay: false
+  #Shows a player used memory on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Memory: false
+  #Shows minimap on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  MiniMap: false
+  #Helps the player to make a mlg (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  MLG Cobweb: false
+  #Adds blur on movement (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  MotionBlur: false
+  #Link Mumble with minecraft (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  MumbleLink: false
+  #Allows a player to check the name history of other players (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Name History: false
+  #Allows a player to hide his nick (client-side) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  NickHider: false
+  #Shows a player pack on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Pack Display: false
+  #Adds useful resourcepack tweaks (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Pack Tweaks: false
+  #Allows a player to modify the amount of particles shown on screen (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Particles: false
+  #Allows a player to change your camera perspective without rotation (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Perspective: false
+  #Shows a player's ping on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Ping: false
+  #Shows a player the amount of players on the server on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Player Counter: false
+  #Shows a player's potion status on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  PotionStatus: false
+  #Shows a player protection on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Protection: false
+  #Makes it easy to join the next game on some servers (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Quickplay: false
+  #Shows a player's reach on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Reach Display: false
+  #Adds a replay mod (client-side) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Replay: false
+  #Shows a player's saturation on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Saturation: false
+  #Allows the player to save/lead schematics (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true')
+  Schematica: true
+  #Allows the player to hide, customize scoreboards (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Scoreboard: false
+  #Shows a player the address of the server he is on, on the screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Server Address: false
+  #Makes pots shine (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Shinypots: false
+  #Multiple addons for skyblock (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  SkyblockAddons: false
+  #Shows a player a stopwatch on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Stopwatch: false
+  #Shows a player's teamspeak status on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  TeamSpeak: false
+  #Allows the player to change his time (client-side) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  TimeChanger: false
+  #Shows timers on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Timers: false
+  #Allows a player to disable chat (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  ToggleChat: false
+  #Makes the player sneak all the time (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  ToggleSneak: false
+  #Makes the player sprint all the time (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  ToggleSprint: false
+  #Lets a player set waypoints, they are shown as a beam (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Waypoints: false
+  #Allows the player to change his weather (client-side) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  WeatherChanger: false
+  #Client-side interface for WorldEdit plugin (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  World Edit CUI: false
+  #Allows the player to zoom (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
+  Zoom: false
