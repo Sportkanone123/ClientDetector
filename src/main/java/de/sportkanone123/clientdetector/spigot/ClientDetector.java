@@ -25,12 +25,6 @@ import java.util.HashMap;
 import java.util.UUID;
 
 
-/*
-ClientDetector uses PacketEvents (by retrooper) for packet processing,
-License and other information can be found here: https://github.com/retrooper/packetevents/blob/dev/LICENSE
-*/
-
-
 public class ClientDetector extends JavaPlugin {
     public static Plugin plugin;
     public static ArrayList<Client> CLIENTS = new ArrayList<Client>();
