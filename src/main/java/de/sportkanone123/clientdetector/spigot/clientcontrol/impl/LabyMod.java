@@ -39,6 +39,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+More information can be found here: https://docs.labymod.net/pages/server/introduction/
+*/
 public class LabyMod {
     public static void handlePacket(Player player, byte[] data){
         String strData = translateString(new String(data, StandardCharsets.UTF_8));

@@ -29,6 +29,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+/*
+More information can be found here: https://github.com/Pokechu22/WorldDownloader-Serverside-Companion
+ */
 public class WorldDownloader {
     public static void handle(Player player){
         ByteArrayOutputStream msgbytes = new ByteArrayOutputStream();

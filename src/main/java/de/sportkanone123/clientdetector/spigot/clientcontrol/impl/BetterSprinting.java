@@ -28,31 +28,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+/*
+More information can be found here: https://github.com/chylex/Better-Sprinting
+ */
 public class BetterSprinting {
 
     public static void handle(Player player){
-
-        /*1.13 - 1.16.5
-         *** [byte 0] [bool <enableSurvivalFlyBoost>] [bool <enableAllDirs>]
-         ***
-         *** Notifies the player about which non-vanilla settings are enabled on the server (both are disabled by default).
-         *** Sent to player when their [byte 0] message is processed, and either or both settings are enabled.
-         *** Sent to all players with the mod after using the '/bettersprinting setting (...)' command.
-         *
-         *
-         *** [byte 1]
-         ***
-         *** Disables basic functionality of the mod on client side.
-         *** Sent to player when their [byte 0] message is processed, and the server wants to disable the mod.
-         *** Sent to all players with the mod after using the '/bettersprinting disablemod true' command.
-         *
-         *
-         *** [byte 2]
-         ***
-         *** Re-enables basic functionality of the mod on client side.
-         *** Sent to all players with the mod after using the '/bettersprinting disablemod false' command.
-         */
-
         ByteArrayOutputStream msgbytes = new ByteArrayOutputStream();
         DataOutputStream msgout = new DataOutputStream(msgbytes);
 

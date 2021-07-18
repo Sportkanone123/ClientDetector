@@ -36,6 +36,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+/*
+More information can be found here: https://github.com/LunarClient/BukkitAPI
+ */
 public class LunarClient {
     public static void handle(Player player){
         ModSettings modSettings = new ModSettings();

@@ -31,6 +31,9 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+More information can be found here: https://github.com/LunarClient/BukkitAPI
+ */
 public class Badlion {
     private static Map<String, DisallowedMods> modsDisallowed =  new HashMap<String, DisallowedMods>();
 
