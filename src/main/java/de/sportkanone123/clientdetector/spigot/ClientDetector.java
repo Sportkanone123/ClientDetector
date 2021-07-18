@@ -73,6 +73,8 @@ public class ClientDetector extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
+        new MetricsManager(this, 10745);
+
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aVersion&7) &aDetected Version &c" + PacketEvents.get().getServerUtils().getVersion().name()));
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aVersion&7) &aLoading settings for Version &c" + PacketEvents.get().getServerUtils().getVersion().name()));
 

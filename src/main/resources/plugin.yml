@@ -1,11 +1,11 @@
 name: ClientDetector
-version: 2.0-BETA
+version: 2.0-PRE-1
 author: Sportkanone123
 main: de.sportkanone123.clientdetector.spigot.ClientDetector
 load: POSTWORLD
 api-version: 1.13
 
-softdepend: [PlaceholderAPI]
+softdepend: [PlaceholderAPI, ProtocolLib, ViaVersion]
 
 commands:
   clientdetector:
