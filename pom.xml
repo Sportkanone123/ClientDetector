@@ -58,8 +58,6 @@
     </build>
 
     <repositories>
-        <!-- This adds the Spigot Maven repository to the build -->
-
         <repository>
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
