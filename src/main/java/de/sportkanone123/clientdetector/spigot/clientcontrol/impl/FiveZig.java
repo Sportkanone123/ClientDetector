@@ -22,6 +22,7 @@ import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
 import io.github.retrooper.packetevents.utils.player.ClientVersion;
+import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import org.bukkit.entity.Player;
 import org.geysermc.connector.utils.FileUtils;
 
@@ -47,7 +48,7 @@ public class FiveZig {
 
         WrappedPacketOutCustomPayload costumPayload;
 
-        if(PacketEvents.get().getPlayerUtils().getClientVersion(player).isNewerThanOrEquals(ClientVersion.v_1_13)){
+        if(PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13)){
             costumPayload = new WrappedPacketOutCustomPayload("the5zigmod:5zig_set",  disableBitSet.toByteArray());
             PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
 

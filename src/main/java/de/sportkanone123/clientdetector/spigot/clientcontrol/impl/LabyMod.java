@@ -24,6 +24,7 @@ import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
 import io.github.retrooper.packetevents.utils.player.ClientVersion;
+import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.EncoderException;
@@ -138,7 +139,7 @@ public class LabyMod {
 
             WrappedPacketOutCustomPayload costumPayload;
 
-            if(PacketEvents.get().getPlayerUtils().getClientVersion(player).isNewerThanOrEquals(ClientVersion.v_1_13)){
+            if(PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13)){
                 costumPayload = new WrappedPacketOutCustomPayload("labymod3:main",  LabyModProtocol.getBytesToSend(modifiedPermissions));
                 PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
             }else{
