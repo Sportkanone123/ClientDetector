@@ -92,14 +92,7 @@ public class ClientDetectorBungee extends Plugin implements Listener {
             if(channel.equalsIgnoreCase("clientdetector:sync")){
                 for(ServerInfo server : ProxyServer.getInstance().getServers().values()) {
                     server.sendData(channel, data);
-
-                    /*System.out.println("-----------[Packet]-----------");
-                    System.out.println("Serevr: " + server.getName());
-                    System.out.println("Channel: '" + channel + "'");
-                    System.out.println("Data: '" + new String(data, StandardCharsets.UTF_8) + "'");
-                    System.out.println("-----------[Packet]-----------");*/
                 }
-
             }
         }
     }

@@ -17,6 +17,7 @@
  */
 
 package de.sportkanone123.clientdetector.spigot.listener;
+
 import com.comphenix.protocol.events.PacketContainer;
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.packet.Packet;
@@ -45,21 +46,4 @@ public class NetworkListener extends PacketListenerDynamic {
     public void onPacketPlayReceive(PacketPlayReceiveEvent event) {
         PacketProcessor.handlePacket(event.getPlayer(), new Packet(event.getNMSPacket(), event.getPacketId()));
     }
-
-    /*public NetworkListener() {
-        super(ClientDetector.plugin, ListenerPriority.NORMAL, PacketType.Play.Client.CUSTOM_PAYLOAD);
-    }*/
-
-
-    /*@Override
-    public void onPacketReceiving(PacketEvent event) {
-        if (event.getPacketType() == PacketType.Play.Client.CUSTOM_PAYLOAD) {
-            PacketContainer packet = event.getPacket();
-
-            System.out.println(packet.getMinecraftKeys().read(0).getFullKey());
-            System.out.println(packet.get.toString());
-
-
-        }
-    }*/
 }
