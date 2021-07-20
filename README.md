@@ -8,3 +8,6 @@
 
 ### License
 This project is licensed under the GPLv3 License - see the [LICENSE](https://github.com/Sportkanone123/ClientDetector/blob/master/LICENSE) file for details
+
+### Additional Information
+ClientDetector uses the PacketEvents API. Check it out here: https://github.com/retrooper/packetevents
