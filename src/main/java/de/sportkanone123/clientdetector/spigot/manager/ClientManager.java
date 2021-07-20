@@ -36,17 +36,18 @@ public class ClientManager {
         ClientDetector.CLIENTS.add(new Client("MC|Pixel", "", "Pixel Client", true, false, null, null));
         ClientDetector.CLIENTS.add(new Client("LC|Brand", "", "Winterware", true, false, null, null));
         ClientDetector.CLIENTS.add(new Client("vanilla", "vanilla", "Aristois (Experimental)", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client("vivecraft:data", "", "Vivecraft", true, false, null, null));
 
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand", "realms"), "vanilla", "Vanilla Minecraft / Undetectable Client", false, false, null, null));
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand", "realms"), "Vanilla", "Vanilla Minecraft / Undetectable Client", false, false, null, null));
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand", "realms"), "Minecraft-Console-Client", "Console Client", false, true, "/", 1));
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand", "realms"), "LiteLoader", "LiteLoader", false, false, null, null));
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand", "realms"), "PLC18", "PvPLounge Client", false, false, null, null));
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand", "realms"), "Subsystem", "Easy Minecraft Client", false, false, null, null));
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand", "realms"), "rift", "Rift", false, false, null, null));
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand", "realms"), "fabric", "Fabric", false, false, null, null));
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand", "realms"), "lunarclient", "Lunar Client", false, true, ":", 1));
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand", "realms"), Arrays.asList("forge", "fml", "fml,forge"), "Forge", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "vanilla", "Vanilla Minecraft / Undetectable Client", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Vanilla", "Vanilla Minecraft / Undetectable Client", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Minecraft-Console-Client", "Console Client", false, true, "/", 1));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "LiteLoader", "LiteLoader", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "PLC18", "PvPLounge Client", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Subsystem", "Easy Minecraft Client", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "rift", "Rift", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "fabric", "Fabric", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "lunarclient", "Lunar Client", false, true, ":", 1));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), Arrays.asList("forge", "fml", "fml,forge"), "Forge", false, false, null, null));
 
         /*for(Client client : ClientDetector.CLIENTS){
             client.load();

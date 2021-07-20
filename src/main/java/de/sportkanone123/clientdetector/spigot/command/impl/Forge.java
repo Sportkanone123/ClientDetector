@@ -38,7 +38,7 @@ public class Forge {
                 org.bukkit.entity.Player target = Bukkit.getPlayer(args[1]);
 
                 if(ClientDetector.playerClient.get(target) != null && ClientDetector.playerClient.get(target) == "Forge"){
-                    if(ClientDetector.forgeMods.get(target) != null || ClientDetector.forgeMods.get(target).getMods().size() != 0){
+                    if(ClientDetector.forgeMods != null && ClientDetector.forgeMods.get(target) != null && ClientDetector.forgeMods.get(target).getMods() != null && ClientDetector.forgeMods.get(target).getMods().size() != 0){
                         ArrayList<String> message =  (ArrayList<String>) ConfigManager.getConfig("message").get("forge.usingforgemodlist");
 
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(0).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName())));
