@@ -22,6 +22,8 @@ import de.sportkanone123.clientdetector.spigot.packet.Packet;
 import io.github.retrooper.packetevents.packetwrappers.play.in.custompayload.WrappedPacketInCustomPayload;
 import org.bukkit.entity.Player;
 
+import java.nio.charset.StandardCharsets;
+
 public class PacketProcessor {
 
     public static void handlePacket(Player player, Packet packet){

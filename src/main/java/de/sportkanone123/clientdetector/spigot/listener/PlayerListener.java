@@ -54,7 +54,7 @@ public class PlayerListener implements Listener {
         event.getPlayer().sendMessage("§8 §8 §1 §3 §3 §7 §8 ");
 
         if(ClientDetector.plugin.getConfig().getBoolean("client.enableMinecraftVersionDetection")){
-            ClientDetector.mcVersion.put(event.getPlayer(), PacketEvents.get().getPlayerUtils().getClientVersion(event.getPlayer()).toString());
+            ClientDetector.mcVersion.put(event.getPlayer(), PacketEvents.get().getPlayerUtils().getClientVersion(event.getPlayer()).name().replace("v_", "").replaceAll("_", "."));
         }
 
         if(ClientDetector.bungeePayload.get(event.getPlayer().getUniqueId()) != null){

@@ -55,7 +55,7 @@ public class Player {
                         }
                     }
                 }else if(args[1].equalsIgnoreCase("version")){
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&' , ConfigManager.getConfig("message").getString("player.mcversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName()).replace("%mc_version%", PacketEvents.get().getPlayerUtils().getClientVersion(target).name())));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&' , ConfigManager.getConfig("message").getString("player.mcversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName()).replace("%mc_version%", PacketEvents.get().getPlayerUtils().getClientVersion(target).name().replace("v_", "").replaceAll("_", "."))));
                 }else if(args[1].equalsIgnoreCase("labyaddons")){
                     if(ConfigManager.getConfig("message").getString("player.playerlabymods") != null){
                         ArrayList<String> message =  (ArrayList<String>) ConfigManager.getConfig("message").get("player.playermods");

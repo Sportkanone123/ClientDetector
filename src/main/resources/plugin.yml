@@ -5,7 +5,7 @@ main: de.sportkanone123.clientdetector.spigot.ClientDetector
 load: POSTWORLD
 api-version: 1.13
 
-softdepend: [PlaceholderAPI, ProtocolLib, ViaVersion]
+softdepend: [PlaceholderAPI, ProtocolLib, ViaVersion, packetevents]
 
 commands:
   clientdetector:
