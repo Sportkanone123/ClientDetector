@@ -20,9 +20,13 @@ package de.sportkanone123.clientdetector.spigot.manager;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.mod.Mod;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 public class ModManager {
 
@@ -39,9 +43,37 @@ public class ModManager {
         }*/
     }
 
-
-
     public static void unLoad(){
         ClientDetector.MODS = new ArrayList<Mod>();
+    }
+
+    public static void handleDetection(Player player, String mod){
+        if(ClientDetector.plugin.getConfig().getBoolean("mods.enableWhitelist")){
+            if(ClientDetector.plugin.getConfig().get("mods.whitelistedMods") != null) {
+                List<String> whitelist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("mods.whitelistedMods");
+                if (!whitelist.contains(mod) && !whitelist.contains(mod.toLowerCase(Locale.ROOT))) {
+                    Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("mods.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%mod_name%", mod).replace("%player_uuid%", player.getUniqueId().toString()));
+                        }
+                    });
+                }
+            }
+        }
+
+        if(ClientDetector.plugin.getConfig().getBoolean("mods.enableBlacklist")){
+            if(ClientDetector.plugin.getConfig().get("mods.blacklistedMods") != null){
+                List<String> blacklist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("mods.blacklistedMods");
+                if(blacklist.contains(mod) || blacklist.contains(mod.toLowerCase(Locale.ROOT))){
+                    Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("mods.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%mod_name%", mod).replace("%player_uuid%", player.getUniqueId().toString()));
+                        }
+                    });
+                }
+            }
+        }
     }
 }

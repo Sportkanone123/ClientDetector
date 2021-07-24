@@ -25,6 +25,9 @@ import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PacketProcessor {
     public static void handlePacket(Player player, String channel, byte[] data){
         for(Client client : ClientDetector.CLIENTS){
@@ -39,6 +42,7 @@ public class PacketProcessor {
                         //Bukkit.getPluginManager().callEvent(new ClientDetectEvent(player, "Vanilla Minecraft / Undetectable Client"));
 
                         AlertsManager.handleClientDetection(player);
+
                     }
                 }else{
                     if(ClientDetector.playerClient.get(player) == null || ClientDetector.playerClient.get(player) == "Vanilla Minecraft / Undetectable Client" || ClientDetector.playerClient.get(player) == "Unknown Client (Not Vanilla Minecraft)"){
@@ -52,6 +56,7 @@ public class PacketProcessor {
                         //Bukkit.getPluginManager().callEvent(new ClientDetectEvent(player, client.getClientName()));
 
                         AlertsManager.handleClientDetection(player);
+
                     }
                 }
             }

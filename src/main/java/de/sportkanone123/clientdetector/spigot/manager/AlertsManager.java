@@ -51,6 +51,9 @@ public class AlertsManager {
             if(PacketEvents.get().getServerUtils().isBungeeCordEnabled()) waitTicks = 100;
 
             Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, () -> {
+                if(ClientDetector.playerClient.get(player) != null)
+                    ClientManager.handleDetection(player, ClientDetector.playerClient.get(player));
+
                for(Player player1 : Bukkit.getOnlinePlayers()){
                    if(!disabledNotifications.contains(player1.getName()) && player1.hasPermission(ConfigManager.getConfig("config").getString("alerts.notificationPermission"))){
                         if(limitedNotifications){

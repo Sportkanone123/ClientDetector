@@ -21,10 +21,8 @@ package de.sportkanone123.clientdetector.spigot.clientcontrol.impl;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
-import io.github.retrooper.packetevents.utils.player.ClientVersion;
 import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import org.bukkit.entity.Player;
-import org.geysermc.connector.utils.FileUtils;
 
 import java.util.BitSet;
 

@@ -20,9 +20,12 @@ package de.sportkanone123.clientdetector.spigot.manager;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.client.Client;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ClientManager {
 
@@ -56,5 +59,35 @@ public class ClientManager {
 
     public static void unLoad(){
         ClientDetector.CLIENTS = new ArrayList<Client>();
+    }
+
+    public static void handleDetection(Player player, String client){
+        if(ClientDetector.plugin.getConfig().getBoolean("client.enableWhitelist")){
+            if(ClientDetector.plugin.getConfig().get("client.whitelistedClients") != null){
+                List<String> whitelist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("client.whitelistedClients");
+                if(!whitelist.contains(client)) {
+                    Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("client.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
+                        }
+                    });
+                }
+            }
+        }
+
+        if(ClientDetector.plugin.getConfig().getBoolean("client.enableBlacklist")){
+            if(ClientDetector.plugin.getConfig().get("client.blacklistedClients") != null){
+                List<String> blacklist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("client.blacklistedClients");
+                if(blacklist.contains(client)){
+                    Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("client.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
+                        }
+                    });
+                }
+            }
+        }
     }
 }
