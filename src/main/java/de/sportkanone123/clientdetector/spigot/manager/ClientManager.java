@@ -40,6 +40,7 @@ public class ClientManager {
         ClientDetector.CLIENTS.add(new Client("LC|Brand", "", "Winterware", true, false, null, null));
         ClientDetector.CLIENTS.add(new Client("vanilla", "vanilla", "Aristois (Experimental)", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client("vivecraft:data", "", "Vivecraft", true, false, null, null));
+        ClientDetector.CLIENTS.add(new Client("mysterymod:mm", "", "MysteryMod", true, false, null, null));
 
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "vanilla", "Vanilla Minecraft / Undetectable Client", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Vanilla", "Vanilla Minecraft / Undetectable Client", false, false, null, null));
