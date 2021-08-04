@@ -16,33 +16,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.sportkanone123.clientdetector.spigot.api;
+package de.sportkanone123.clientdetector.spigot.api.events;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class ClientDetectEvent extends Event {
+public class ModDetectEvent extends Event {
     private static HandlerList handlers = new HandlerList();
     private Player player;
-    private String client;
+    private String modName;
 
-    public ClientDetectEvent(Player player, String client) {
-        this.client = client;
+    public ModDetectEvent(Player player, String modName) {
+        this.modName = modName;
         this.player = player;
     }
 
-    @Override
     public HandlerList getHandlers() {
-        return null;
+        return handlers;
     }
 
     public Player getPlayer() {
         return player;
     }
 
-    public String getClient() {
-        return client;
+    public String getMod() {
+        return modName;
     }
 
     public static HandlerList getHandlerList() {

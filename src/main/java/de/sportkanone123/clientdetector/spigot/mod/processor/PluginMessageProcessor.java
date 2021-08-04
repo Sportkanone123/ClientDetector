@@ -19,7 +19,7 @@
 package de.sportkanone123.clientdetector.spigot.mod.processor;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
-import de.sportkanone123.clientdetector.spigot.client.Client;
+import de.sportkanone123.clientdetector.spigot.api.events.ModDetectEvent;
 import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
 import de.sportkanone123.clientdetector.spigot.manager.ModManager;
 import de.sportkanone123.clientdetector.spigot.mod.Mod;
@@ -27,7 +27,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PluginMessageProcessor {
     public static void handlePluginMessage(Player player, String channel, byte[] data){
@@ -39,7 +38,13 @@ public class PluginMessageProcessor {
 
                     ClientDetector.playerMods.get(player).add(mod.getModName());
 
-                    //Bukkit.getPluginManager().callEvent(new ModDetectEvent(player, mod.getModName()));
+                    Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable(){
+                        @Override
+                        public void run() {
+                            Bukkit.getPluginManager().callEvent(new ModDetectEvent(player, mod.getModName()));
+                        }
+                    });
+
                     AlertsManager.handleModlistDetection(player, mod.getModName());
 
                     ModManager.handleDetection(player, mod.getModName());

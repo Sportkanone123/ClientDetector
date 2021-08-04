@@ -19,13 +19,11 @@
 package de.sportkanone123.clientdetector.spigot.client.processor;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
+import de.sportkanone123.clientdetector.spigot.api.events.ClientDetectEvent;
 import de.sportkanone123.clientdetector.spigot.client.Client;
 import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PluginMessageProcessor {
     public static void handlePluginMessage(Player player, String channel, byte[] data) {
@@ -38,8 +36,6 @@ public class PluginMessageProcessor {
                         if (ClientDetector.mcVersion.get(player) != null && client.getClientName() != null)
                             ClientDetector.clientVersion.put(player, ClientDetector.mcVersion.get(player));
 
-                        //Bukkit.getPluginManager().callEvent(new ClientDetectEvent(player, "Vanilla Minecraft / Undetectable Client"));
-
                         AlertsManager.handleClientDetection(player);
 
                     }
@@ -51,8 +47,6 @@ public class PluginMessageProcessor {
                             ClientDetector.clientVersion.put(player, client.getVersion(channel, data));
                         else
                             ClientDetector.clientVersion.put(player, null);
-
-                        //Bukkit.getPluginManager().callEvent(new ClientDetectEvent(player, client.getClientName()));
 
                         AlertsManager.handleClientDetection(player);
 

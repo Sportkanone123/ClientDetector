@@ -19,6 +19,7 @@
 package de.sportkanone123.clientdetector.spigot.manager;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
+import de.sportkanone123.clientdetector.spigot.api.events.ClientDetectEvent;
 import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
 import org.bukkit.Bukkit;
@@ -53,6 +54,13 @@ public class AlertsManager {
             Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, () -> {
                 if(ClientDetector.playerClient.get(player) != null)
                     ClientManager.handleDetection(player, ClientDetector.playerClient.get(player));
+
+                Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable(){
+                    @Override
+                    public void run() {
+                        Bukkit.getPluginManager().callEvent(new ClientDetectEvent(player, ClientDetector.playerClient.get(player)));
+                    }
+                });
 
                for(Player player1 : Bukkit.getOnlinePlayers()){
                    if(!disabledNotifications.contains(player1.getName()) && player1.hasPermission(ConfigManager.getConfig("config").getString("alerts.notificationPermission"))){
