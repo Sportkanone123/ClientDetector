@@ -69,6 +69,8 @@ alerts:
   limitNotifications: false
   #Everybody with this permission will get notifications about a player's client [OPTIONS: 'any.valid.permission', PLACEHOLDERS: none, DEFAULT:'clientdetecor.notify']
   notificationPermission: 'clientdetector.notify'
+  #Should vanilla join/leave messages be disabled? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
+  disablevanillamessages: false
 
 
 #  ┌─────────────────────────────┐

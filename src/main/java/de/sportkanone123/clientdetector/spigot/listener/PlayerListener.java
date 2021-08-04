@@ -23,6 +23,7 @@ import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.clientdisabler.ClientDisabler;
 import de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandshake;
 import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
+import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import de.sportkanone123.clientdetector.spigot.manager.GeyserManager;
 import io.github.retrooper.packetevents.PacketEvents;
 import org.bukkit.Bukkit;
@@ -67,12 +68,18 @@ public class PlayerListener implements Listener {
                 de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl.handlePacket(Bukkit.getPlayer(customPayload.getUuid()), customPayload.getChannel(), customPayload.getData());
             }
         }
+
+        if(ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))
+            event.setJoinMessage(null);
     }
 
     @EventHandler
     public static void onQuit(PlayerQuitEvent event){
 
         ClientDetector.bungeePayload.put(event.getPlayer().getUniqueId(), new ArrayList<CustomPayload>());
+
+        if(ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))
+            event.setQuitMessage(null);
     }
 
     /*@EventHandler
