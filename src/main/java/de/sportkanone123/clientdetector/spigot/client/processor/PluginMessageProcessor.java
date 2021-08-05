@@ -19,10 +19,8 @@
 package de.sportkanone123.clientdetector.spigot.client.processor;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
-import de.sportkanone123.clientdetector.spigot.api.events.ClientDetectEvent;
 import de.sportkanone123.clientdetector.spigot.client.Client;
 import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class PluginMessageProcessor {

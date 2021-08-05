@@ -22,13 +22,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class ClientDetectEvent extends Event {
+public class ModDetectedEvent extends Event {
     private static HandlerList handlers = new HandlerList();
     private Player player;
-    private String client;
+    private String modName;
 
-    public ClientDetectEvent(Player player, String client) {
-        this.client = client;
+    public ModDetectedEvent(Player player, String modName) {
+        this.modName = modName;
         this.player = player;
     }
 
@@ -40,8 +40,8 @@ public class ClientDetectEvent extends Event {
         return player;
     }
 
-    public String getClient() {
-        return client;
+    public String getMod() {
+        return modName;
     }
 
     public static HandlerList getHandlerList() {

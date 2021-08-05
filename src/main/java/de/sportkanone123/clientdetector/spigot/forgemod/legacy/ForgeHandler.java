@@ -19,7 +19,10 @@
 package de.sportkanone123.clientdetector.spigot.forgemod.legacy;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
+import de.sportkanone123.clientdetector.spigot.api.events.ClientDetectedEvent;
+import de.sportkanone123.clientdetector.spigot.api.events.ForgeModlistDetectedEvent;
 import de.sportkanone123.clientdetector.spigot.forgemod.ModList;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.nio.charset.StandardCharsets;
@@ -35,6 +38,13 @@ public class ForgeHandler {
 
                 for(String forgeMod : getModList(data).getMods().keySet())
                     de.sportkanone123.clientdetector.spigot.forgemod.ForgeHandler.handleDetection(player, forgeMod);
+
+                Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable(){
+                    @Override
+                    public void run() {
+                        Bukkit.getPluginManager().callEvent(new ForgeModlistDetectedEvent(player, getModList(data)));
+                    }
+                });
             }
         }
     }

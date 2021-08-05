@@ -19,9 +19,8 @@
 package de.sportkanone123.clientdetector.spigot.manager;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
-import de.sportkanone123.clientdetector.spigot.api.events.ClientDetectEvent;
+import de.sportkanone123.clientdetector.spigot.api.events.ClientDetectedEvent;
 import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -29,7 +28,6 @@ import org.bukkit.entity.Player;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class AlertsManager {
     public static List<Player> disabledNotifications = new ArrayList<Player>();
@@ -58,7 +56,7 @@ public class AlertsManager {
                 Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable(){
                     @Override
                     public void run() {
-                        Bukkit.getPluginManager().callEvent(new ClientDetectEvent(player, ClientDetector.playerClient.get(player)));
+                        Bukkit.getPluginManager().callEvent(new ClientDetectedEvent(player, ClientDetector.playerClient.get(player)));
                     }
                 });
 
