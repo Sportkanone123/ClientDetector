@@ -1,5 +1,6 @@
 name: ClientDetector
-version: 2.0
+description: A simple plugin to detect/manage a player's client.
+version: 2.0-PRE-6
 author: Sportkanone123
 main: de.sportkanone123.clientdetector.spigot.ClientDetector
 load: POSTWORLD

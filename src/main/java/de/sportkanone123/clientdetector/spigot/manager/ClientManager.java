@@ -52,6 +52,7 @@ public class ClientManager {
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "fabric", "Fabric", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "lunarclient", "Lunar Client", false, true, ":", 1));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), Arrays.asList("forge", "fml", "fml,forge"), "Forge", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "PolarClient", "Polar Client", false, false, null, null));
 
         /*for(Client client : ClientDetector.CLIENTS){
             client.load();
