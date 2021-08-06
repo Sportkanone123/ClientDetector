@@ -30,29 +30,38 @@ import java.util.List;
 public class ClientManager {
 
     public static void load(){
+
+        /*
+        Tested
+         */
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("FML|HS", "l:fmlhs"), "", "Forge", true, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("5zig_Set", "l:5zig_set"), "", "5zig Mod", true, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("LABYMOD", "LMC", "labymod3:main"), "", "LabyMod", true, false, null, null));
-        ClientDetector.CLIENTS.add(new Client("PX|Version", "", "PXMod", true, false, null, null));
-        ClientDetector.CLIENTS.add(new Client("LOLIMAHACKER", "", "Cracked Vape", true, false, null, null));
-        ClientDetector.CLIENTS.add(new Client("hyperium", "", "Hyperium", true, false, null, null));
-        ClientDetector.CLIENTS.add(new Client("MC|Pixel", "", "Pixel Client", true, false, null, null));
-        ClientDetector.CLIENTS.add(new Client("LC|Brand", "", "Winterware", true, false, null, null));
         ClientDetector.CLIENTS.add(new Client("vanilla", "vanilla", "Aristois (Experimental)", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client("vivecraft:data", "", "Vivecraft", true, false, null, null));
         ClientDetector.CLIENTS.add(new Client("mysterymod:mm", "", "MysteryMod", true, false, null, null));
+        ClientDetector.CLIENTS.add(new Client("hyperium", "", "Hyperium", true, false, null, null));
+        ClientDetector.CLIENTS.add(new Client("PX|Version", "", "PXMod", true, false, null, null));
+        ClientDetector.CLIENTS.add(new Client("MC|Pixel", "", "Pixel Client", true, false, null, null));
 
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "vanilla", "Vanilla Minecraft / Undetectable Client", false, false, null, null));
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Vanilla", "Vanilla Minecraft / Undetectable Client", false, false, null, null));
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Minecraft-Console-Client", "Console Client", false, true, "/", 1));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "LiteLoader", "LiteLoader", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "PLC18", "PvPLounge Client", false, false, null, null));
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Subsystem", "Easy Minecraft Client", false, false, null, null));
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "rift", "Rift", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "fabric", "Fabric", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "lunarclient", "Lunar Client", false, true, ":", 1));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), Arrays.asList("forge", "fml", "fml,forge"), "Forge", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "PolarClient", "Polar Client", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "rift", "Rift", false, false, null, null));
+
+        /*
+        Not tested
+         */
+        ClientDetector.CLIENTS.add(new Client("LOLIMAHACKER", "", "Cracked Vape", true, false, null, null));
+        ClientDetector.CLIENTS.add(new Client("LC|Brand", "", "Winterware", true, false, null, null));
+
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Subsystem", "Easy Minecraft Client", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Minecraft-Console-Client", "Console Client", false, true, "/", 1));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Vanilla", "Jigsaw", false, false, null, null));
 
         /*for(Client client : ClientDetector.CLIENTS){
             client.load();

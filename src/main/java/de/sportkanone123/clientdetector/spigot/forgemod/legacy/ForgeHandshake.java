@@ -78,9 +78,9 @@ public class ForgeHandshake {
             sendServerHello(player, "FML|HS");
             sendModList(player, "FML|HS");
         }else{
-            sendHandshakeReset(player, "minecraft:forge");
-            sendServerHello(player, "minecraft:forge");
-            sendModList(player, "minecraft:forge");
+            sendHandshakeReset(player, "l:fmlhs");
+            sendServerHello(player, "l:fmlhs");
+            sendModList(player, "l:fmlhs");
         }
     }
 }
