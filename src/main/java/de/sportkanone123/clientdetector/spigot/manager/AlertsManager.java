@@ -60,6 +60,16 @@ public class AlertsManager {
                     }
                 });
 
+                if(ClientDetector.playerClient.get(player) != null){
+                    if(ConfigManager.getConfig("config").getBoolean("discord.limitNotifications") == true) {
+                        if (!ClientDetector.playerClient.get(player).equalsIgnoreCase("Vanilla Minecraft / Undetectable Client")) {
+                            DiscordManager.handle(player, ClientDetector.playerClient.get(player));
+                        }
+                    }else{
+                        DiscordManager.handle(player, ClientDetector.playerClient.get(player));
+                    }
+                }
+
                for(Player player1 : Bukkit.getOnlinePlayers()){
                    if(!disabledNotifications.contains(player1.getName()) && player1.hasPermission(ConfigManager.getConfig("config").getString("alerts.notificationPermission"))){
                         if(limitedNotifications){
@@ -90,6 +100,7 @@ public class AlertsManager {
                }else{
                    sendCrossServer(player, ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("detection.clientdetectionmessagewithoutversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString()).replace("%client_name%", "Vanilla Minecraft / Undetectable Client")));
                }
+
             }, waitTicks);
         }
     }

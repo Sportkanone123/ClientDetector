@@ -102,6 +102,8 @@ public class ClientDetector extends JavaPlugin {
 
         AlertsManager.load();
 
+        DiscordManager.load();
+
         if(Bukkit.getServer().getPluginManager().isPluginEnabled("ViaVersion")){
             Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aViaVersion&7) &aDetected ViaVersion " + Bukkit.getPluginManager().getPlugin("ViaVersion").getDescription().getVersion()));
         }

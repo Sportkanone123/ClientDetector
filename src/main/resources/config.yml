@@ -111,3 +111,13 @@ forge:
   #List of blacklisted mods. [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- exampleMod]]
   blacklistedMods:
     - exampleMod
+
+
+#  ┌─────────────────────────────┐
+#  │      Discord settings       │
+#  └─────────────────────────────┘
+discord:
+  #Discord WebHook Url. [OPTIONS: 'String', PLACEHOLDERS: none, DEFAULT: ""]
+  webHookUrl: "https://discord.com/api/webhooks/879042329183408189/8s1v-kDv7lK2VgA9KLM_hXAJjbtmmckqLbVr2AKntQbD-n1Oi5bSAXGZpjQOdiUeCCwD"
+  #Should only important notifications be sent to the discord? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
+  limitNotifications: false
