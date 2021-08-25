@@ -75,7 +75,7 @@ public class ForgeHandler {
         ArrayList<String> modList = new ArrayList<>();
 
         if (getInt(wrappedBuffer) != 2) {
-            return null;
+            return new ModList(modList);
         }
 
         for (int i = getInt(wrappedBuffer), i2 = 0; i2 < i; ++i2) {
