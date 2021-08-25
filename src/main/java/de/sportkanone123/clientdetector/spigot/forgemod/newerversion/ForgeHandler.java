@@ -48,8 +48,13 @@ public class ForgeHandler {
             }
 
         }else if(event.getPacketId() == PacketType.Login.Client.CUSTOM_PAYLOAD) {
-            nameToModlist.put(channelToName.get(event.getChannel()), getModList(new WrappedPacketLoginInCustomPayload(event.getNMSPacket()).getData()));
             event.setCancelled(true);
+
+            try {
+                nameToModlist.put(channelToName.get(event.getChannel()), getModList(new WrappedPacketLoginInCustomPayload(event.getNMSPacket()).getData()));
+            }catch (NullPointerException e){
+
+            }
         }
     }
 
