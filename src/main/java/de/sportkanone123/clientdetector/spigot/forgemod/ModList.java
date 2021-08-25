@@ -18,21 +18,20 @@
 
 package de.sportkanone123.clientdetector.spigot.forgemod;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class ModList {
-    private Map<String, String> mods = new HashMap<>();
+    private ArrayList<String> mods = new ArrayList<>();
 
-    public ModList(Map<String, String> mods){
+    public ModList(ArrayList<String> mods){
         this.mods = mods;
     }
 
-    public Map<String, String> getMods() {
+    public ArrayList<String> getMods() {
         return mods;
     }
 
-    public void setMods(HashMap<String, String> mods) {
+    public void setMods(ArrayList<String> mods) {
         this.mods = mods;
     }
 }

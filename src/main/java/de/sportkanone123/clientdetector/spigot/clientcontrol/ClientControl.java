@@ -25,18 +25,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerRegisterChannelEvent;
 
 public class ClientControl implements Listener {
 
     @EventHandler()
     public void onJoin(PlayerJoinEvent event){
-        Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, () -> {
-            LunarClient.handle(event.getPlayer());
-        }, 60L);
 
         Badlion.handle(event.getPlayer());
         FiveZig.handle(event.getPlayer());
         LabyMod.hande(event.getPlayer());
+
     }
 
     public static void handlePacket(Player player, String channel, byte[] data){
@@ -48,6 +47,10 @@ public class ClientControl implements Listener {
 
         if(channel.equalsIgnoreCase("LABYMOD") || channel.equalsIgnoreCase("labymod3:main")){
             LabyMod.handlePacket(player, data);
+        }
+
+        if(channel.equalsIgnoreCase("minecraft:brand") && new String(data).contains("lunarclient")){
+            LunarClient.handle(player);
         }
     }
 

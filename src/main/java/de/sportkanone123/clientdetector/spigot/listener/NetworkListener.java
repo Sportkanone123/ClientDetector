@@ -18,13 +18,40 @@
 
 package de.sportkanone123.clientdetector.spigot.listener;
 
+import de.sportkanone123.clientdetector.spigot.forgemod.ModList;
+import de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandler;
 import de.sportkanone123.clientdetector.spigot.packet.Packet;
 import de.sportkanone123.clientdetector.spigot.packet.processor.PacketProcessor;
+import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.event.PacketListenerDynamic;
+import io.github.retrooper.packetevents.event.impl.PacketLoginReceiveEvent;
+import io.github.retrooper.packetevents.event.impl.PacketLoginSendEvent;
 import io.github.retrooper.packetevents.event.impl.PacketPlayReceiveEvent;
+import io.github.retrooper.packetevents.event.impl.PacketPlaySendEvent;
 import io.github.retrooper.packetevents.event.priority.PacketEventPriority;
+import io.github.retrooper.packetevents.packettype.PacketType;
+import io.github.retrooper.packetevents.packettype.PacketTypeClasses;
+import io.github.retrooper.packetevents.packetwrappers.NMSPacket;
+import io.github.retrooper.packetevents.packetwrappers.login.in.custompayload.WrappedPacketLoginInCustomPayload;
+import io.github.retrooper.packetevents.packetwrappers.login.in.start.WrappedPacketLoginInStart;
+import io.github.retrooper.packetevents.packetwrappers.login.out.custompayload.WrappedPacketLoginOutCustomPayload;
+import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
+import io.github.retrooper.packetevents.utils.nms.NMSUtils;
+import io.netty.buffer.Unpooled;
+import org.bukkit.event.Listener;
 
-public class NetworkListener extends PacketListenerDynamic {
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class NetworkListener extends PacketListenerDynamic implements Listener {
 
     public NetworkListener() {
         super(PacketEventPriority.NORMAL);
@@ -33,5 +60,10 @@ public class NetworkListener extends PacketListenerDynamic {
     @Override
     public void onPacketPlayReceive(PacketPlayReceiveEvent event) {
         PacketProcessor.handlePacket(event.getPlayer(), new Packet(event.getNMSPacket(), event.getPacketId()));
+    }
+
+    @Override
+    public void onPacketLoginReceive(PacketLoginReceiveEvent event) {
+        PacketProcessor.handleLoginPacket(event);
     }
 }

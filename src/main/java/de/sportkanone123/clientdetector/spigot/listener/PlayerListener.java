@@ -20,7 +20,6 @@ package de.sportkanone123.clientdetector.spigot.listener;
 
 import de.sportkanone123.clientdetector.bungeecord.utils.CustomPayload;
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
-import de.sportkanone123.clientdetector.spigot.clientdisabler.ClientDisabler;
 import de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandshake;
 import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
@@ -29,11 +28,9 @@ import io.github.retrooper.packetevents.PacketEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class PlayerListener implements Listener {
@@ -47,6 +44,8 @@ public class PlayerListener implements Listener {
 
         if(ClientDetector.plugin.getConfig().getBoolean("forge.simulateForgeHandshake"))
             ForgeHandshake.sendHandshake(event.getPlayer());
+
+        de.sportkanone123.clientdetector.spigot.forgemod.newerversion.ForgeHandler.handleJoin(event.getPlayer());
 
         if(GeyserManager.isBedrockPlayer(event.getPlayer()))
             AlertsManager.handleGeyserDetection(event.getPlayer());

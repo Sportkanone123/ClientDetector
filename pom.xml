@@ -88,7 +88,7 @@
         <dependency>
             <groupId>com.github.retrooper</groupId>
             <artifactId>packetevents</artifactId>
-            <version>55c3b9a446</version>
+            <version>7f655ad54b</version>
         </dependency>
 
         <dependency>

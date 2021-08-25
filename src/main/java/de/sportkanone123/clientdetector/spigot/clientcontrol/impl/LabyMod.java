@@ -136,16 +136,16 @@ public class LabyMod {
             }else if(perm.equals(Permission.GUI_ALL)){
                 modifiedPermissions.put(perm, !ConfigManager.getConfig("clientcontrol").getBoolean("labymod.disableGuiAll"));
             }
+        }
 
-            WrappedPacketOutCustomPayload costumPayload;
+        WrappedPacketOutCustomPayload costumPayload;
 
-            if(PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13)){
-                costumPayload = new WrappedPacketOutCustomPayload("labymod3:main",  LabyModProtocol.getBytesToSend(modifiedPermissions));
-                PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
-            }else{
-                costumPayload = new WrappedPacketOutCustomPayload("LMC",  LabyModProtocol.getBytesToSend(modifiedPermissions));
-                PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
-            }
+        if(PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13)){
+            costumPayload = new WrappedPacketOutCustomPayload("labymod3:main",  LabyModProtocol.getBytesToSend(modifiedPermissions));
+            PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+        }else{
+            costumPayload = new WrappedPacketOutCustomPayload("LMC",  LabyModProtocol.getBytesToSend(modifiedPermissions));
+            PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
         }
     }
 

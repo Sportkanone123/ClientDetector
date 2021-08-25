@@ -40,10 +40,10 @@ public class ClientDetectorAPI {
         return new ArrayList<String>();
     }
 
-    public static Map<String, String> getPlayerForgeMods(Player player){
+    public static ArrayList<String> getPlayerForgeMods(Player player){
         if(ClientDetector.forgeMods.get(player) != null)
             return ClientDetector.forgeMods.get(player).getMods();
-        return new HashMap<String, String>();
+        return new ArrayList<String>();
     }
 
     public static List<String> getPlayerLabymodAddons(Player player){

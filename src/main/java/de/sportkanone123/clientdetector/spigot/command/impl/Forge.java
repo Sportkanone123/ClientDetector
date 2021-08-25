@@ -45,8 +45,8 @@ public class Forge {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(1).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName())));
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(2).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName())));
 
-                        for(String mod : ClientDetector.forgeMods.get(target).getMods().keySet()){
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(3).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%mod_name%", mod).replace("%mod_version%", ClientDetector.forgeMods.get(target).getMods().get(mod))));
+                        for(String mod : ClientDetector.forgeMods.get(target).getMods()){
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(3).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%mod_name%", mod)));
                         }
 
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(4).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName())));

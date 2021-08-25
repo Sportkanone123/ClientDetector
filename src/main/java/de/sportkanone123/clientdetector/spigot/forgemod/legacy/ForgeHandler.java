@@ -19,16 +19,13 @@
 package de.sportkanone123.clientdetector.spigot.forgemod.legacy;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
-import de.sportkanone123.clientdetector.spigot.api.events.ClientDetectedEvent;
 import de.sportkanone123.clientdetector.spigot.api.events.ForgeModlistDetectedEvent;
 import de.sportkanone123.clientdetector.spigot.forgemod.ModList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ForgeHandler {
     public static void handle(Player player, String channel, byte[] data){
@@ -36,7 +33,7 @@ public class ForgeHandler {
             if(channel.equalsIgnoreCase("FML|HS") && data != null && data[0] == 2){
                 ClientDetector.forgeMods.put(player, getModList(data));
 
-                for(String forgeMod : getModList(data).getMods().keySet())
+                for(String forgeMod : getModList(data).getMods())
                     de.sportkanone123.clientdetector.spigot.forgemod.ForgeHandler.handleDetection(player, forgeMod);
 
                 Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable(){
@@ -50,7 +47,7 @@ public class ForgeHandler {
     }
 
     public static ModList getModList(byte[] data){
-        Map<String, String> modList = new HashMap<>();
+        ArrayList<String> modList = new ArrayList<>();
 
         boolean modname = false;
         String tempName = null;
@@ -64,7 +61,7 @@ public class ForgeHandler {
 
             if (modname)
             {
-                modList.put(tempName, string);
+                modList.add(tempName);
             }
             else
             {

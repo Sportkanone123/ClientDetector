@@ -19,10 +19,9 @@
 package de.sportkanone123.clientdetector.spigot.packet.processor;
 
 import de.sportkanone123.clientdetector.spigot.packet.Packet;
+import io.github.retrooper.packetevents.event.impl.PacketLoginReceiveEvent;
 import io.github.retrooper.packetevents.packetwrappers.play.in.custompayload.WrappedPacketInCustomPayload;
 import org.bukkit.entity.Player;
-
-import java.nio.charset.StandardCharsets;
 
 public class PacketProcessor {
 
@@ -37,15 +36,18 @@ public class PacketProcessor {
             de.sportkanone123.clientdetector.spigot.mod.processor.PacketProcessor.handlePacket(player, channel, data);
 
             de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandler.handle(player, channel, data);
-            de.sportkanone123.clientdetector.spigot.forgemod.newerversion.ForgeHandler.handle(player, packet);
 
             de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl.handlePacket(player, channel, data);
 
-            /*System.out.println("-----------[Packet]-----------");
+            /*System.out.println("-----------[Packet C -> S]-----------");
             System.out.println("Player: " + player);
             System.out.println("Channel: '" + wrappedPacketInCustomPayload.getChannelName() + "'");
             System.out.println("Data: '" + new String(data, StandardCharsets.UTF_8) + "'");
-            System.out.println("-----------[Packet]-----------");*/
+            System.out.println("-----------[Packet C -> S]-----------");*/
         }
+    }
+
+    public static void handleLoginPacket(PacketLoginReceiveEvent event){
+        de.sportkanone123.clientdetector.spigot.forgemod.newerversion.ForgeHandler.handle(event);
     }
 }

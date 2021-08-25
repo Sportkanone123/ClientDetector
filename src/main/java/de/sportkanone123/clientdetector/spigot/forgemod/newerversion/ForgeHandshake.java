@@ -18,13 +18,14 @@
 
 package de.sportkanone123.clientdetector.spigot.forgemod.newerversion;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.List;
-import java.util.Map;
+import io.github.retrooper.packetevents.PacketEvents;
+import io.github.retrooper.packetevents.packetwrappers.login.out.custompayload.WrappedPacketLoginOutCustomPayload;
 
-public class FMLHandshakeMessages {
+public class ForgeHandshake {
+    public static void sendModList(Object channel){
 
+        WrappedPacketLoginOutCustomPayload wrappedPacketLoginOutCustomPayload = new WrappedPacketLoginOutCustomPayload(/*Random ID*/111111, "fml:handshake", new byte[] { 1, 0, 0, 0 });
+        PacketEvents.get().getPlayerUtils().sendPacket(channel, wrappedPacketLoginOutCustomPayload);
+
+    }
 }

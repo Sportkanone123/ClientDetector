@@ -22,7 +22,7 @@ forge:
     - "&7&m------------------- %prefix% &7&m-------------------"
     - "&c%player_name%&7's Forge mods:"
     - ""
-    - "&8&m- &c%mod_name% &7(&c%mod_version%&7)"
+    - "&8&m- &c%mod_name%"
     - "&7&m------------------- %prefix% &7&m-------------------"
 
 player:
