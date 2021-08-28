@@ -83,9 +83,11 @@ public class ClientDetector extends JavaPlugin {
         instance.init();
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "clientdetector:sync");
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "lunarclient:pm");
 
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "clientdetector:sync", new PluginMessageListener());
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "clientdetector:fix", new PluginMessageListener());
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, "lunarclient:pm", new PluginMessageListener());
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aConfig&7) &aLoading config(s)..."));
         saveDefaultConfig();

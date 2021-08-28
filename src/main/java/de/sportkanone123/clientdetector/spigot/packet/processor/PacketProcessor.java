@@ -23,6 +23,8 @@ import io.github.retrooper.packetevents.event.impl.PacketLoginReceiveEvent;
 import io.github.retrooper.packetevents.packetwrappers.play.in.custompayload.WrappedPacketInCustomPayload;
 import org.bukkit.entity.Player;
 
+import java.nio.charset.StandardCharsets;
+
 public class PacketProcessor {
 
     public static void handlePacket(Player player, Packet packet){
@@ -50,4 +52,5 @@ public class PacketProcessor {
     public static void handleLoginPacket(PacketLoginReceiveEvent event){
         de.sportkanone123.clientdetector.spigot.forgemod.newerversion.ForgeHandler.handle(event);
     }
+
 }

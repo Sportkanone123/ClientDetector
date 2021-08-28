@@ -31,11 +31,18 @@ public class ClientControl implements Listener {
 
     @EventHandler()
     public void onJoin(PlayerJoinEvent event){
-
         Badlion.handle(event.getPlayer());
         FiveZig.handle(event.getPlayer());
         LabyMod.hande(event.getPlayer());
 
+    }
+
+    @EventHandler
+    public void onRegister(final PlayerRegisterChannelEvent event) {
+        if (!event.getChannel().equalsIgnoreCase("lunarclient:pm")) {
+            return;
+        }
+        LunarClient.handle(event.getPlayer());
     }
 
     public static void handlePacket(Player player, String channel, byte[] data){
@@ -47,10 +54,6 @@ public class ClientControl implements Listener {
 
         if(channel.equalsIgnoreCase("LABYMOD") || channel.equalsIgnoreCase("labymod3:main")){
             LabyMod.handlePacket(player, data);
-        }
-
-        if(channel.equalsIgnoreCase("minecraft:brand") && new String(data).contains("lunarclient")){
-            LunarClient.handle(player);
         }
     }
 

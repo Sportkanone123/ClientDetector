@@ -20,6 +20,7 @@ package de.sportkanone123.clientdetector.spigot.listener;
 
 import de.sportkanone123.clientdetector.bungeecord.utils.CustomPayload;
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
+import de.sportkanone123.clientdetector.spigot.clientcontrol.impl.LunarClient;
 import de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandshake;
 import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
@@ -30,6 +31,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRegisterChannelEvent;
 
 import java.util.ArrayList;
 
@@ -80,9 +82,4 @@ public class PlayerListener implements Listener {
         if(ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))
             event.setQuitMessage(null);
     }
-
-    /*@EventHandler
-    public static void onChat(AsyncPlayerChatEvent event){
-        ClientDisabler.handleChatEvent(event);
-    }*/
 }
