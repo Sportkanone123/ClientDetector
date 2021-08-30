@@ -23,7 +23,11 @@ import de.sportkanone123.clientdetector.spigot.packet.processor.PacketProcessor;
 import io.github.retrooper.packetevents.event.PacketListenerDynamic;
 import io.github.retrooper.packetevents.event.impl.*;
 import io.github.retrooper.packetevents.event.priority.PacketEventPriority;
+import io.github.retrooper.packetevents.packettype.PacketType;
+import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
 import org.bukkit.event.Listener;
+
+import java.nio.charset.StandardCharsets;
 
 
 public class NetworkListener extends PacketListenerDynamic implements Listener {

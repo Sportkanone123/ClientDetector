@@ -22,6 +22,7 @@ import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
 import io.github.retrooper.packetevents.utils.player.ClientVersion;
+import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import org.bukkit.entity.Player;
 
 import java.io.ByteArrayOutputStream;
@@ -73,14 +74,10 @@ public class ForgeHandshake {
     }
 
     public static void sendHandshake(Player player){
-        if(PacketEvents.get().getPlayerUtils().getClientVersion(player).isOlderThanOrEquals(ClientVersion.v_1_12_2)){
+        if(PacketEvents.get().getServerUtils().getVersion().isOlderThanOrEquals(ServerVersion.v_1_12_2)){
             sendHandshakeReset(player, "FML|HS");
             sendServerHello(player, "FML|HS");
             sendModList(player, "FML|HS");
-        }else{
-            sendHandshakeReset(player, "l:fmlhs");
-            sendServerHello(player, "l:fmlhs");
-            sendModList(player, "l:fmlhs");
         }
     }
 }

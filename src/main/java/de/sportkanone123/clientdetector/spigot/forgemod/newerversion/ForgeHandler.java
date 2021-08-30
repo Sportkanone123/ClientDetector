@@ -21,10 +21,12 @@ package de.sportkanone123.clientdetector.spigot.forgemod.newerversion;
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.api.events.ForgeModlistDetectedEvent;
 import de.sportkanone123.clientdetector.spigot.forgemod.ModList;
+import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.event.impl.PacketLoginReceiveEvent;
 import io.github.retrooper.packetevents.packettype.PacketType;
 import io.github.retrooper.packetevents.packetwrappers.login.in.custompayload.WrappedPacketLoginInCustomPayload;
 import io.github.retrooper.packetevents.packetwrappers.login.in.start.WrappedPacketLoginInStart;
+import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.DecoderException;
@@ -41,8 +43,8 @@ public class ForgeHandler {
 
 
     public static void handle(PacketLoginReceiveEvent event){
-        if(event.getPacketId() == PacketType.Login.Client.START) {
-            if(ClientDetector.plugin.getConfig().getBoolean("forge.simulateForgeHandshake")) {
+        if(event.getPacketId() == PacketType.Login.Client.START ) {
+            if(ClientDetector.plugin.getConfig().getBoolean("forge.simulateForgeHandshake") && PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13)) {
                 ForgeHandshake.sendModList(event.getChannel());
                 channelToName.put(event.getChannel(), new WrappedPacketLoginInStart(event.getNMSPacket()).getGameProfile().getName());
             }
