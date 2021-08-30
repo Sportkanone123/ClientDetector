@@ -30,12 +30,11 @@ public class DiscordManager {
     private static URL url;
 
     public static boolean load(){
-        if(ConfigManager.getConfig("config").get("discord.webHookUrl") != null){
+        if(ConfigManager.getConfig("config").get("discord.webHookUrl") != null && !ConfigManager.getConfig("config").get("discord.webHookUrl").equals("") && !ConfigManager.getConfig("config").get("discord.webHookUrl").equals(" ")){
             try {
                 url = new URL(ConfigManager.getConfig("config").getString("discord.webHookUrl"));
                 return true;
             } catch (MalformedURLException e) {
-                e.printStackTrace();
                 return false;
             }
         }else {
