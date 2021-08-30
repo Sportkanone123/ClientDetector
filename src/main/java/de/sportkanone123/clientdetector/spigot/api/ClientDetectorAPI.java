@@ -53,9 +53,7 @@ public class ClientDetectorAPI {
     }
 
     public static Boolean isForgePlayer(Player player){
-        if(ClientDetector.forgeMods.get(player).getMods() == null || ClientDetector.forgeMods.get(player).getMods().isEmpty())
-            return false;
-        return true;
+        return ClientDetector.forgeMods.get(player).getMods() != null && !ClientDetector.forgeMods.get(player).getMods().isEmpty();
     }
 
     public static Boolean isBedrockPlayer(Player player){

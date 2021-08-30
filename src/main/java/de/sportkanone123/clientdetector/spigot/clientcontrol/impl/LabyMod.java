@@ -172,8 +172,8 @@ public class LabyMod {
         ANIMATIONS( "Animations", true ),
         SATURATION_BAR( "Saturation bar", true );
 
-        private String displayName;
-        private boolean defaultEnabled;
+        private final String displayName;
+        private final boolean defaultEnabled;
 
         /**
          * @param displayName    the permission's display-name
@@ -257,7 +257,7 @@ public class LabyMod {
          * @param string the string that should be written to the buffer
          */
         private static void writeString( ByteBuf buf, String string ) {
-            byte[] abyte = string.getBytes( Charset.forName( "UTF-8" ) );
+            byte[] abyte = string.getBytes(StandardCharsets.UTF_8);
 
             if ( abyte.length > Short.MAX_VALUE ) {
                 throw new EncoderException( "String too big (was " + string.length() + " bytes encoded, max " + Short.MAX_VALUE + ")" );

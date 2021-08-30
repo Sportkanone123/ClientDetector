@@ -69,7 +69,7 @@ public class ClientDetectorBungee extends Plugin implements Listener {
 
                     try {
                         msgout.writeUTF(customPayload.getUuid().toString());
-                        msgout.writeUTF(customPayload.getChannel().toString());
+                        msgout.writeUTF(customPayload.getChannel());
                         msgout.writeUTF(new String(customPayload.getData(), StandardCharsets.UTF_8));
                     } catch (IOException exception) {
 

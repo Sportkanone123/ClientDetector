@@ -392,7 +392,7 @@ public class LunarClient {
 
         public static final Gson GSON = new GsonBuilder().registerTypeHierarchyAdapter(ModSettings.class, new ModSettingsAdapter()).create();
 
-        private Map<String, ModSetting> modSettings = new HashMap<>();
+        private final Map<String, ModSetting> modSettings = new HashMap<>();
 
         public ModSettings addModSetting(String modId, ModSetting setting) {
             modSettings.put(modId, setting);

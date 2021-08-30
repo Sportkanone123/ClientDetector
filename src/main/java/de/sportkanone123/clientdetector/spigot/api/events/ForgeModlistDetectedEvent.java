@@ -24,9 +24,9 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class ForgeModlistDetectedEvent extends Event {
-    private static HandlerList handlers = new HandlerList();
-    private Player player;
-    private ModList modlist;
+    private static final HandlerList handlers = new HandlerList();
+    private final Player player;
+    private final ModList modlist;
 
     public ForgeModlistDetectedEvent(Player player, ModList modlist) {
         this.modlist = modlist;

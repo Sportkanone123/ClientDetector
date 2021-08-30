@@ -35,7 +35,7 @@ import java.util.Map;
 More information can be found here: https://github.com/LunarClient/BukkitAPI
  */
 public class Badlion {
-    private static Map<String, DisallowedMods> modsDisallowed =  new HashMap<String, DisallowedMods>();
+    private static final Map<String, DisallowedMods> modsDisallowed =  new HashMap<String, DisallowedMods>();
 
     public static void handle(Player player){
         Gson GSON = new GsonBuilder().enableComplexMapKeySerialization().disableHtmlEscaping().create();
@@ -128,9 +128,9 @@ public class Badlion {
     }
 
     private static class DisallowedMods {
-        private boolean disabled;
-        private JsonObject extra_data;
-        private JsonObject settings;
+        private final boolean disabled;
+        private final JsonObject extra_data;
+        private final JsonObject settings;
 
         public DisallowedMods(boolean disabled, JsonObject extra_data, JsonObject settings){
             this.disabled = disabled;

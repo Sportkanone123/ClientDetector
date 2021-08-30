@@ -23,9 +23,9 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class ModDetectedEvent extends Event {
-    private static HandlerList handlers = new HandlerList();
-    private Player player;
-    private String modName;
+    private static final HandlerList handlers = new HandlerList();
+    private final Player player;
+    private final String modName;
 
     public ModDetectedEvent(Player player, String modName) {
         this.modName = modName;

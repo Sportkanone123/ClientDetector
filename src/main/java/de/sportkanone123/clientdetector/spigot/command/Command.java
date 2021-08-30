@@ -31,7 +31,7 @@ public class Command implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         if(sender instanceof org.bukkit.entity.Player){
-            if(!((org.bukkit.entity.Player) sender).hasPermission("clientdetector.command")){
+            if(!sender.hasPermission("clientdetector.command")){
                 String prefix = ConfigManager.getConfig("message").getString("prefix");
 
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&m-------&7" + prefix + "&7&m-------&7"));

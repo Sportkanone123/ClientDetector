@@ -21,9 +21,9 @@ package de.sportkanone123.clientdetector.bungeecord.utils;
 import java.util.UUID;
 
 public class CustomPayload {
-    private UUID uuid;
-    private String channel;
-    private byte[] data;
+    private final UUID uuid;
+    private final String channel;
+    private final byte[] data;
 
     public CustomPayload(final UUID uuid, final String channel, final byte[] data) {
         this.uuid = uuid;

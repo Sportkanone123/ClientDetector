@@ -60,7 +60,7 @@ public class ForgeHandshake {
     // FML|HS	║ Both     ║ Discriminator        ║	Byte	      ║ Always -1 (255) for HandshakeAck
     //          ║          ║ Phase                ║	Byte	      ║ The current phase, which is the ordinal (0-indexed) in the FMLHandshakeClientState or FMLHandshakeServerState enums (if the server is sending it, it is in the ServerState enum, and if the client is sending it, it is the ClientState enum).
     public static void sendHandshakeAck(Player player, Byte phase, String channel){
-        WrappedPacketOutCustomPayload costumPayload = new WrappedPacketOutCustomPayload(channel,  new byte[] {(byte) -1,(byte) phase });
+        WrappedPacketOutCustomPayload costumPayload = new WrappedPacketOutCustomPayload(channel,  new byte[] {(byte) -1, phase});
         PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
     }
 
