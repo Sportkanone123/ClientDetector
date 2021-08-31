@@ -26,10 +26,12 @@ import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import de.sportkanone123.clientdetector.spigot.manager.GeyserManager;
 import io.github.retrooper.packetevents.PacketEvents;
+import io.github.retrooper.packetevents.event.impl.PlayerInjectEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRegisterChannelEvent;
 
@@ -39,10 +41,6 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public static void onJoin(PlayerJoinEvent event){
-        ClientDetector.playerMods.put(event.getPlayer(), new ArrayList<String>());
-        ClientDetector.clientVersion.put(event.getPlayer(), null);
-        ClientDetector.playerMods.put(event.getPlayer(), null);
-        ClientDetector.playerLabymodMods.put(event.getPlayer(), new ArrayList<String>());
 
         if(ClientDetector.plugin.getConfig().getBoolean("forge.simulateForgeHandshake"))
             ForgeHandshake.sendHandshake(event.getPlayer());
@@ -78,6 +76,13 @@ public class PlayerListener implements Listener {
     public static void onQuit(PlayerQuitEvent event){
 
         ClientDetector.bungeePayload.put(event.getPlayer().getUniqueId(), new ArrayList<CustomPayload>());
+
+        ClientDetector.playerClient.remove(event.getPlayer());
+        ClientDetector.playerMods.remove(event.getPlayer());
+        ClientDetector.playerLabymodMods.remove(event.getPlayer());
+        ClientDetector.forgeMods.remove(event.getPlayer());
+        ClientDetector.mcVersion.remove(event.getPlayer());
+        ClientDetector.clientVersion.remove(event.getPlayer());
 
         if(ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))
             event.setQuitMessage(null);
