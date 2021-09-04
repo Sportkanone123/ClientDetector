@@ -23,6 +23,7 @@ import de.sportkanone123.clientdetector.spigot.client.Client;
 import de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl;
 import de.sportkanone123.clientdetector.spigot.command.Command;
 import de.sportkanone123.clientdetector.spigot.forgemod.ModList;
+import de.sportkanone123.clientdetector.spigot.hackdetector.HackDetector;
 import de.sportkanone123.clientdetector.spigot.listener.NetworkListener;
 import de.sportkanone123.clientdetector.spigot.listener.PlayerListener;
 import de.sportkanone123.clientdetector.spigot.listener.PluginMessageListener;
@@ -96,6 +97,7 @@ public class ClientDetector extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getPluginManager().registerEvents(new ClientControl(), this);
+        Bukkit.getPluginManager().registerEvents(new HackDetector(), this);
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aDetection&7) &aLoading client detections..."));
         ClientManager.load();

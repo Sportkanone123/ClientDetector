@@ -22,6 +22,8 @@ import de.sportkanone123.clientdetector.bungeecord.utils.CustomPayload;
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.clientcontrol.impl.LunarClient;
 import de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandshake;
+import de.sportkanone123.clientdetector.spigot.hackdetector.HackDetector;
+import de.sportkanone123.clientdetector.spigot.hackdetector.impl.ChatExploit;
 import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import de.sportkanone123.clientdetector.spigot.manager.GeyserManager;
@@ -70,6 +72,8 @@ public class PlayerListener implements Listener {
 
         if(ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))
             event.setJoinMessage(null);
+
+        HackDetector.startChatCheck(event.getPlayer());
     }
 
     @EventHandler
@@ -86,5 +90,7 @@ public class PlayerListener implements Listener {
 
         if(ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))
             event.setQuitMessage(null);
+
+        ChatExploit.handleQuit(event.getPlayer());
     }
 }

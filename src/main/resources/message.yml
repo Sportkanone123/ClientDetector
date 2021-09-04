@@ -49,3 +49,31 @@ error:
   nopermission: "%prefix% &cYou do not have permission to do that!"
   #Answer to command when it was executed through the console, but the command can only be used by players. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%'], DEFAULT: "%prefix% &cThis command can only be used by players!"]
   onlyplayercanusecommand: "%prefix% &cThis command can only be used by players!"
+
+hackdetector:
+  chatexploit:
+    #Text that will be sent to the player (the player has to click on it to pass the test). [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%time%]]
+    clickabletext:
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "                                                         "
+      - "%prefix% &bPlease click this message to continue playing! You have %time% seconds left."
+    #Message that will be sent to the player when he passes the test. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%'], DEFAULT: "%prefix% &aYou have successfully passed the test."]
+    success: "%prefix% &aYou have successfully passed the test."
