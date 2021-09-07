@@ -32,7 +32,6 @@ import java.util.ArrayList;
 
 public class Forge {
     public static boolean handle(CommandSender sender, Command command, String label, String[] args) {
-        org.bukkit.entity.Player p = (Player) sender;
         if(args.length == 2){
             if(Bukkit.getPlayer(args[1]) != null){
                 org.bukkit.entity.Player target = Bukkit.getPlayer(args[1]);

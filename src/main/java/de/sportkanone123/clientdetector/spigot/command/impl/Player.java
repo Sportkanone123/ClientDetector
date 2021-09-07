@@ -30,7 +30,6 @@ import java.util.ArrayList;
 
 public class Player {
     public static boolean handle(CommandSender sender, Command command, String label, String[] args) {
-        org.bukkit.entity.Player p = (org.bukkit.entity.Player) sender;
 
         if(args.length >= 3){
             if(Bukkit.getPlayer(args[2]) != null){

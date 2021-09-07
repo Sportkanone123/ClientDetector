@@ -129,7 +129,7 @@ discord:
 hackdetector:
   chatexploit:
     #If a player joins they have to click on a message to continue playing. [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
-    enableChatExploit: true
+    enableChatExploit: false
     #Should the palyer be allowed to move while he is tested. [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
     disableMoving: true
     #Command that will be executed trough the console if he fails the test. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%prefix%'], DEFAULT:'kick %player_name% %prefix% &aYou failed the test. \n&7(&fIf you think this is an error, please rejoin and click the message&7)']
