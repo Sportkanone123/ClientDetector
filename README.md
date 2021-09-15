@@ -1,4 +1,5 @@
 [![](https://img.shields.io/badge/license-GPLv3-blue)](https://github.com/Sportkanone123/ClientDetector/blob/master/LICENSE)
+[![CodeFactor](https://www.codefactor.io/repository/github/sportkanone123/clientdetector/badge/master)](https://www.codefactor.io/repository/github/sportkanone123/clientdetector/overview/master)
 
 # ClientDetector
 *A simple plugin to detect and manage a player's client/mods*
