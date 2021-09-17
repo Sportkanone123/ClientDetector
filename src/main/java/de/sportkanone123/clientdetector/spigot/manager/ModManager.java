@@ -31,7 +31,6 @@ import java.util.Locale;
 public class ModManager {
 
     public static void load(){
-        ClientDetector.MODS.add(new Mod("REGISTER", "the5zigmod:5zig_set", "5zig Mod", false));
         ClientDetector.MODS.add(new Mod(Arrays.asList("5zig_Set", "l:5zig_set", "the5zigmod:5zig_set"), Arrays.asList(""), "5zig Mod", true));
         ClientDetector.MODS.add(new Mod(Arrays.asList("BSprint", "BSM", "l:bsprint", "l:bsm"), Arrays.asList(""), "Better Sprinting Mod", true));
         ClientDetector.MODS.add(new Mod(Arrays.asList("WDL|INIT", "WDL|CONTROL", "wdl:request", "wdl:init", "wdl:control"), Arrays.asList(""), "World Downloader", true));

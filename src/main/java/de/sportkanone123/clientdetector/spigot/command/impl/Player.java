@@ -70,8 +70,20 @@ public class Player {
             }else{
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("error.playernotfound").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", args[2])));
             }
+        }else if(args.length == 2){
+            if(args[1].equalsIgnoreCase("list")){
+                if(!Bukkit.getOnlinePlayers().isEmpty()){
+                    for(org.bukkit.entity.Player player : Bukkit.getOnlinePlayers()){
+                        if(ClientDetector.playerClient.get(player) != null){
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("player.clientlist").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%client_name%", ClientDetector.playerClient.get(player))));
+                        }
+                    }
+                }else{
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("error.noplayersonline").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix"))));
+                }
+            }
         }else{
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("prefix") + " &cPlease use: /cd player <client/version/mods/labyaddons> <player>"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("prefix") + " &cPlease use: /cd player <client/list/version/mods/labyaddons> <player>"));
         }
         return false;
     }

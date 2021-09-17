@@ -24,6 +24,7 @@ import de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl;
 import de.sportkanone123.clientdetector.spigot.command.Command;
 import de.sportkanone123.clientdetector.spigot.forgemod.ModList;
 import de.sportkanone123.clientdetector.spigot.hackdetector.HackDetector;
+import de.sportkanone123.clientdetector.spigot.hackdetector.impl.AntiFastMath;
 import de.sportkanone123.clientdetector.spigot.listener.NetworkListener;
 import de.sportkanone123.clientdetector.spigot.listener.PlayerListener;
 import de.sportkanone123.clientdetector.spigot.listener.PluginMessageListener;
@@ -94,6 +95,9 @@ public class ClientDetector extends JavaPlugin {
         saveDefaultConfig();
 
         getCommand("clientdetector").setExecutor(new Command());
+        getCommand("client").setExecutor(new Command());
+        getCommand("forge").setExecutor(new Command());
+        getCommand("mods").setExecutor(new Command());
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getPluginManager().registerEvents(new ClientControl(), this);
@@ -107,6 +111,8 @@ public class ClientDetector extends JavaPlugin {
         AlertsManager.load();
 
         DiscordManager.load();
+
+        AntiFastMath.load();
 
         if(Bukkit.getServer().getPluginManager().isPluginEnabled("ViaVersion")){
             Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aViaVersion&7) &aDetected ViaVersion " + Bukkit.getPluginManager().getPlugin("ViaVersion").getDescription().getVersion()));

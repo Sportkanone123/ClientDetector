@@ -1,5 +1,5 @@
 name: ClientDetector
-version: 2.1.2
+version: 2.1.2-Custom
 author: Sportkanone123
 main: de.sportkanone123.clientdetector.spigot.ClientDetector
 load: POSTWORLD
@@ -10,3 +10,6 @@ softdepend: [PlaceholderAPI, ProtocolLib, ViaVersion]
 commands:
   clientdetector:
     aliases: cd
+  client:
+  forge:
+  mods:

@@ -30,31 +30,55 @@ public class Command implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
-        if(sender instanceof org.bukkit.entity.Player){
-            if(!sender.hasPermission("clientdetector.command")){
+        if(command.getName().equalsIgnoreCase("clientdetector")){
+            if(sender instanceof org.bukkit.entity.Player){
+                if(!sender.hasPermission("clientdetector.command")){
+                    String prefix = ConfigManager.getConfig("message").getString("prefix");
+
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&m-------&7" + prefix + "&7&m-------&7"));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("prefix") + " &7ClientDetector(" + Bukkit.getServer().getPluginManager().getPlugin("ClientDetector").getDescription().getVersion() + ") by Sportkanone123"));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&m-------&7" + prefix + "&7&m-------&7"));
+
+                    return false;
+                }
+            }
+
+            if(args.length == 0){
                 String prefix = ConfigManager.getConfig("message").getString("prefix");
 
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&m-------&7" + prefix + "&7&m-------&7"));
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("prefix") + " &7ClientDetector(" + Bukkit.getServer().getPluginManager().getPlugin("ClientDetector").getDescription().getVersion() + ") by Sportkanone123"));
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&m-------&7" + prefix + "&7&m-------&7"));
-
-                return false;
+            }else{
+                if(args[0].equalsIgnoreCase("help")) {
+                    Help.handle(sender, command, label, args);
+                }else if(args[0].equalsIgnoreCase("player")){
+                    Player.handle(sender, command, label, args);
+                }else if(args[0].equalsIgnoreCase("forge")){
+                    Forge.handle(sender, command, label, args);
+                }
             }
-        }
+        }else if(command.getName().equalsIgnoreCase("client")){
+            if(args.length == 1){
+                String[] args_custom = new String[]{"player", "client", args[0]};
+                Player.handle(sender, command, label, args_custom);
+            }else{
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("prefix") + " &cPlease use: /client <player>"));
+            }
+        }else if(command.getName().equalsIgnoreCase("forge")){
+            if(args.length == 1){
+                String[] args_custom = new String[]{"forge", args[0]};
+                Forge.handle(sender, command, label, args_custom);
+            }else{
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("prefix") + " &cPlease use: /forge <player>"));
+            }
 
-        if(args.length == 0){
-            String prefix = ConfigManager.getConfig("message").getString("prefix");
-
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&m-------&7" + prefix + "&7&m-------&7"));
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("prefix") + " &7ClientDetector(" + Bukkit.getServer().getPluginManager().getPlugin("ClientDetector").getDescription().getVersion() + ") by Sportkanone123"));
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&m-------&7" + prefix + "&7&m-------&7"));
-        }else{
-            if(args[0].equalsIgnoreCase("help")) {
-                Help.handle(sender, command, label, args);
-            }else if(args[0].equalsIgnoreCase("player")){
-                Player.handle(sender, command, label, args);
-            }else if(args[0].equalsIgnoreCase("forge")){
-                Forge.handle(sender, command, label, args);
+        }else if(command.getName().equalsIgnoreCase("mods")){
+            if(args.length == 1){
+                String[] args_custom = new String[]{"player", "mods", args[0]};
+                Player.handle(sender, command, label, args_custom);
+            }else{
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("prefix") + " &cPlease use: /mods <player>"));
             }
         }
 
