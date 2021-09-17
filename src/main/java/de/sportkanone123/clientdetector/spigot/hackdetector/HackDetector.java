@@ -18,12 +18,15 @@
 
 package de.sportkanone123.clientdetector.spigot.hackdetector;
 
+import de.sportkanone123.clientdetector.spigot.hackdetector.impl.AntiFastMath;
 import de.sportkanone123.clientdetector.spigot.hackdetector.impl.ChatExploit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class HackDetector implements Listener {
     public static void startChatCheck(Player player){
@@ -33,10 +36,22 @@ public class HackDetector implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event){
         ChatExploit.handleChat(event.getPlayer(), event);
+
     }
 
     @EventHandler
     public void onMove(PlayerMoveEvent event){
         ChatExploit.handleMovement(event.getPlayer(), event);
+        AntiFastMath.handleMovement(event.getPlayer(), event);
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event){
+        AntiFastMath.handleJoin(event.getPlayer(), event);
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event){
+        AntiFastMath.handleQuit(event.getPlayer(), event);
     }
 }
