@@ -26,11 +26,15 @@
 
 package de.sportkanone123.clientdetector.spigot.hackdetector.impl;
 
+import de.sportkanone123.clientdetector.spigot.ClientDetector;
+import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
 
 import java.util.HashMap;
@@ -45,37 +49,47 @@ public class AntiFastMath {
     static int multiplier = 1000; //10000
 
     public static void handleMovement(Player player, PlayerMoveEvent event){
-        if(checkPlayer.get(player) != null && checkPlayer.get(player)){
-            Vector movement = event.getTo().toVector().subtract(event.getFrom().toVector());
-            Vector vanillaMovement = getVanillaMathMovement(movement, (float) (0.1), event.getFrom().getYaw());
-            Vector fastMathMovement = getFastMathMovement(movement, (float) (0.1), event.getFrom().getYaw());
+        if(ConfigManager.getConfig("config").getBoolean("hackdetector.antifastmath.enableAntiFastMath")){
+            if(checkPlayer.get(player) != null && checkPlayer.get(player)){
+                Vector movement = event.getTo().toVector().subtract(event.getFrom().toVector());
+                Vector vanillaMovement = getVanillaMathMovement(movement, (float) (0.1), event.getFrom().getYaw());
+                Vector fastMathMovement = getFastMathMovement(movement, (float) (0.1), event.getFrom().getYaw());
 
-            double lowVanilla = Math.min(Math.abs(vanillaMovement.getX()), Math.abs(vanillaMovement.getZ()));
-            double lowOptifine = Math.min(Math.abs(fastMathMovement.getX()), Math.abs(fastMathMovement.getZ()));
+                double lowVanilla = Math.min(Math.abs(vanillaMovement.getX()), Math.abs(vanillaMovement.getZ()));
+                double lowOptifine = Math.min(Math.abs(fastMathMovement.getX()), Math.abs(fastMathMovement.getZ()));
 
-            double vanillaRunning = vanillaPrecision.get(event.getPlayer());
-            double optifineRunning = fastMathPrecision.get(event.getPlayer());
+                double vanillaRunning = vanillaPrecision.get(event.getPlayer());
+                double optifineRunning = fastMathPrecision.get(event.getPlayer());
 
-            double xDistance = event.getFrom().getX() - event.getTo().getX();
-            double zDistance = event.getFrom().getZ() - event.getTo().getZ();
+                double xDistance = event.getFrom().getX() - event.getTo().getX();
+                double zDistance = event.getFrom().getZ() - event.getTo().getZ();
 
-            if ((lowVanilla < 1e-5 || lowOptifine < 1e-5) && ((xDistance * xDistance) + (zDistance * zDistance) > 0.01)) {
-                vanillaRunning = vanillaRunning * 15 / 16 + lowVanilla;
-                optifineRunning = optifineRunning * 15 / 16 + lowOptifine;
+                if ((lowVanilla < 1e-5 || lowOptifine < 1e-5) && ((xDistance * xDistance) + (zDistance * zDistance) > 0.01)) {
+                    vanillaRunning = vanillaRunning * 15 / 16 + lowVanilla;
+                    optifineRunning = optifineRunning * 15 / 16 + lowOptifine;
 
-                vanillaPrecision.put(event.getPlayer(), vanillaRunning);
-                fastMathPrecision.put(event.getPlayer(), optifineRunning);
+                    vanillaPrecision.put(event.getPlayer(), vanillaRunning);
+                    fastMathPrecision.put(event.getPlayer(), optifineRunning);
 
-                int count = playerSamples.get(event.getPlayer());
-                playerSamples.put(event.getPlayer(), count + 1);
+                    int count = playerSamples.get(event.getPlayer());
+                    playerSamples.put(event.getPlayer(), count + 1);
 
-                if (count == 20 && optifineRunning * multiplier < vanillaRunning) {
-                    Bukkit.broadcastMessage(player.getName() + " is using FastMath.");
-                    checkPlayer.put(player, false);
-                }else if(count == 10 && optifineRunning * multiplier < vanillaRunning){
-                    Bukkit.broadcastMessage(player.getName() + " probably uses FastMath.");
-                }else if(count == 5 && optifineRunning * multiplier < vanillaRunning){
-                    Bukkit.broadcastMessage(player.getName() + " maybe uses FastMath.");
+                    if (count == ConfigManager.getConfig("config").getInt("hackdetector.antifastmath.checkAfterCounts") && optifineRunning * multiplier < vanillaRunning) {
+                        checkPlayer.put(player, false);
+
+                        for(Player player1 : Bukkit.getOnlinePlayers()){
+                            if(player1.hasPermission(ConfigManager.getConfig("config").getString("alerts.notificationPermission"))){
+                                player1.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("hackdetector.antifastmath.usingfastmath").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString())));
+                            }
+                        }
+
+                        if(ConfigManager.getConfig("config").getBoolean("hackdetector.antifastmath.enablePunishment")){
+                            BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+                            scheduler.runTask(ClientDetector.plugin, () -> {
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("config").getString("hackdetector.antifastmath.punishCommand").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString())));
+                            });
+                        }
+                    }
                 }
             }
         }

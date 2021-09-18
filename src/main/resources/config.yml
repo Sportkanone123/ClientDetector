@@ -128,9 +128,19 @@ discord:
 #  └─────────────────────────────┘
 hackdetector:
   chatexploit:
-    #If a player joins they have to click on a message to continue playing. [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+    #If a player joins they have to click on a message to continue playing. [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
     enableChatExploit: false
-    #Should the palyer be allowed to move while he is tested. [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+    #Should the player be allowed to move while he is tested. [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
     disableMoving: true
     #Command that will be executed trough the console if he fails the test. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%prefix%'], DEFAULT:'kick %player_name% %prefix% &aYou failed the test. \n&7(&fIf you think this is an error, please rejoin and click the message&7)']
     punishCommand: "kick %player_name% %prefix% &aYou failed the test. \n&7(&fIf you think this is an error, please rejoin and click the message&7)"
+
+  antifastmath:
+    #ClienDetector can check if a player is using FastMath by analysing his movement. [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
+    enableAntiFastMath: false
+    #If FastMath is not detected set this Integer higher (min: 1, max: 50) [OPTIONS: 'anyInteger', PLACEHOLDERS: none, DEFAULT:'20']
+    checkAfterCounts: 20
+    #Should the player be punished if he uses FastMath (FastMath doesn't indicate a hack client directly, but it doesn't exist in vanilla minecaft) . [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
+    enablePunishment: false
+    #Command that will be executed trough the console if he fails the test. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%prefix%'], DEFAULT:'kick %player_name% %prefix% &aPlease use Vanilla Minecraft!']
+    punishCommand: "kick %player_name% %prefix% &aPlease use Vanilla Minecraft!"
