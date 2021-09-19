@@ -296,9 +296,13 @@ badlion_disable:
   #Allows a player to disable chat (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
   ToggleChat: false
   #Makes the player sneak all the time (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
-  ToggleSneak: false
+  ToggleSneak:
+    disableAll: false
+    InventorySneak: true
   #Makes the player sprint all the time (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
-  ToggleSprint: false
+  ToggleSprint:
+    disableAll: false
+    FlySpeed: true
   #Lets a player set waypoints, they are shown as a beam (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
   Waypoints: false
   #Allows the player to change his weather (client-side) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')

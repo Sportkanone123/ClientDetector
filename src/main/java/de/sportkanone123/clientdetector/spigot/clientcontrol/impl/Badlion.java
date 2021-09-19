@@ -118,6 +118,30 @@ public class Badlion {
          */
 
         for(String string : ((MemorySection) ConfigManager.getConfig("clientcontrol").get("badlion_disable")).getKeys(false)){
+            if(string.equalsIgnoreCase("ToggleSprint")){
+                if(ConfigManager.getConfig("clientcontrol").getBoolean("badlion_disable." + string + ".disableAll")) {
+                    modsDisallowed.put(string, new DisallowedMods(true, null, null));
+                }else if(ConfigManager.getConfig("clientcontrol").getBoolean("badlion_disable." + string + ".FlySpeed")){
+                    JsonObject object = new JsonObject();
+                    JsonObject object2 = new JsonObject();
+                    object2.addProperty("disabled", true);
+                    object.add("flySpeed", object2);
+                    modsDisallowed.put(string, new DisallowedMods(false, object, null));
+                }
+            }
+
+            if(string.equalsIgnoreCase("ToggleSneak")){
+                if(ConfigManager.getConfig("clientcontrol").getBoolean("badlion_disable." + string + ".disableAll")) {
+                    modsDisallowed.put(string, new DisallowedMods(true, null, null));
+                }else if(ConfigManager.getConfig("clientcontrol").getBoolean("badlion_disable." + string + ".InventorySneak")){
+                    JsonObject object = new JsonObject();
+                    JsonObject object2 = new JsonObject();
+                    object2.addProperty("disabled", true);
+                    object.add("inventorySneak", object2);
+                    modsDisallowed.put(string, new DisallowedMods(false, object, null));
+                }
+            }
+
             if(ConfigManager.getConfig("clientcontrol").getBoolean("badlion_disable." + string))
                 modsDisallowed.put(string, new DisallowedMods(true, null, null));
         }
