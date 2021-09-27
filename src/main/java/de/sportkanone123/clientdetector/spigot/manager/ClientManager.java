@@ -53,6 +53,9 @@ public class ClientManager {
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "PolarClient", "Polar Client", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "rift", "Rift", false, false, null, null));
 
+        ClientDetector.CLIENTS.add(new Client("REGISTER", "CB-Client", "CheatBreaker", false, false, null, null));
+
+
         /*
         Not tested
          */

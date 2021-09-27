@@ -91,6 +91,9 @@ public class ClientDetector extends JavaPlugin {
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "clientdetector:fix", new PluginMessageListener());
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "lunarclient:pm", new PluginMessageListener());
 
+        if(PacketEvents.get().getServerUtils().getVersion().isOlderThanOrEquals(ServerVersion.v_1_12_2))
+            Bukkit.getMessenger().registerIncomingPluginChannel((Plugin)this, "CB-Client", new PluginMessageListener());
+
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aConfig&7) &aLoading config(s)..."));
         saveDefaultConfig();
 
