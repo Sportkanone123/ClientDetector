@@ -59,6 +59,10 @@ public class Command implements CommandExecutor {
                 }
             }
         }else if(command.getName().equalsIgnoreCase("client")){
+            if(sender instanceof org.bukkit.entity.Player)
+                if(!sender.hasPermission("clientdetector.command"))
+                    return false;
+
             if(args.length == 1){
                 String[] args_custom = new String[]{"player", "client", args[0]};
                 Player.handle(sender, command, label, args_custom);
@@ -66,6 +70,10 @@ public class Command implements CommandExecutor {
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("prefix") + " &cPlease use: /client <player>"));
             }
         }else if(command.getName().equalsIgnoreCase("forge")){
+            if(sender instanceof org.bukkit.entity.Player)
+                if(!sender.hasPermission("clientdetector.command"))
+                    return false;
+
             if(args.length == 1){
                 String[] args_custom = new String[]{"forge", args[0]};
                 Forge.handle(sender, command, label, args_custom);
@@ -74,6 +82,10 @@ public class Command implements CommandExecutor {
             }
 
         }else if(command.getName().equalsIgnoreCase("mods")){
+            if(sender instanceof org.bukkit.entity.Player)
+                if(!sender.hasPermission("clientdetector.command"))
+                    return false;
+
             if(args.length == 1){
                 String[] args_custom = new String[]{"player", "mods", args[0]};
                 Player.handle(sender, command, label, args_custom);
