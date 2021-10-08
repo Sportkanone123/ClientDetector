@@ -41,6 +41,8 @@ public class PacketProcessor {
 
             de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl.handlePacket(player, channel, data);
 
+            de.sportkanone123.clientdetector.spigot.forgemod.ForgeHandler.handlePluginMessage(player, channel, data);
+
             /*System.out.println("-----------[Packet C -> S]-----------");
             System.out.println("Player: " + player);
             System.out.println("Channel: '" + wrappedPacketInCustomPayload.getChannelName() + "'");

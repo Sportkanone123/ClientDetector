@@ -87,7 +87,7 @@ placeholder:
 forge:
   #Should forge mod detection be enabled for legacy(1.8-1.12.2) version? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
   enableLegacyDetection: true
-  #Should forge mod detection be enabled for newer(1.13-1.16.5) version? !!1.13+ detection is not yet implemented!! [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+  #Should forge mod detection be enabled for newer(1.13-1.17.1) version? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
   enableNewerVersionDetection: true
   #Should the plugin send a "fake" handshake, this is required to get the modlist of a forge player. [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
   simulateForgeHandshake: true

@@ -28,11 +28,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ForgeHandler {
-    public static void handleDetection(Player player, String mod){
-        if(ClientDetector.plugin.getConfig().getBoolean("forge.blockForge")){
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("forge.punishCommandForge"));
+    public static void handlePluginMessage(Player player, String channel, byte[] data){
+        if(channel.equalsIgnoreCase("FML|HS") || channel.equalsIgnoreCase("l:fmlhs") || (channel.equalsIgnoreCase("minecraft:brand") && new String(data).contains("forge")) || (channel.equalsIgnoreCase("MC|Brand") && new String(data).contains("forge"))){
+            if(ClientDetector.plugin.getConfig().getBoolean("forge.blockForge")){
+                Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, new Runnable(){
+                    @Override
+                    public void run() {
+                        if(player != null && player.isOnline())
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("forge.punishCommandForge").replace("%player_name%", player.getName()));
+                    }
+                }, 10l);
+            }
         }
 
+    }
+
+    public static void handleDetection(Player player, String mod){
         if(ClientDetector.plugin.getConfig().getBoolean("forge.enableWhitelist")){
             if(ClientDetector.plugin.getConfig().get("forge.whitelistedMods") != null){
                 List<String> whitelist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("forge.whitelistedMods");
