@@ -65,6 +65,16 @@ public class PlaceholderManager extends PlaceholderExpansion {
         if(identifier.equalsIgnoreCase("bedrock_player")){
             return String.valueOf(GeyserManager.isBedrockPlayer(player));
         }
+        if(identifier.equalsIgnoreCase("forgemod_list")){
+            if(ClientDetector.forgeMods.get(player) == null)
+                return "null";
+
+            String string = "";
+            for(String mod : ClientDetector.forgeMods.get(player).getMods())
+                string = string + mod + "; ";
+
+            return string;
+        }
         return null;
     }
 }
