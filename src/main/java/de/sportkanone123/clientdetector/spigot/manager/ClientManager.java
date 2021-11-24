@@ -79,7 +79,7 @@ public class ClientManager {
         if(ClientDetector.plugin.getConfig().getBoolean("client.enableWhitelist")){
             if(ClientDetector.plugin.getConfig().get("client.whitelistedClients") != null){
                 List<String> whitelist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("client.whitelistedClients");
-                if(!whitelist.contains(client)) {
+                if(!whitelist.contains(client) && !player.hasPermission("clientdetector.bypass")) {
                     Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
                         @Override
                         public void run() {
@@ -93,7 +93,7 @@ public class ClientManager {
         if(ClientDetector.plugin.getConfig().getBoolean("client.enableBlacklist")){
             if(ClientDetector.plugin.getConfig().get("client.blacklistedClients") != null){
                 List<String> blacklist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("client.blacklistedClients");
-                if(blacklist.contains(client)){
+                if(blacklist.contains(client) && !player.hasPermission("clientdetector.bypass")){
                     Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
                         @Override
                         public void run() {

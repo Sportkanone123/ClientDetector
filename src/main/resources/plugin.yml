@@ -1,5 +1,5 @@
 name: ClientDetector
-version: 2.2.3
+version: 2.2.4
 author: Sportkanone123
 main: de.sportkanone123.clientdetector.spigot.ClientDetector
 load: POSTWORLD

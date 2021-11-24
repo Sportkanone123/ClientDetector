@@ -84,10 +84,12 @@ public class AntiFastMath {
                         }
 
                         if(ConfigManager.getConfig("config").getBoolean("hackdetector.antifastmath.enablePunishment")){
-                            BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-                            scheduler.runTask(ClientDetector.plugin, () -> {
-                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("config").getString("hackdetector.antifastmath.punishCommand").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString())));
-                            });
+                            if(!player.hasPermission("clientdetector.bypass")){
+                                BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+                                scheduler.runTask(ClientDetector.plugin, () -> {
+                                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("config").getString("hackdetector.antifastmath.punishCommand").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString())));
+                                });
+                            }
                         }
                     }
                 }

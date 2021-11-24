@@ -50,7 +50,7 @@ public class ModManager {
         if(ClientDetector.plugin.getConfig().getBoolean("mods.enableWhitelist")){
             if(ClientDetector.plugin.getConfig().get("mods.whitelistedMods") != null) {
                 List<String> whitelist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("mods.whitelistedMods");
-                if (!whitelist.contains(mod) && !whitelist.contains(mod.toLowerCase(Locale.ROOT))) {
+                if ((!whitelist.contains(mod) && !whitelist.contains(mod.toLowerCase(Locale.ROOT))) && !player.hasPermission("clientdetector.bypass")) {
                     Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
                         @Override
                         public void run() {
@@ -64,7 +64,7 @@ public class ModManager {
         if(ClientDetector.plugin.getConfig().getBoolean("mods.enableBlacklist")){
             if(ClientDetector.plugin.getConfig().get("mods.blacklistedMods") != null){
                 List<String> blacklist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("mods.blacklistedMods");
-                if(blacklist.contains(mod) || blacklist.contains(mod.toLowerCase(Locale.ROOT))){
+                if((blacklist.contains(mod) || blacklist.contains(mod.toLowerCase(Locale.ROOT)))  && !player.hasPermission("clientdetector.bypass")){
                     Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
                         @Override
                         public void run() {
