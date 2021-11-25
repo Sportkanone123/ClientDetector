@@ -104,7 +104,9 @@ public class ClientDetector extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getPluginManager().registerEvents(new ClientControl(), this);
-        Bukkit.getPluginManager().registerEvents(new HackDetector(), this);
+
+        if(ConfigManager.getConfig("config").getBoolean("hackdetector.chatexploit.enableChatExploit") || ConfigManager.getConfig("config").getBoolean("hackdetector.antifastmath.enableAntiFastMath"))
+            Bukkit.getPluginManager().registerEvents(new HackDetector(), this);
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aDetection&7) &aLoading client detections..."));
         ClientManager.load();
