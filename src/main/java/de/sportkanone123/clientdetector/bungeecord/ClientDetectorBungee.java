@@ -56,26 +56,28 @@ public class ClientDetectorBungee extends Plugin implements Listener {
 
     @EventHandler
     public void onPlayerLeave(PlayerDisconnectEvent event){
-        sentData.put(event.getPlayer(), null);
+        sentData.remove(event.getPlayer());
     }
 
     @EventHandler
     public void onPlayerSwitchServer(ServerConnectedEvent event){
         ProxyServer.getInstance().getScheduler().schedule(this, new Runnable() {
             public void run() {
-                for(CustomPayload customPayload : sentData.get(event.getPlayer())) {
-                    ByteArrayOutputStream msgbytes = new ByteArrayOutputStream();
-                    DataOutputStream msgout = new DataOutputStream(msgbytes);
+                if(sentData.get(event.getPlayer()) != null && !sentData.get(event.getPlayer()).isEmpty()){
+                    for(CustomPayload customPayload : sentData.get(event.getPlayer())) {
+                        ByteArrayOutputStream msgbytes = new ByteArrayOutputStream();
+                        DataOutputStream msgout = new DataOutputStream(msgbytes);
 
-                    try {
-                        msgout.writeUTF(customPayload.getUuid().toString());
-                        msgout.writeUTF(customPayload.getChannel());
-                        msgout.writeUTF(new String(customPayload.getData(), StandardCharsets.UTF_8));
-                    } catch (IOException exception) {
+                        try {
+                            msgout.writeUTF(customPayload.getUuid().toString());
+                            msgout.writeUTF(customPayload.getChannel());
+                            msgout.writeUTF(new String(customPayload.getData(), StandardCharsets.UTF_8));
+                        } catch (IOException exception) {
 
+                        }
+
+                        event.getServer().sendData("clientdetector:fix", msgbytes.toByteArray());
                     }
-
-                    event.getServer().sendData("clientdetector:fix", msgbytes.toByteArray());
                 }
             }
         }, 3, TimeUnit.SECONDS);
