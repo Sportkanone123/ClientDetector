@@ -20,7 +20,9 @@ package de.sportkanone123.clientdetector.spigot.forgemod.newerversion;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.api.events.ForgeModlistDetectedEvent;
+import de.sportkanone123.clientdetector.spigot.bungee.DataType;
 import de.sportkanone123.clientdetector.spigot.forgemod.ModList;
+import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import io.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.event.impl.PacketLoginReceiveEvent;
 import io.github.retrooper.packetevents.packettype.PacketType;
@@ -44,7 +46,7 @@ public class ForgeHandler {
 
     public static void handle(PacketLoginReceiveEvent event){
         if(event.getPacketId() == PacketType.Login.Client.START ) {
-            if(ClientDetector.plugin.getConfig().getBoolean("forge.simulateForgeHandshake") && PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13)) {
+            if(ClientDetector.plugin.getConfig().getBoolean("forge.simulateForgeHandshake") && PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13) && !ClientDetector.forgeMods.containsKey(new WrappedPacketLoginInStart(event.getNMSPacket()).getGameProfile().getId())) {
                 ForgeHandshake.sendModList(event.getChannel());
                 channelToName.put(event.getChannel(), new WrappedPacketLoginInStart(event.getNMSPacket()).getGameProfile().getName());
             }
@@ -62,7 +64,10 @@ public class ForgeHandler {
 
     public static void handleJoin(Player player){
         if(nameToModlist.containsKey(player.getName())){
-            ClientDetector.forgeMods.put(player, nameToModlist.get(player.getName()));
+            ClientDetector.forgeMods.put(player.getUniqueId(), nameToModlist.get(player.getName()));
+
+            if(ClientDetector.clientSocket != null && ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient"))
+                ClientDetector.clientSocket.syncList(DataType.FORGE_MOD_LIST, player, ClientDetector.forgeMods.get(player.getUniqueId()).getMods());
 
             for(String forgeMod : nameToModlist.get(player.getName()).getMods())
                 de.sportkanone123.clientdetector.spigot.forgemod.ForgeHandler.handleDetection(player, forgeMod);

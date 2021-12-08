@@ -35,10 +35,10 @@ public class Player {
             if(Bukkit.getPlayer(args[2]) != null){
                 org.bukkit.entity.Player target = Bukkit.getPlayer(args[2]);
                 if(args[1].equalsIgnoreCase("client")){
-                    if(ClientDetector.playerClient.get(target) != null && ClientDetector.clientVersion.get(target) == null) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("player.clientwithoutversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName()).replace("%player_uuid%", target.getUniqueId().toString()).replace("%client_name%", ClientDetector.playerClient.get(target))));
-                    }else if(ClientDetector.playerClient.get(target) != null && ClientDetector.clientVersion.get(target) != null) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("player.clientwithversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName()).replace("%player_uuid%", target.getUniqueId().toString()).replace("%client_name%", ClientDetector.playerClient.get(target)).replace("%client_version%", ClientDetector.clientVersion.get(target))));
+                    if(ClientDetector.playerClient.get(target.getUniqueId()) != null && ClientDetector.clientVersion.get(target.getUniqueId()) == null) {
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("player.clientwithoutversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName()).replace("%player_uuid%", target.getUniqueId().toString()).replace("%client_name%", ClientDetector.playerClient.get(target.getUniqueId()))));
+                    }else if(ClientDetector.playerClient.get(target.getUniqueId()) != null && ClientDetector.clientVersion.get(target.getUniqueId()) != null) {
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("player.clientwithversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName()).replace("%player_uuid%", target.getUniqueId().toString()).replace("%client_name%", ClientDetector.playerClient.get(target.getUniqueId())).replace("%client_version%", ClientDetector.clientVersion.get(target.getUniqueId()))));
                     }else{
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("player.clientwithoutversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName()).replace("%player_uuid%", target.getUniqueId().toString()).replace("%client_name%", "Vanilla Minecraft / Undetectable Client")));
                     }
@@ -47,8 +47,8 @@ public class Player {
                         ArrayList<String> message =  (ArrayList<String>) ConfigManager.getConfig("message").get("player.playermods");
 
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(0).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName())));
-                        if(ClientDetector.playerMods.get(target) != null){
-                            for(String mod : ClientDetector.playerMods.get(target)){
+                        if(ClientDetector.playerMods.get(target.getUniqueId()) != null){
+                            for(String mod : ClientDetector.playerMods.get(target.getUniqueId())){
                                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(1).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%mod_name%", mod)));
                             }
                         }
@@ -60,8 +60,8 @@ public class Player {
                         ArrayList<String> message =  (ArrayList<String>) ConfigManager.getConfig("message").get("player.playermods");
 
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(0).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName())));
-                        if(ClientDetector.playerLabymodMods.get(target) != null){
-                            for(String mod : ClientDetector.playerLabymodMods.get(target)){
+                        if(ClientDetector.playerLabymodMods.get(target.getUniqueId()) != null){
+                            for(String mod : ClientDetector.playerLabymodMods.get(target.getUniqueId())){
                                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(1).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%mod_name%", mod)));
                             }
                         }
@@ -74,8 +74,8 @@ public class Player {
             if(args[1].equalsIgnoreCase("list")){
                 if(!Bukkit.getOnlinePlayers().isEmpty()){
                     for(org.bukkit.entity.Player player : Bukkit.getOnlinePlayers()){
-                        if(ClientDetector.playerClient.get(player) != null){
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("player.clientlist").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%client_name%", ClientDetector.playerClient.get(player))));
+                        if(ClientDetector.playerClient.get(player.getUniqueId()) != null){
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("player.clientlist").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%client_name%", ClientDetector.playerClient.get(player.getUniqueId()))));
                         }
                     }
                 }else{

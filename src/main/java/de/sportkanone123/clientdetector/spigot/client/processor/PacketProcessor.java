@@ -28,23 +28,23 @@ public class PacketProcessor {
         for(Client client : ClientDetector.CLIENTS){
             if(client.isClient(channel, data) && ClientDetector.plugin.getConfig().getBoolean("client.enableClientDetection")){
                 if(client.getClientName() == "Vanilla Minecraft / Undetectable Client"){
-                    if(ClientDetector.playerClient.get(player) == null){
-                        ClientDetector.playerClient.put(player, client.getClientName());
+                    if(ClientDetector.playerClient.get(player.getUniqueId()) == null){
+                        ClientDetector.playerClient.put(player.getUniqueId(), client.getClientName());
 
-                        if(ClientDetector.mcVersion.get(player) != null && client.getClientName() != null)
-                            ClientDetector.clientVersion.put(player, ClientDetector.mcVersion.get(player));
+                        if(ClientDetector.mcVersion.get(player.getUniqueId()) != null && client.getClientName() != null)
+                            ClientDetector.clientVersion.put(player.getUniqueId(), ClientDetector.mcVersion.get(player.getUniqueId()));
 
                         AlertsManager.handleClientDetection(player);
 
                     }
                 }else{
-                    if(ClientDetector.playerClient.get(player) == null || ClientDetector.playerClient.get(player) == "Vanilla Minecraft / Undetectable Client" || ClientDetector.playerClient.get(player) == "Unknown Client (Not Vanilla Minecraft)"){
-                        ClientDetector.playerClient.put(player, client.getClientName());
+                    if(ClientDetector.playerClient.get(player.getUniqueId()) == null || ClientDetector.playerClient.get(player.getUniqueId()) == "Vanilla Minecraft / Undetectable Client" || ClientDetector.playerClient.get(player) == "Unknown Client (Not Vanilla Minecraft)"){
+                        ClientDetector.playerClient.put(player.getUniqueId(), client.getClientName());
 
                         if(client.getHasVersion() && client.getVersion(channel, data) != null && ClientDetector.plugin.getConfig().getBoolean("client.enableVersionDetection"))
-                            ClientDetector.clientVersion.put(player, client.getVersion(channel, data));
+                            ClientDetector.clientVersion.put(player.getUniqueId(), client.getVersion(channel, data));
                         else
-                            ClientDetector.clientVersion.put(player, null);
+                            ClientDetector.clientVersion.put(player.getUniqueId(), null);
 
                         AlertsManager.handleClientDetection(player);
 

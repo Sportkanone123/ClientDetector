@@ -36,15 +36,15 @@ public class Forge {
             if(Bukkit.getPlayer(args[1]) != null){
                 org.bukkit.entity.Player target = Bukkit.getPlayer(args[1]);
 
-                if(ClientDetector.playerClient.get(target) != null && ClientDetector.playerClient.get(target) == "Forge"){
-                    if(ClientDetector.forgeMods != null && ClientDetector.forgeMods.get(target) != null && ClientDetector.forgeMods.get(target).getMods() != null && ClientDetector.forgeMods.get(target).getMods().size() != 0){
+                if(ClientDetector.playerClient.get(target.getUniqueId()) != null && ClientDetector.playerClient.get(target.getUniqueId()).equalsIgnoreCase("Forge")){
+                    if(ClientDetector.forgeMods != null && ClientDetector.forgeMods.get(target.getUniqueId()) != null && ClientDetector.forgeMods.get(target.getUniqueId()).getMods() != null && ClientDetector.forgeMods.get(target.getUniqueId()).getMods().size() != 0){
                         ArrayList<String> message =  (ArrayList<String>) ConfigManager.getConfig("message").get("forge.usingforgemodlist");
 
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(0).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName())));
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(1).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName())));
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(2).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName())));
 
-                        for(String mod : ClientDetector.forgeMods.get(target).getMods()){
+                        for(String mod : ClientDetector.forgeMods.get(target.getUniqueId()).getMods()){
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message.get(3).replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%mod_name%", mod)));
                         }
 

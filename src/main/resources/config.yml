@@ -63,7 +63,7 @@ mods:
 alerts:
   #Should the notifications be sent when a player's client/mods are detected? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
   enableNotifications: true
-  #Should the notifications be sent on every server that ClientDetector is installed on, on your network? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
+  #Should the notifications be sent on every server that ClientDetector is installed on, on your network? (This only works if bungee.enableBungeeClient is enabled!) [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
   crossServerNotifications: true
   #Should only important notifications be sent to the player's to avoid spamming? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
   limitNotifications: false
@@ -111,6 +111,25 @@ forge:
   #List of blacklisted mods (name = ModID). [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- exampleMod]]
   blacklistedMods:
     - exampleMod
+
+
+#  ┌─────────────────────────────┐
+#  │  Cross Server Sync Settings │
+#  └─────────────────────────────┘
+bungee:
+  #Do you want to use the BungeeCord feature? (Only enable if you use Bungeecord) [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT: 'false']
+  enableBungeeClient: false
+  #IP-Adress of your Bungeecord, if both servers are on the same machine use "localhost". [OPTIONS: 'anyString'', PLACEHOLDERS: none, DEFAULT: 'localhost']
+  bungeeIPAdress: "localhost"
+  #Port that you set in the config of the Bungeecord. [OPTIONS: 'anyInteger', PLACEHOLDERS: none, DEFAULT: '20154']
+  bungeePort: 20154
+  #Passsword that you set in the config of the Bungeecord. [OPTIONS: 'anyString'', PLACEHOLDERS: none, DEFAULT: 'randomPassword']
+  bungeePassword: "randomPassword"
+  #Name of this Spigot/Papaer/Bukkit/... server. [OPTIONS: 'anyString'', PLACEHOLDERS: none, DEFAULT: 'LOBBY']
+  serverName: "LOBBY"
+  #Heartbeat of the socket connection, don't change this value if you don't know what you are doing! [OPTIONS: 'anyInteger', PLACEHOLDERS: none, DEFAULT: '1000']
+  heartbeat: 1000
+
 
 
 #  ┌─────────────────────────────┐

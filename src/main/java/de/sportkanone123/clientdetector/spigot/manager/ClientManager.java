@@ -19,6 +19,7 @@
 package de.sportkanone123.clientdetector.spigot.manager;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
+import de.sportkanone123.clientdetector.spigot.bungee.DataType;
 import de.sportkanone123.clientdetector.spigot.client.Client;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -76,6 +77,10 @@ public class ClientManager {
     }
 
     public static void handleDetection(Player player, String client){
+        if(ClientDetector.clientSocket != null && ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient")){
+            ClientDetector.clientSocket.syncList(DataType.CLIENT_LIST, player, client);
+        }
+
         if(ClientDetector.plugin.getConfig().getBoolean("client.enableWhitelist")){
             if(ClientDetector.plugin.getConfig().get("client.whitelistedClients") != null){
                 List<String> whitelist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("client.whitelistedClients");

@@ -20,7 +20,9 @@ package de.sportkanone123.clientdetector.spigot.forgemod.legacy;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.api.events.ForgeModlistDetectedEvent;
+import de.sportkanone123.clientdetector.spigot.bungee.DataType;
 import de.sportkanone123.clientdetector.spigot.forgemod.ModList;
+import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -31,7 +33,10 @@ public class ForgeHandler {
     public static void handle(Player player, String channel, byte[] data){
         if(ClientDetector.plugin.getConfig().getBoolean("forge.enableLegacyDetection")){
             if(channel.equalsIgnoreCase("FML|HS") && data != null && data[0] == 2){
-                ClientDetector.forgeMods.put(player, getModList(data));
+                ClientDetector.forgeMods.put(player.getUniqueId(), getModList(data));
+
+                if(ClientDetector.clientSocket != null && ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient"))
+                    ClientDetector.clientSocket.syncList(DataType.FORGE_MOD_LIST, player, ClientDetector.forgeMods.get(player.getUniqueId()).getMods());
 
                 for(String forgeMod : getModList(data).getMods())
                     de.sportkanone123.clientdetector.spigot.forgemod.ForgeHandler.handleDetection(player, forgeMod);

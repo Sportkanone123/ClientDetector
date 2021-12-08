@@ -29,31 +29,31 @@ import java.util.Map;
 
 public class ClientDetectorAPI {
     public static String getPlayerClient(Player player){
-        if(ClientDetector.playerClient.get(player) != null)
-            return ClientDetector.playerClient.get(player);
+        if(ClientDetector.playerClient.get(player.getUniqueId()) != null)
+            return ClientDetector.playerClient.get(player.getUniqueId());
         return "Vanilla Minecraft / Undetectable Client";
     }
 
     public static List<String> getPlayerMods(Player player){
-        if(ClientDetector.playerMods.get(player) != null)
-            return ClientDetector.playerMods.get(player);
+        if(ClientDetector.playerMods.get(player.getUniqueId()) != null)
+            return ClientDetector.playerMods.get(player.getUniqueId());
         return new ArrayList<String>();
     }
 
     public static ArrayList<String> getPlayerForgeMods(Player player){
-        if(ClientDetector.forgeMods.get(player) != null)
-            return ClientDetector.forgeMods.get(player).getMods();
+        if(ClientDetector.forgeMods.get(player.getUniqueId()) != null)
+            return ClientDetector.forgeMods.get(player.getUniqueId()).getMods();
         return new ArrayList<String>();
     }
 
     public static List<String> getPlayerLabymodAddons(Player player){
-        if(ClientDetector.playerLabymodMods.get(player) != null)
-            return ClientDetector.playerLabymodMods.get(player);
+        if(ClientDetector.playerLabymodMods.get(player.getUniqueId()) != null)
+            return ClientDetector.playerLabymodMods.get(player.getUniqueId());
         return new ArrayList<String>();
     }
 
     public static Boolean isForgePlayer(Player player){
-        return ClientDetector.forgeMods.get(player).getMods() != null && !ClientDetector.forgeMods.get(player).getMods().isEmpty();
+        return ClientDetector.forgeMods.get(player.getUniqueId()).getMods() != null && !ClientDetector.forgeMods.get(player.getUniqueId()).getMods().isEmpty();
     }
 
     public static Boolean isBedrockPlayer(Player player){

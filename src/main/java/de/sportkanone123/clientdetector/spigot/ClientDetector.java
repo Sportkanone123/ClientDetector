@@ -19,6 +19,7 @@
 package de.sportkanone123.clientdetector.spigot;
 
 import de.sportkanone123.clientdetector.bungeecord.utils.CustomPayload;
+import de.sportkanone123.clientdetector.spigot.bungee.BungeeManager;
 import de.sportkanone123.clientdetector.spigot.client.Client;
 import de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl;
 import de.sportkanone123.clientdetector.spigot.command.Command;
@@ -50,13 +51,13 @@ public class ClientDetector extends JavaPlugin {
     public static ArrayList<Client> CLIENTS = new ArrayList<Client>();
     public static ArrayList<Mod> MODS = new ArrayList<Mod>();
 
-    public static HashMap<Player, String> mcVersion = new HashMap<Player, String>();
-    public static HashMap<Player, ModList> forgeMods = new HashMap<Player, ModList>();
-    public static HashMap<Player, String> playerClient = new HashMap<Player, String> ();
-    public static HashMap<Player, String> clientVersion = new HashMap<Player, String> ();
-    public static HashMap<Player, ArrayList<String>> playerMods = new HashMap<Player, ArrayList<String>> ();
-    public static HashMap<Player, ArrayList<String>> playerLabymodMods = new HashMap<Player, ArrayList<String>> ();
-    public static HashMap<UUID, ArrayList<CustomPayload>> bungeePayload = new HashMap<UUID, ArrayList<CustomPayload>> ();
+    public static HashMap<UUID, String> mcVersion = new HashMap<UUID, String>();
+    public static HashMap<UUID, ModList> forgeMods = new HashMap<UUID, ModList>();
+    public static HashMap<UUID, String> playerClient = new HashMap<UUID, String> ();
+    public static HashMap<UUID, String> clientVersion = new HashMap<UUID, String> ();
+    public static HashMap<UUID, ArrayList<String>> playerMods = new HashMap<UUID, ArrayList<String>> ();
+    public static HashMap<UUID, ArrayList<String>> playerLabymodMods = new HashMap<UUID, ArrayList<String>> ();
+    public static BungeeManager clientSocket;
 
     private PacketEvents instance;
 
@@ -65,7 +66,7 @@ public class ClientDetector extends JavaPlugin {
         instance = PacketEvents.create(this);
         PacketEventsSettings settings = instance.getSettings();
         settings.checkForUpdates(false)
-                .fallbackServerVersion(ServerVersion.v_1_16_5)
+                .fallbackServerVersion(ServerVersion.v_1_17_1)
                 .compatInjector(false)
                 .bStats(false);
         instance.load();
@@ -92,7 +93,7 @@ public class ClientDetector extends JavaPlugin {
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "lunarclient:pm", new PluginMessageListener());
 
         if(PacketEvents.get().getServerUtils().getVersion().isOlderThanOrEquals(ServerVersion.v_1_12_2))
-            Bukkit.getMessenger().registerIncomingPluginChannel((Plugin)this, "CB-Client", new PluginMessageListener());
+            Bukkit.getMessenger().registerIncomingPluginChannel(this, "CB-Client", new PluginMessageListener());
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aConfig&7) &aLoading config(s)..."));
         saveDefaultConfig();
@@ -118,6 +119,12 @@ public class ClientDetector extends JavaPlugin {
         DiscordManager.load();
 
         AntiFastMath.load();
+
+        if(ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient")){
+            Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aDetection&7) &aLoading Bungee client..."));
+            clientSocket = new BungeeManager();
+            clientSocket.load();
+        }
 
         if(Bukkit.getServer().getPluginManager().isPluginEnabled("ViaVersion")){
             Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aViaVersion&7) &aDetected ViaVersion " + Bukkit.getPluginManager().getPlugin("ViaVersion").getDescription().getVersion()));

@@ -20,6 +20,8 @@ package de.sportkanone123.clientdetector.spigot.listener;
 
 import de.sportkanone123.clientdetector.bungeecord.utils.CustomPayload;
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
+import de.sportkanone123.clientdetector.spigot.bungee.BungeeManager;
+import de.sportkanone123.clientdetector.spigot.bungee.DataType;
 import de.sportkanone123.clientdetector.spigot.clientcontrol.impl.LunarClient;
 import de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandshake;
 import de.sportkanone123.clientdetector.spigot.hackdetector.HackDetector;
@@ -44,7 +46,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public static void onJoin(PlayerJoinEvent event){
 
-        if(ClientDetector.plugin.getConfig().getBoolean("forge.simulateForgeHandshake"))
+        if(ClientDetector.plugin.getConfig().getBoolean("forge.simulateForgeHandshake") && !ClientDetector.forgeMods.containsKey(event.getPlayer().getUniqueId()))
             ForgeHandshake.sendHandshake(event.getPlayer());
 
         de.sportkanone123.clientdetector.spigot.forgemod.newerversion.ForgeHandler.handleJoin(event.getPlayer());
@@ -55,19 +57,9 @@ public class PlayerListener implements Listener {
         /* Needed for Cracked Vape detection */
         event.getPlayer().sendMessage("§8 §8 §1 §3 §3 §7 §8 ");
 
+
         if(ClientDetector.plugin.getConfig().getBoolean("client.enableMinecraftVersionDetection")){
-            ClientDetector.mcVersion.put(event.getPlayer(), PacketEvents.get().getPlayerUtils().getClientVersion(event.getPlayer()).name().replace("v_", "").replaceAll("_", "."));
-        }
-
-        if(ClientDetector.bungeePayload.get(event.getPlayer().getUniqueId()) != null){
-            for(CustomPayload customPayload : ClientDetector.bungeePayload.get(event.getPlayer().getUniqueId())){
-                de.sportkanone123.clientdetector.spigot.client.processor.PacketProcessor.handlePacket(Bukkit.getPlayer(customPayload.getUuid()), customPayload.getChannel(), customPayload.getData());
-                de.sportkanone123.clientdetector.spigot.mod.processor.PacketProcessor.handlePacket(Bukkit.getPlayer(customPayload.getUuid()), customPayload.getChannel(), customPayload.getData());
-
-                de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandler.handle(Bukkit.getPlayer(customPayload.getUuid()), customPayload.getChannel(), customPayload.getData());
-
-                de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl.handlePacket(Bukkit.getPlayer(customPayload.getUuid()), customPayload.getChannel(), customPayload.getData());
-            }
+            ClientDetector.mcVersion.put(event.getPlayer().getUniqueId(), PacketEvents.get().getPlayerUtils().getClientVersion(event.getPlayer()).name().replace("v_", "").replaceAll("_", "."));
         }
 
         if(ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))
@@ -79,14 +71,15 @@ public class PlayerListener implements Listener {
     @EventHandler
     public static void onQuit(PlayerQuitEvent event){
 
-        ClientDetector.bungeePayload.put(event.getPlayer().getUniqueId(), new ArrayList<CustomPayload>());
-
-        ClientDetector.playerClient.remove(event.getPlayer());
-        ClientDetector.playerMods.remove(event.getPlayer());
-        ClientDetector.playerLabymodMods.remove(event.getPlayer());
-        ClientDetector.forgeMods.remove(event.getPlayer());
-        ClientDetector.mcVersion.remove(event.getPlayer());
-        ClientDetector.clientVersion.remove(event.getPlayer());
+        if(ClientDetector.clientSocket == null || ClientDetector.clientSocket.client == null || !ClientDetector.clientSocket.client.isActive){
+            ClientDetector.playerClient.remove(event.getPlayer().getUniqueId());
+            ClientDetector.playerMods.remove(event.getPlayer().getUniqueId());
+            ClientDetector.playerLabymodMods.remove(event.getPlayer().getUniqueId());
+            ClientDetector.forgeMods.remove(event.getPlayer().getUniqueId());
+            ClientDetector.mcVersion.remove(event.getPlayer().getUniqueId());
+            ClientDetector.clientVersion.remove(event.getPlayer().getUniqueId());
+            AlertsManager.firstDetection.remove(event.getPlayer().getUniqueId());
+        }
 
         if(ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))
             event.setQuitMessage(null);

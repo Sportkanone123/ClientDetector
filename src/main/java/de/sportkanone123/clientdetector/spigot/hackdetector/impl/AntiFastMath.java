@@ -14,9 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-/*
+ *
  * Credits:
  * AntiFastMath is based on AntiFastMath by MWHunter which is Licensed under MIT License.
  * Author: MWHunter, edited by Sportkanone123

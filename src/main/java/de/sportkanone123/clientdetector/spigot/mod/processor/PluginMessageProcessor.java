@@ -33,10 +33,10 @@ public class PluginMessageProcessor {
         if(ClientDetector.plugin.getConfig().getBoolean("mods.enableModDetection")){
             for(Mod mod : ClientDetector.MODS){
                 if(mod.isMod(channel, data)){
-                    if(ClientDetector.playerMods.get(player) == null)
-                        ClientDetector.playerMods.put(player, new ArrayList<String>());
+                    if(ClientDetector.playerMods.get(player.getUniqueId()) == null)
+                        ClientDetector.playerMods.put(player.getUniqueId(), new ArrayList<String>());
 
-                    ClientDetector.playerMods.get(player).add(mod.getModName());
+                    ClientDetector.playerMods.get(player.getUniqueId()).add(mod.getModName());
 
                     Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable(){
                         @Override

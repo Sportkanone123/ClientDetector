@@ -18,84 +18,65 @@
 
 package de.sportkanone123.clientdetector.bungeecord;
 
-import de.sportkanone123.clientdetector.bungeecord.utils.CustomPayload;
+import de.sportkanone123.clientdetector.bungeecord.utils.FileUtils;
+import de.sportkanone123.clientdetector.bungeecord.utils.ServerSocketListener;
 
 import net.md_5.bungee.api.ProxyServer;
-import net.md_5.bungee.api.config.ServerInfo;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
-import net.md_5.bungee.api.event.*;
+import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
-import net.md_5.bungee.api.plugin.PluginManager;
 import net.md_5.bungee.event.EventHandler;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+
+import java.util.*;
 
 public class ClientDetectorBungee extends Plugin implements Listener {
-    HashMap<ProxiedPlayer, ArrayList<CustomPayload>> sentData = new HashMap<ProxiedPlayer, ArrayList<CustomPayload>>();
+    public ServerSocket server;
+    public Set<String> c;
+    public List<String> oq;
+    public Map<String, List<String>> pq;
+    public Map<String, Integer> qc;
+    public static Plugin plugin;
+
+    public ClientDetectorBungee() {
+        this.c = Collections.synchronizedSet(new HashSet<String>());
+        this.oq = Collections.synchronizedList(new ArrayList<String>());
+        this.pq = Collections.synchronizedMap(new HashMap<String, List<String>>());
+        this.qc = Collections.synchronizedMap(new HashMap<String, Integer>());
+    }
+
 
     @Override
     public void onEnable() {
-        PluginManager pm = ProxyServer.getInstance().getPluginManager();
-        pm.registerListener(this, this);
+        plugin = this;
 
-        ProxyServer.getInstance().registerChannel("clientdetector:fix");
-        ProxyServer.getInstance().registerChannel("clientdetector:sync");
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PostLoginEvent event){
-        sentData.put(event.getPlayer(), new ArrayList<CustomPayload>());
-    }
-
-    @EventHandler
-    public void onPlayerLeave(PlayerDisconnectEvent event){
-        sentData.remove(event.getPlayer());
-    }
-
-    @EventHandler
-    public void onPlayerSwitchServer(ServerConnectedEvent event){
-        ProxyServer.getInstance().getScheduler().schedule(this, new Runnable() {
-            public void run() {
-                if(sentData.get(event.getPlayer()) != null && !sentData.get(event.getPlayer()).isEmpty()){
-                    for(CustomPayload customPayload : sentData.get(event.getPlayer())) {
-                        ByteArrayOutputStream msgbytes = new ByteArrayOutputStream();
-                        DataOutputStream msgout = new DataOutputStream(msgbytes);
-
-                        try {
-                            msgout.writeUTF(customPayload.getUuid().toString());
-                            msgout.writeUTF(customPayload.getChannel());
-                            msgout.writeUTF(new String(customPayload.getData(), StandardCharsets.UTF_8));
-                        } catch (IOException exception) {
-
-                        }
-
-                        event.getServer().sendData("clientdetector:fix", msgbytes.toByteArray());
-                    }
-                }
-            }
-        }, 3, TimeUnit.SECONDS);
-    }
-
-    @EventHandler
-    public void onPluginMessage(PluginMessageEvent event) {
-        String channel = event.getTag();
-        byte[] data = event.getData();
-        if (event.getSender() instanceof ProxiedPlayer) {
-            ProxiedPlayer player = (ProxiedPlayer) event.getSender();
-            sentData.get(player).add(new CustomPayload(player.getUniqueId(), channel, data));
-        }else{
-            if(channel.equalsIgnoreCase("clientdetector:sync")){
-                for(ServerInfo server : ProxyServer.getInstance().getServers().values()) {
-                    server.sendData(channel, data);
-                }
-            }
+        if (!getDataFolder().exists()) {
+            getDataFolder().mkdir();
         }
+
+        FileUtils.loadConfig("bungeeconfig");
+
+        ProxyServer.getInstance().getPluginManager().registerListener(this, this);
+
+        try {
+            this.server = new ServerSocket(FileUtils.getConfig("bungeeconfig").getInt("sync.syncPort"), 50, InetAddress.getByName("localhost"));
+            new ServerSocketListener(this, FileUtils.getConfig("bungeeconfig").getInt("sync.heartbeat"), "1.0", FileUtils.getConfig("bungeeconfig").getString("sync.syncPassword")).start();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleSyncMessage(String string, String name){
+        this.oq.add(string);
+    }
+
+    @EventHandler
+    public void onLeave(PlayerDisconnectEvent e) {
+        String placeholder = "@@";
+
+        this.oq.add("PLAYER_LEFT" + placeholder + e.getPlayer().getName());
     }
 }

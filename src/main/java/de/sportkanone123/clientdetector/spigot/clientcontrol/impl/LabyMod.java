@@ -57,7 +57,7 @@ public class LabyMod {
                 JSONObject jsonObject = (JSONObject) parsed;
 
                 String version = jsonObject.containsKey( "version" ) ? jsonObject.get( "version" ).toString() : "Unknown";
-                if(!version.equalsIgnoreCase("Unknown")) ClientDetector.clientVersion.put(player, version);
+                if(!version.equalsIgnoreCase("Unknown")) ClientDetector.clientVersion.put(player.getUniqueId(), version);
 
                 ArrayList<String> addons = new ArrayList<>();
 
@@ -65,10 +65,10 @@ public class LabyMod {
 
                 for(int i = 0; i < jsonAddons.size(); i++){
                     JSONObject tempJsonObject = (JSONObject) jsonAddons.get(i);
-                    if(ClientDetector.playerLabymodMods.get(player) == null){
-                        ClientDetector.playerLabymodMods.put(player, new ArrayList<>());
+                    if(ClientDetector.playerLabymodMods.get(player.getUniqueId()) == null){
+                        ClientDetector.playerLabymodMods.put(player.getUniqueId(), new ArrayList<>());
                     }
-                    ClientDetector.playerLabymodMods.get(player).add(tempJsonObject.get( "name" ).toString());
+                    ClientDetector.playerLabymodMods.get(player.getUniqueId()).add(tempJsonObject.get( "name" ).toString());
                 }
             } catch (ParseException e) {
 
@@ -89,7 +89,7 @@ public class LabyMod {
                 JSONObject jsonObject = (JSONObject) parsed;
 
                 String version = jsonObject.containsKey( "version" ) ? jsonObject.get( "version" ).toString() : "Unknown";
-                if(!version.equalsIgnoreCase("Unknown")) ClientDetector.clientVersion.put(player, version);
+                if(!version.equalsIgnoreCase("Unknown")) ClientDetector.clientVersion.put(player.getUniqueId(), version);
 
                 ArrayList<String> addons = new ArrayList<>();
 
@@ -97,10 +97,10 @@ public class LabyMod {
 
                 for(int i = 0; i < jsonAddons.size(); i++){
                     JSONObject tempJsonObject = (JSONObject) jsonAddons.get(i);
-                    if(ClientDetector.playerLabymodMods.get(player) == null){
-                        ClientDetector.playerLabymodMods.put(player, new ArrayList<>());
+                    if(ClientDetector.playerLabymodMods.get(player.getUniqueId()) == null){
+                        ClientDetector.playerLabymodMods.put(player.getUniqueId(), new ArrayList<>());
                     }
-                    ClientDetector.playerLabymodMods.get(player).add(tempJsonObject.get( "name" ).toString());
+                    ClientDetector.playerLabymodMods.get(player.getUniqueId()).add(tempJsonObject.get( "name" ).toString());
                 }
             } catch (ParseException e) {
 

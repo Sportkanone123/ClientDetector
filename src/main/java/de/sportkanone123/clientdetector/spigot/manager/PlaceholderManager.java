@@ -48,17 +48,17 @@ public class PlaceholderManager extends PlaceholderExpansion {
 
     public String onPlaceholderRequest(Player player, String identifier) {
         if(identifier.equalsIgnoreCase("client_name")){
-            if(ClientDetector.playerClient.get(player) != null)
-                return ClientDetector.playerClient.get(player);
+            if(ClientDetector.playerClient.get(player.getUniqueId()) != null)
+                return ClientDetector.playerClient.get(player.getUniqueId());
             return "Vanilla Minecraft / Undetectable Client";
         }
         if(identifier.equalsIgnoreCase("client_version")){
-            if(ClientDetector.clientVersion.get(player) != null)
-                return ClientDetector.clientVersion.get(player);
+            if(ClientDetector.clientVersion.get(player.getUniqueId()) != null)
+                return ClientDetector.clientVersion.get(player.getUniqueId());
             return null;
         }
         if(identifier.equalsIgnoreCase("forge_user")){
-            if(ClientDetector.forgeMods.get(player).getMods() == null || ClientDetector.forgeMods.get(player).getMods().isEmpty())
+            if(ClientDetector.forgeMods.get(player.getUniqueId()).getMods() == null || ClientDetector.forgeMods.get(player.getUniqueId()).getMods().isEmpty())
                 return "false";
             return "true";
         }
@@ -66,11 +66,11 @@ public class PlaceholderManager extends PlaceholderExpansion {
             return String.valueOf(GeyserManager.isBedrockPlayer(player));
         }
         if(identifier.equalsIgnoreCase("forgemod_list")){
-            if(ClientDetector.forgeMods.get(player) == null)
+            if(ClientDetector.forgeMods.get(player.getUniqueId()) == null)
                 return "null";
 
             String string = "";
-            for(String mod : ClientDetector.forgeMods.get(player).getMods())
+            for(String mod : ClientDetector.forgeMods.get(player.getUniqueId()).getMods())
                 string = string + mod + "; ";
 
             return string;

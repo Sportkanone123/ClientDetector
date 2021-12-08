@@ -19,6 +19,7 @@
 package de.sportkanone123.clientdetector.spigot.manager;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
+import de.sportkanone123.clientdetector.spigot.bungee.DataType;
 import de.sportkanone123.clientdetector.spigot.mod.Mod;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -36,10 +37,6 @@ public class ModManager {
         ClientDetector.MODS.add(new Mod(Arrays.asList("WDL|INIT", "WDL|CONTROL", "wdl:request", "wdl:init", "wdl:control"), Arrays.asList(""), "World Downloader", true));
         ClientDetector.MODS.add(new Mod(Arrays.asList("journeymap_channel", "journeymap:channel"), Arrays.asList(""), "JourneyMap", true));
         ClientDetector.MODS.add(new Mod(Arrays.asList("WECUI"), Arrays.asList(""), "WorldEditCUI", true));
-
-        /*for(Mod mod : ClientDetector.MODS){
-            mod.load();
-        }*/
     }
 
     public static void unLoad(){
@@ -47,6 +44,9 @@ public class ModManager {
     }
 
     public static void handleDetection(Player player, String mod){
+        if(ClientDetector.clientSocket != null && ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient"))
+            ClientDetector.clientSocket.syncList(DataType.MOD_LIST, player, ClientDetector.playerMods.get(player.getUniqueId()));
+
         if(ClientDetector.plugin.getConfig().getBoolean("mods.enableWhitelist")){
             if(ClientDetector.plugin.getConfig().get("mods.whitelistedMods") != null) {
                 List<String> whitelist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("mods.whitelistedMods");

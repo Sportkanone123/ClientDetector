@@ -20,6 +20,7 @@ package de.sportkanone123.clientdetector.spigot.forgemod;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.api.events.ClientDetectedEvent;
+import de.sportkanone123.clientdetector.spigot.bungee.DataType;
 import de.sportkanone123.clientdetector.spigot.client.Client;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
