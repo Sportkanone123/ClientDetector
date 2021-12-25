@@ -136,8 +136,12 @@ bungee:
 #  │      Discord settings       │
 #  └─────────────────────────────┘
 discord:
-  #Discord WebHook Url. [OPTIONS: 'String', PLACEHOLDERS: none, DEFAULT: ""]
+  #Discord WebHook Url. [OPTIONS: 'anyString', PLACEHOLDERS: none, DEFAULT: ""]
   webHookUrl: ""
+  #Title of the embed message. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%client_name%'], DEFAULT: "ClientDetector"]
+  embedTitle: "ClientDetector"
+  #Message of the embed message. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%client_name%'], DEFAULT: ""]
+  embedMessage: "%player_name% joined using %client_name%"
   #Should only important notifications be sent to the discord? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
   limitNotifications: false
 

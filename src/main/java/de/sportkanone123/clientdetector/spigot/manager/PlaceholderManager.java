@@ -55,7 +55,7 @@ public class PlaceholderManager extends PlaceholderExpansion {
         if(identifier.equalsIgnoreCase("client_version")){
             if(ClientDetector.clientVersion.get(player.getUniqueId()) != null)
                 return ClientDetector.clientVersion.get(player.getUniqueId());
-            return null;
+            return "unknown";
         }
         if(identifier.equalsIgnoreCase("forge_user")){
             if(ClientDetector.forgeMods.get(player.getUniqueId()).getMods() == null || ClientDetector.forgeMods.get(player.getUniqueId()).getMods().isEmpty())
@@ -65,12 +65,28 @@ public class PlaceholderManager extends PlaceholderExpansion {
         if(identifier.equalsIgnoreCase("bedrock_player")){
             return String.valueOf(GeyserManager.isBedrockPlayer(player));
         }
-        if(identifier.equalsIgnoreCase("forgemod_list")){
+        if(identifier.equalsIgnoreCase("forge_list")){
             if(ClientDetector.forgeMods.get(player.getUniqueId()) == null)
-                return "null";
+                return "notusingforge";
+
+            if(ClientDetector.forgeMods.get(player.getUniqueId()).getMods().isEmpty())
+                return "unknown";
 
             String string = "";
             for(String mod : ClientDetector.forgeMods.get(player.getUniqueId()).getMods())
+                string = string + mod + "; ";
+
+            return string;
+        }
+        if(identifier.equalsIgnoreCase("labymod_addons")){
+            if(ClientDetector.playerLabymodMods.get(player.getUniqueId()) == null)
+                return "notusinglabymod";
+
+            if(ClientDetector.playerLabymodMods.get(player.getUniqueId()).isEmpty())
+                return "unknown";
+
+            String string = "";
+            for(String mod : ClientDetector.playerLabymodMods.get(player.getUniqueId()))
                 string = string + mod + "; ";
 
             return string;

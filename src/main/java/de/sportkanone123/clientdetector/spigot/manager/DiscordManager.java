@@ -46,8 +46,8 @@ public class DiscordManager {
         if(url != null){
             DiscordWebhook webhook = new DiscordWebhook(url.toString());
             webhook.addEmbed(new DiscordWebhook.EmbedObject()
-                    .setTitle("ClientDetector")
-                    .setDescription(player.getName() + " joined using " + clientName)
+                    .setTitle(ConfigManager.getConfig("config").getString("discord.embedTitle").replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString()).replace("%client_name%", clientName))
+                    .setDescription(ConfigManager.getConfig("config").getString("discord.embedMessage").replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString()).replace("%client_name%", clientName))
                     .setColor(Color.LIGHT_GRAY)
                     .setThumbnail("https://crafatar.com/avatars/" + player.getUniqueId())
                     .setFooter("Check out ClientDetctor on SpigotMC: https://www.spigotmc.org/resources/clientdetector.90375/", "https://www.spigotmc.org/data/resource_icons/90/90375.jpg?1616258526"));
