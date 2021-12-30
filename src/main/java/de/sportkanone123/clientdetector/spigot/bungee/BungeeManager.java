@@ -23,87 +23,69 @@ import de.sportkanone123.clientdetector.spigot.forgemod.ModList;
 import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-
-import java.io.*;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.util.*;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class BungeeManager {
-    public ClientSocketThread client;
-    public List<String> oq;
-    public Integer qc;
     public String placeholder = "@@";
 
-    public BungeeManager() {
-        this.oq = Collections.synchronizedList(new ArrayList<String>());
-        this.qc = 0;
+    private void sync(String string, Player player){
+        player.sendPluginMessage(ClientDetector.plugin, "cd:bungee", string.getBytes(StandardCharsets.UTF_8));
     }
 
-    public void load(){
-        try {
-            (client = new ClientSocketThread(this,
-                    InetAddress.getByName(ConfigManager.getConfig("config").getString("bungee.bungeeIPAdress")),
-                    ConfigManager.getConfig("config").getInt("bungee.bungeePort"),
-                    ConfigManager.getConfig("config").getInt("bungee.heartbeat"),
-                    "1.0",
-                    ConfigManager.getConfig("config").getString("bungee.serverName"),
-                    ConfigManager.getConfig("config").getString("bungee.bungeePassword"))
-            ).start();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void sync(String string){
+        if(Bukkit.getOnlinePlayers().iterator().hasNext()){
+            Bukkit.getOnlinePlayers().iterator().next().sendPluginMessage(ClientDetector.plugin, "cd:bungee", string.getBytes(StandardCharsets.UTF_8));
         }
     }
 
     public void syncList(DataType type, Player player, ArrayList<String> list){
-        String str = type.toString() + placeholder + player.getUniqueId();
+        String str = ConfigManager.getConfig("config").getString("bungee.serverName") + placeholder + type.toString() + placeholder + player.getUniqueId();
 
         for(int i = 0; i < list.size(); i++)
             str = str + placeholder + list.get(i);
 
-        this.oq.add(str);
+        sync(str, player);
     }
     public void syncList(DataType type, Player player, String client){
-        String str = type.toString() + placeholder + player.getUniqueId() + placeholder + client;
+        String str = ConfigManager.getConfig("config").getString("bungee.serverName") + placeholder + type.toString() + placeholder + player.getUniqueId() + placeholder + client;
 
-        this.oq.add(str);
+        sync(str, player);
     }
 
     public void syncList(DataType type, String message){
-        String str = type.toString() + placeholder + ConfigManager.getConfig("config").getString("bungee.serverName") + placeholder + message;
+        String str = ConfigManager.getConfig("config").getString("bungee.serverName") + placeholder + type.toString() + placeholder + ConfigManager.getConfig("config").getString("bungee.serverName") + placeholder + message;
 
-        this.oq.add(str);
+        sync(str);
     }
 
     public void handleSyncMessage(String string){
         String[] strings = string.split(placeholder);
 
+        if(strings[1].equalsIgnoreCase("CLIENT_LIST") && strings.length == 4) {
+            ClientDetector.playerClient.put(UUID.fromString(strings[2]), strings[3]);
 
-        if(strings[0].equalsIgnoreCase("CLIENT_LIST") && strings.length == 3) {
-            ClientDetector.playerClient.put(UUID.fromString(strings[1]), strings[2]);
-
-        }else if(strings[0].equalsIgnoreCase("MOD_LIST") && strings.length >= 3) {
+        }else if(strings[1].equalsIgnoreCase("MOD_LIST") && strings.length >= 4) {
             ArrayList<String> list = new ArrayList<>();
 
-            for(int i = 2; i < strings.length; i++)
+            for(int i = 3; i < strings.length; i++)
                 list.add(strings[i]);
 
-            ClientDetector.playerMods.put(UUID.fromString(strings[1]), list);
+            ClientDetector.playerMods.put(UUID.fromString(strings[2]), list);
 
-        }else if(strings[0].equalsIgnoreCase("FORGE_MOD_LIST") && strings.length >= 3) {
+        }else if(strings[1].equalsIgnoreCase("FORGE_MOD_LIST") && strings.length >= 4) {
             ArrayList<String> list = new ArrayList<>();
 
-            for(int i = 2; i < strings.length; i++)
+            for(int i = 3; i < strings.length; i++)
                 list.add(strings[i]);
 
-            ClientDetector.forgeMods.put(UUID.fromString(strings[1]), new ModList(list));
+            ClientDetector.forgeMods.put(UUID.fromString(strings[2]), new ModList(list));
 
-        }else if(strings[0].equalsIgnoreCase("CROSS_SERVER_MESSAGE") && strings.length == 3) {
-            String message = strings[1];
-            String server = strings[2];
+        }else if(strings[1].equalsIgnoreCase("CROSS_SERVER_MESSAGE") && strings.length == 4) {
+            String message = strings[2];
+            String server = strings[3];
 
             AlertsManager.handleCrossServer(server, message);
 

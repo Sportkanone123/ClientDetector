@@ -26,7 +26,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -73,7 +72,7 @@ public class AlertsManager {
                 }
 
                for(Player player1 : Bukkit.getOnlinePlayers()){
-                   if(!disabledNotifications.contains(player1.getName()) && player1.hasPermission(ConfigManager.getConfig("config").getString("alerts.notificationPermission"))){
+                   if(!disabledNotifications.contains(player1.getName()) && player1.hasPermission(ConfigManager.getConfig("config").getString("alerts.notificationPermission")) && !(ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient") && crossServerNotifications)){
                         if(limitedNotifications){
                             if(!ClientDetector.playerClient.get(player.getUniqueId()).equalsIgnoreCase("Vanilla Minecraft / Undetectable Client")){
                                 if(ClientDetector.playerClient.get(player.getUniqueId()) != null && ClientDetector.clientVersion.get(player.getUniqueId()) == null) {
@@ -130,21 +129,19 @@ public class AlertsManager {
     }
 
     public static void sendCrossServer(Player player, String message){
-        if(ClientDetector.clientSocket != null && crossServerNotifications && ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient")){
-            ClientDetector.clientSocket.syncList(DataType.CROSS_SERVER_MESSAGE, message);
+        if(ClientDetector.bungeeManager != null && crossServerNotifications && ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient")){
+            ClientDetector.bungeeManager.syncList(DataType.CROSS_SERVER_MESSAGE, message);
         }
     }
     public static void handleCrossServer(String message, String serverName){
         if(crossServerNotifications && ConfigManager.getConfig("config").getBoolean("alerts.enableNotifications")){
-            if(!serverName.equalsIgnoreCase(ConfigManager.getConfig("config").getString("bungee.serverName"))){
-                for(Player player1 : Bukkit.getOnlinePlayers()) {
-                    if (!disabledNotifications.contains(player1.getName()) && player1.hasPermission(ConfigManager.getConfig("config").getString("alerts.notificationPermission"))) {
-                        if (limitedNotifications) {
-                            if(!message.contains("Vanilla Minecraft / Undetectable Client"))
-                                player1.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("detection.clientdetectionmessagecrossserver").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%server_name%", serverName).replace("%cross_server_message%", message)));
-                        }else
+            for(Player player1 : Bukkit.getOnlinePlayers()) {
+                if (!disabledNotifications.contains(player1.getName()) && player1.hasPermission(ConfigManager.getConfig("config").getString("alerts.notificationPermission"))) {
+                    if (limitedNotifications) {
+                        if(!message.contains("Vanilla Minecraft / Undetectable Client"))
                             player1.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("detection.clientdetectionmessagecrossserver").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%server_name%", serverName).replace("%cross_server_message%", message)));
-                    }
+                    }else
+                        player1.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("detection.clientdetectionmessagecrossserver").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%server_name%", serverName).replace("%cross_server_message%", message)));
                 }
             }
         }

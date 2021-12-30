@@ -18,17 +18,23 @@
 
 package de.sportkanone123.clientdetector.spigot.listener;
 
+import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import org.bukkit.entity.Player;
+
+import java.nio.charset.StandardCharsets;
 
 public class PluginMessageListener implements org.bukkit.plugin.messaging.PluginMessageListener {
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] data) {
-        de.sportkanone123.clientdetector.spigot.mod.processor.PluginMessageProcessor.handlePluginMessage(player, channel, data);
-        de.sportkanone123.clientdetector.spigot.client.processor.PluginMessageProcessor.handlePluginMessage(player, channel, data);
+        if(channel.equalsIgnoreCase("cd:spigot")){
+            ClientDetector.bungeeManager.handleSyncMessage(new String(data, StandardCharsets.UTF_8));
+        }else{
+            de.sportkanone123.clientdetector.spigot.mod.processor.PluginMessageProcessor.handlePluginMessage(player, channel, data);
+            de.sportkanone123.clientdetector.spigot.client.processor.PluginMessageProcessor.handlePluginMessage(player, channel, data);
 
-        de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl.handlePluginMessage(player, channel, data);
+            de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl.handlePluginMessage(player, channel, data);
 
-        de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandler.handle(player, channel, data);
-
+            de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandler.handle(player, channel, data);
+        }
     }
 }

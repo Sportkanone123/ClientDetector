@@ -44,8 +44,8 @@ public class ModManager {
     }
 
     public static void handleDetection(Player player, String mod){
-        if(ClientDetector.clientSocket != null && ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient"))
-            ClientDetector.clientSocket.syncList(DataType.MOD_LIST, player, ClientDetector.playerMods.get(player.getUniqueId()));
+        if(ClientDetector.bungeeManager != null && ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient"))
+            ClientDetector.bungeeManager.syncList(DataType.MOD_LIST, player, ClientDetector.playerMods.get(player.getUniqueId()));
 
         if(ClientDetector.plugin.getConfig().getBoolean("mods.enableWhitelist")){
             if(ClientDetector.plugin.getConfig().get("mods.whitelistedMods") != null) {

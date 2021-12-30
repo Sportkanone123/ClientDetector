@@ -66,8 +66,8 @@ public class ForgeHandler {
         if(nameToModlist.containsKey(player.getName())){
             ClientDetector.forgeMods.put(player.getUniqueId(), nameToModlist.get(player.getName()));
 
-            if(ClientDetector.clientSocket != null && ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient"))
-                ClientDetector.clientSocket.syncList(DataType.FORGE_MOD_LIST, player, ClientDetector.forgeMods.get(player.getUniqueId()).getMods());
+            if(ClientDetector.bungeeManager != null && ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient"))
+                ClientDetector.bungeeManager.syncList(DataType.FORGE_MOD_LIST, player, ClientDetector.forgeMods.get(player.getUniqueId()).getMods());
 
             for(String forgeMod : nameToModlist.get(player.getName()).getMods())
                 de.sportkanone123.clientdetector.spigot.forgemod.ForgeHandler.handleDetection(player, forgeMod);

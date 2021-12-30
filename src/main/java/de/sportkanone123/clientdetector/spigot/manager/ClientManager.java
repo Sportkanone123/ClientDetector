@@ -66,10 +66,6 @@ public class ClientManager {
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Subsystem", "Easy Minecraft Client", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Minecraft-Console-Client", "Console Client", false, true, "/", 1));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Vanilla", "Jigsaw", false, false, null, null));
-
-        /*for(Client client : ClientDetector.CLIENTS){
-            client.load();
-        }*/
     }
 
     public static void unLoad(){
@@ -77,8 +73,8 @@ public class ClientManager {
     }
 
     public static void handleDetection(Player player, String client){
-        if(ClientDetector.clientSocket != null && ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient")){
-            ClientDetector.clientSocket.syncList(DataType.CLIENT_LIST, player, client);
+        if(ClientDetector.bungeeManager != null && ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient")){
+            ClientDetector.bungeeManager.syncList(DataType.CLIENT_LIST, player, client);
         }
 
         if(ClientDetector.plugin.getConfig().getBoolean("client.enableWhitelist")){

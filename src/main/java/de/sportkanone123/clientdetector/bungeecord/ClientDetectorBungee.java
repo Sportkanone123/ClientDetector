@@ -18,65 +18,79 @@
 
 package de.sportkanone123.clientdetector.bungeecord;
 
-import de.sportkanone123.clientdetector.bungeecord.utils.FileUtils;
-import de.sportkanone123.clientdetector.bungeecord.utils.ServerSocketListener;
-
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
+import net.md_5.bungee.api.event.PluginMessageEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.event.EventHandler;
 
-import java.net.InetAddress;
-import java.net.ServerSocket;
-
+import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class ClientDetectorBungee extends Plugin implements Listener {
-    public ServerSocket server;
-    public Set<String> c;
-    public List<String> oq;
-    public Map<String, List<String>> pq;
-    public Map<String, Integer> qc;
     public static Plugin plugin;
-
-    public ClientDetectorBungee() {
-        this.c = Collections.synchronizedSet(new HashSet<String>());
-        this.oq = Collections.synchronizedList(new ArrayList<String>());
-        this.pq = Collections.synchronizedMap(new HashMap<String, List<String>>());
-        this.qc = Collections.synchronizedMap(new HashMap<String, Integer>());
-    }
+    private Map<ServerInfo, List<byte[]>> queue = new HashMap<>();
 
 
     @Override
     public void onEnable() {
         plugin = this;
 
-        if (!getDataFolder().exists()) {
-            getDataFolder().mkdir();
-        }
-
-        FileUtils.loadConfig("bungeeconfig");
-
         ProxyServer.getInstance().getPluginManager().registerListener(this, this);
 
-        try {
-            this.server = new ServerSocket(FileUtils.getConfig("bungeeconfig").getInt("sync.syncPort"), 50, InetAddress.getByName("localhost"));
-            new ServerSocketListener(this, FileUtils.getConfig("bungeeconfig").getInt("sync.heartbeat"), "1.0", FileUtils.getConfig("bungeeconfig").getString("sync.syncPassword")).start();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+        ProxyServer.getInstance().registerChannel("cd:bungee");
+
+        runQueue();
+    }
+
+    public void runQueue() {
+        getProxy().getScheduler().schedule(this, new Runnable() {
+            @Override
+            public void run() {
+                for(ServerInfo serverInfo : queue.keySet()){
+                    if(!serverInfo.getPlayers().isEmpty() && queue.get(serverInfo) != null){
+                        List<byte[]> toRemove = new ArrayList<>();
+                        for(byte[] data : queue.get(serverInfo)){
+                            toRemove.add(data);
+                            serverInfo.sendData("cd:spigot", data);
+                        }
+                        queue.get(serverInfo).removeAll(toRemove);
+                    }
+                }
+            }
+        }, 1, 1, TimeUnit.SECONDS);
+    }
+
+    @EventHandler
+    public void onPluginMessage(PluginMessageEvent event) {
+        if(event.getTag().equalsIgnoreCase("cd:bungee")){
+            sync(event.getData());
         }
     }
 
-    public void handleSyncMessage(String string, String name){
-        this.oq.add(string);
+    private void sync(String string){
+        sync(string.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private void sync(byte[] data){
+        for(ServerInfo server : ProxyServer.getInstance().getServers().values()){
+            if(server.getPlayers().isEmpty()){
+                if(queue.get(server) == null) queue.put(server, new ArrayList<>());
+
+                if(!new String(data, StandardCharsets.UTF_8).contains("CROSS_SERVER_MESSAGE"))
+                    queue.get(server).add(data);
+            }else{
+                server.sendData("cd:spigot", data);
+            }
+        }
     }
 
     @EventHandler
     public void onLeave(PlayerDisconnectEvent e) {
         String placeholder = "@@";
-
-        this.oq.add("PLAYER_LEFT" + placeholder + e.getPlayer().getName());
+        sync("PLAYER_LEFT" + placeholder + e.getPlayer().getName());
     }
 }

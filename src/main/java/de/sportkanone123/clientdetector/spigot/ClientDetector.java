@@ -18,7 +18,6 @@
 
 package de.sportkanone123.clientdetector.spigot;
 
-import de.sportkanone123.clientdetector.bungeecord.utils.CustomPayload;
 import de.sportkanone123.clientdetector.spigot.bungee.BungeeManager;
 import de.sportkanone123.clientdetector.spigot.client.Client;
 import de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl;
@@ -36,7 +35,6 @@ import io.github.retrooper.packetevents.settings.PacketEventsSettings;
 import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -57,7 +55,7 @@ public class ClientDetector extends JavaPlugin {
     public static HashMap<UUID, String> clientVersion = new HashMap<UUID, String> ();
     public static HashMap<UUID, ArrayList<String>> playerMods = new HashMap<UUID, ArrayList<String>> ();
     public static HashMap<UUID, ArrayList<String>> playerLabymodMods = new HashMap<UUID, ArrayList<String>> ();
-    public static BungeeManager clientSocket;
+    public static BungeeManager bungeeManager;
 
     private PacketEvents instance;
 
@@ -122,8 +120,11 @@ public class ClientDetector extends JavaPlugin {
 
         if(ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient")){
             Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aDetection&7) &aLoading Bungee client..."));
-            clientSocket = new BungeeManager();
-            clientSocket.load();
+
+            Bukkit.getMessenger().registerOutgoingPluginChannel(this, "cd:bungee");
+            Bukkit.getMessenger().registerIncomingPluginChannel(this, "cd:spigot", new PluginMessageListener());
+
+            bungeeManager = new BungeeManager();
         }
 
         if(Bukkit.getServer().getPluginManager().isPluginEnabled("ViaVersion")){

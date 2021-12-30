@@ -18,11 +18,7 @@
 
 package de.sportkanone123.clientdetector.spigot.listener;
 
-import de.sportkanone123.clientdetector.bungeecord.utils.CustomPayload;
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
-import de.sportkanone123.clientdetector.spigot.bungee.BungeeManager;
-import de.sportkanone123.clientdetector.spigot.bungee.DataType;
-import de.sportkanone123.clientdetector.spigot.clientcontrol.impl.LunarClient;
 import de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandshake;
 import de.sportkanone123.clientdetector.spigot.hackdetector.HackDetector;
 import de.sportkanone123.clientdetector.spigot.hackdetector.impl.ChatExploit;
@@ -30,16 +26,10 @@ import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import de.sportkanone123.clientdetector.spigot.manager.GeyserManager;
 import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.event.impl.PlayerInjectEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRegisterChannelEvent;
-
-import java.util.ArrayList;
 
 public class PlayerListener implements Listener {
 
@@ -71,7 +61,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public static void onQuit(PlayerQuitEvent event){
 
-        if(ClientDetector.clientSocket == null || ClientDetector.clientSocket.client == null || !ClientDetector.clientSocket.client.isActive){
+        if(ClientDetector.bungeeManager == null || !ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient")){
             ClientDetector.playerClient.remove(event.getPlayer().getUniqueId());
             ClientDetector.playerMods.remove(event.getPlayer().getUniqueId());
             ClientDetector.playerLabymodMods.remove(event.getPlayer().getUniqueId());
