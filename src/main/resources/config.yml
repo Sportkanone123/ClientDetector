@@ -117,9 +117,9 @@ forge:
 #  │  Cross Server Sync Settings │
 #  └─────────────────────────────┘
 bungee:
-  #Do you want to use the BungeeCord feature? (Only enable if you use Bungeecord) [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT: 'true']
-  enableBungeeClient: true
-  #Name of this Spigot/Papaer/Bukkit/... server. [OPTIONS: 'anyString'', PLACEHOLDERS: none, DEFAULT: 'LOBBY']
+  #Do you want to use the BungeeCord feature? (Only enable if you use Bungeecord) [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT: 'false']
+  enableBungeeClient: false
+  #Name of this Spigot/Paper/Bukkit/... server. [OPTIONS: 'anyString'', PLACEHOLDERS: none, DEFAULT: 'LOBBY']
   serverName: "LOBBY"
 
 

@@ -51,12 +51,19 @@ public class ModManager {
             if(ClientDetector.plugin.getConfig().get("mods.whitelistedMods") != null) {
                 List<String> whitelist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("mods.whitelistedMods");
                 if ((!whitelist.contains(mod) && !whitelist.contains(mod.toLowerCase(Locale.ROOT))) && !player.hasPermission("clientdetector.bypass")) {
-                    Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
-                        @Override
-                        public void run() {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("mods.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%mod_name%", mod).replace("%player_uuid%", player.getUniqueId().toString()));
-                        }
-                    });
+                    if(player.isOnline()){
+                        Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
+                            @Override
+                            public void run() {
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("mods.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%mod_name%", mod).replace("%player_uuid%", player.getUniqueId().toString()));
+                            }
+                        });
+                    }else{
+                        if(ClientDetector.playerCommandsQueue.get(player.getUniqueId()) == null)
+                            ClientDetector.playerCommandsQueue.put(player.getUniqueId(), new ArrayList<>());
+
+                        ClientDetector.playerCommandsQueue.get(player.getUniqueId()).add(ClientDetector.plugin.getConfig().getString("mods.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%mod_name%", mod).replace("%player_uuid%", player.getUniqueId().toString()));
+                    }
                 }
             }
         }
@@ -65,12 +72,19 @@ public class ModManager {
             if(ClientDetector.plugin.getConfig().get("mods.blacklistedMods") != null){
                 List<String> blacklist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("mods.blacklistedMods");
                 if((blacklist.contains(mod) || blacklist.contains(mod.toLowerCase(Locale.ROOT)))  && !player.hasPermission("clientdetector.bypass")){
-                    Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
-                        @Override
-                        public void run() {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("mods.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%mod_name%", mod).replace("%player_uuid%", player.getUniqueId().toString()));
-                        }
-                    });
+                    if(player.isOnline()){
+                        Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
+                            @Override
+                            public void run() {
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("mods.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%mod_name%", mod).replace("%player_uuid%", player.getUniqueId().toString()));
+                            }
+                        });
+                    }else{
+                        if(ClientDetector.playerCommandsQueue.get(player.getUniqueId()) == null)
+                            ClientDetector.playerCommandsQueue.put(player.getUniqueId(), new ArrayList<>());
+
+                        ClientDetector.playerCommandsQueue.get(player.getUniqueId()).add(ClientDetector.plugin.getConfig().getString("mods.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%mod_name%", mod).replace("%player_uuid%", player.getUniqueId().toString()));
+                    }
                 }
             }
         }

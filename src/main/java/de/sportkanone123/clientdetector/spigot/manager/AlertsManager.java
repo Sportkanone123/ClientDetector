@@ -48,6 +48,7 @@ public class AlertsManager {
             firstDetection.add(player.getUniqueId());
 
             int waitTicks = 4;
+            if(PacketEvents.get().getServerUtils().isBungeeCordEnabled()) waitTicks = 100;
 
             Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, () -> {
                 if(ClientDetector.playerClient.get(player.getUniqueId()) != null)

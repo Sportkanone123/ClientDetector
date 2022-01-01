@@ -33,13 +33,19 @@ public class ForgeHandler {
         if(channel.equalsIgnoreCase("FML|HS") || channel.equalsIgnoreCase("l:fmlhs") || (channel.equalsIgnoreCase("minecraft:brand") && new String(data).contains("forge")) || (channel.equalsIgnoreCase("MC|Brand") && new String(data).contains("forge"))){
             if(ClientDetector.plugin.getConfig().getBoolean("forge.blockForge")){
                 if(!player.hasPermission("clientdetector.bypass")){
-                    Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, new Runnable(){
-                        @Override
-                        public void run() {
-                            if(player != null && player.isOnline())
+                    if(player.isOnline()){
+                        Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, new Runnable(){
+                            @Override
+                            public void run() {
                                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("forge.punishCommandForge").replace("%player_name%", player.getName()));
-                        }
-                    }, 10l);
+                            }
+                        }, 10l);
+                    }else{
+                        if(ClientDetector.playerCommandsQueue.get(player.getUniqueId()) == null)
+                            ClientDetector.playerCommandsQueue.put(player.getUniqueId(), new ArrayList<>());
+
+                        ClientDetector.playerCommandsQueue.get(player.getUniqueId()).add(ClientDetector.plugin.getConfig().getString("forge.punishCommandForge").replace("%player_name%", player.getName()));
+                    }
                 }
             }
         }
@@ -50,13 +56,19 @@ public class ForgeHandler {
             if(ClientDetector.plugin.getConfig().get("forge.whitelistedMods") != null){
                 List<String> whitelist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("forge.whitelistedMods");
                 if(!whitelist.contains(mod) && !player.hasPermission("clientdetector.bypass")){
-                    Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, new Runnable(){
-                        @Override
-                        public void run() {
-                            if(player != null && player.isOnline())
+                    if(player.isOnline()){
+                        Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, new Runnable(){
+                            @Override
+                            public void run() {
                                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("forge.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%mod_name%", mod).replace("%player_uuid%", player.getUniqueId().toString()));
-                           }
-                    }, 10l);
+                            }
+                        }, 10l);
+                    }else{
+                        if(ClientDetector.playerCommandsQueue.get(player.getUniqueId()) == null)
+                            ClientDetector.playerCommandsQueue.put(player.getUniqueId(), new ArrayList<>());
+
+                        ClientDetector.playerCommandsQueue.get(player.getUniqueId()).add(ClientDetector.plugin.getConfig().getString("forge.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%mod_name%", mod).replace("%player_uuid%", player.getUniqueId().toString()));
+                    }
                 }
             }
         }
@@ -65,13 +77,19 @@ public class ForgeHandler {
             if(ClientDetector.plugin.getConfig().get("forge.blacklistedMods") != null){
                 List<String> blacklist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("forge.blacklistedMods");
                 if(blacklist.contains(mod) && !player.hasPermission("clientdetector.bypass")){
-                    Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, new Runnable(){
-                        @Override
-                        public void run() {
-                            if(player != null && player.isOnline())
+                    if(player.isOnline()){
+                        Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, new Runnable(){
+                            @Override
+                            public void run() {
                                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("forge.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%mod_name%", mod).replace("%player_uuid%", player.getUniqueId().toString()));
-                        }
-                    }, 10l);
+                            }
+                        }, 10l);
+                    }else{
+                        if(ClientDetector.playerCommandsQueue.get(player.getUniqueId()) == null)
+                            ClientDetector.playerCommandsQueue.put(player.getUniqueId(), new ArrayList<>());
+
+                        ClientDetector.playerCommandsQueue.get(player.getUniqueId()).add(ClientDetector.plugin.getConfig().getString("forge.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%mod_name%", mod).replace("%player_uuid%", player.getUniqueId().toString()));
+                    }
                 }
             }
         }

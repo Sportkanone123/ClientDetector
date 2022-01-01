@@ -55,6 +55,7 @@ public class ClientDetector extends JavaPlugin {
     public static HashMap<UUID, String> clientVersion = new HashMap<UUID, String> ();
     public static HashMap<UUID, ArrayList<String>> playerMods = new HashMap<UUID, ArrayList<String>> ();
     public static HashMap<UUID, ArrayList<String>> playerLabymodMods = new HashMap<UUID, ArrayList<String>> ();
+    public static HashMap<UUID, ArrayList<String>> playerCommandsQueue = new HashMap<UUID, ArrayList<String>>();
     public static BungeeManager bungeeManager;
 
     private PacketEvents instance;

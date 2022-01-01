@@ -81,12 +81,19 @@ public class ClientManager {
             if(ClientDetector.plugin.getConfig().get("client.whitelistedClients") != null){
                 List<String> whitelist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("client.whitelistedClients");
                 if(!whitelist.contains(client) && !player.hasPermission("clientdetector.bypass")) {
-                    Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
-                        @Override
-                        public void run() {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("client.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
-                        }
-                    });
+                    if(player.isOnline()){
+                        Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
+                            @Override
+                            public void run() {
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("client.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
+                            }
+                        });
+                    }else{
+                        if(ClientDetector.playerCommandsQueue.get(player.getUniqueId()) == null)
+                            ClientDetector.playerCommandsQueue.put(player.getUniqueId(), new ArrayList<>());
+
+                        ClientDetector.playerCommandsQueue.get(player.getUniqueId()).add(ClientDetector.plugin.getConfig().getString("client.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
+                    }
                 }
             }
         }
@@ -95,12 +102,19 @@ public class ClientManager {
             if(ClientDetector.plugin.getConfig().get("client.blacklistedClients") != null){
                 List<String> blacklist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("client.blacklistedClients");
                 if(blacklist.contains(client) && !player.hasPermission("clientdetector.bypass")){
-                    Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
-                        @Override
-                        public void run() {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("client.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
-                        }
-                    });
+                    if(player.isOnline()){
+                        Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
+                            @Override
+                            public void run() {
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("client.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
+                            }
+                        });
+                    }else{
+                        if(ClientDetector.playerCommandsQueue.get(player.getUniqueId()) == null)
+                            ClientDetector.playerCommandsQueue.put(player.getUniqueId(), new ArrayList<>());
+
+                        ClientDetector.playerCommandsQueue.get(player.getUniqueId()).add(ClientDetector.plugin.getConfig().getString("client.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
+                    }
                 }
             }
         }

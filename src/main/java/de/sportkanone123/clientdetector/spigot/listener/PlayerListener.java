@@ -26,42 +26,61 @@ import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import de.sportkanone123.clientdetector.spigot.manager.GeyserManager;
 import io.github.retrooper.packetevents.PacketEvents;
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerListener implements Listener {
 
     @EventHandler
-    public static void onJoin(PlayerJoinEvent event){
+    public static void onJoin(PlayerJoinEvent event) {
 
-        if(ClientDetector.plugin.getConfig().getBoolean("forge.simulateForgeHandshake") && !ClientDetector.forgeMods.containsKey(event.getPlayer().getUniqueId()))
+        if (ClientDetector.plugin.getConfig().getBoolean("forge.simulateForgeHandshake") && !ClientDetector.forgeMods.containsKey(event.getPlayer().getUniqueId()))
             ForgeHandshake.sendHandshake(event.getPlayer());
 
         de.sportkanone123.clientdetector.spigot.forgemod.newerversion.ForgeHandler.handleJoin(event.getPlayer());
 
-        if(GeyserManager.isBedrockPlayer(event.getPlayer()))
+        if (GeyserManager.isBedrockPlayer(event.getPlayer()))
             AlertsManager.handleGeyserDetection(event.getPlayer());
 
         /* Needed for Cracked Vape detection */
         event.getPlayer().sendMessage("§8 §8 §1 §3 §3 §7 §8 ");
 
 
-        if(ClientDetector.plugin.getConfig().getBoolean("client.enableMinecraftVersionDetection")){
+        if (ClientDetector.plugin.getConfig().getBoolean("client.enableMinecraftVersionDetection")) {
             ClientDetector.mcVersion.put(event.getPlayer().getUniqueId(), PacketEvents.get().getPlayerUtils().getClientVersion(event.getPlayer()).name().replace("v_", "").replaceAll("_", "."));
         }
 
-        if(ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))
+        if (ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))
             event.setJoinMessage(null);
 
         HackDetector.startChatCheck(event.getPlayer());
+
+        if (ClientDetector.playerCommandsQueue.get(event.getPlayer().getUniqueId()) != null && !ClientDetector.playerCommandsQueue.get(event.getPlayer().getUniqueId()).isEmpty()) {
+            List<String> toRemove = new ArrayList<>();
+            for (String string : ClientDetector.playerCommandsQueue.get(event.getPlayer().getUniqueId())) {
+                toRemove.add(string);
+                Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), string);
+                    }
+                });
+            }
+            ClientDetector.playerCommandsQueue.get(event.getPlayer().getUniqueId()).removeAll(toRemove);
+        }
     }
 
     @EventHandler
-    public static void onQuit(PlayerQuitEvent event){
+    public static void onQuit(PlayerQuitEvent event) {
 
-        if(ClientDetector.bungeeManager == null || !ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient")){
+        if (ClientDetector.bungeeManager == null || !ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient")) {
             ClientDetector.playerClient.remove(event.getPlayer().getUniqueId());
             ClientDetector.playerMods.remove(event.getPlayer().getUniqueId());
             ClientDetector.playerLabymodMods.remove(event.getPlayer().getUniqueId());
@@ -71,9 +90,13 @@ public class PlayerListener implements Listener {
             AlertsManager.firstDetection.remove(event.getPlayer().getUniqueId());
         }
 
-        if(ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))
+        if (ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))
             event.setQuitMessage(null);
 
         ChatExploit.handleQuit(event.getPlayer());
+
+        if (ClientDetector.playerCommandsQueue.get(event.getPlayer().getUniqueId()) != null && !ClientDetector.playerCommandsQueue.get(event.getPlayer().getUniqueId()).isEmpty()) {
+            ClientDetector.playerCommandsQueue.get(event.getPlayer().getUniqueId()).clear();
+        }
     }
 }
