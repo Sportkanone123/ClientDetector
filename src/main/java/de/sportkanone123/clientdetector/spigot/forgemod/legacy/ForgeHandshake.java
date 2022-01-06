@@ -74,7 +74,7 @@ public class ForgeHandshake {
     }
 
     public static void sendHandshake(Player player){
-        if(PacketEvents.get().getServerUtils().getVersion().isOlderThanOrEquals(ServerVersion.v_1_12_2)){
+        if(PacketEvents.get().getServerUtils().getVersion().isOlderThanOrEquals(ServerVersion.v_1_12_2) && PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_8)){
             sendHandshakeReset(player, "FML|HS");
             sendServerHello(player, "FML|HS");
             sendModList(player, "FML|HS");
