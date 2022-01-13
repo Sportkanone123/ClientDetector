@@ -7,8 +7,8 @@ detection:
   clientdetectionmessagewithoutversion: "%prefix% &c%player_name% &7joined using &c%client_name%"
   #Message that will be sent if CrossServerNotifications are enabled. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%server_name%', '%%cross_server_message%'], DEFAULT: "%prefix% &c%player_name% &7joined using &c%client_name%"]
   clientdetectionmessagecrossserver: "&7[&c%server_name%&7] %cross_server_message%"
-  #Message that will be sent when a bedrock player joins your server. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%player_name%', '%player_uuid%'], DEFAULT: "%prefix% &c%player_name% &7uses &cMinecarft Bedrock Edition"]
-  geyserdetectionmessage: "%prefix% &c%player_name% &7uses &cMinecarft Bedrock Edition"
+  #Message that will be sent when a bedrock player joins your server. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%player_name%', '%player_uuid%'], DEFAULT: "%prefix% &c%player_name% &7uses &cMinecraft Bedrock Edition"]
+  geyserdetectionmessage: "%prefix% &c%player_name% &7uses &cMinecraft Bedrock Edition"
   #Message that will be sent when player joins and one or more mods are detected. [OPTIONS: "anyString", PLACEHOLDERS: ['%prefix%', '%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT: "%prefix% &c%player_name% &7joined using &c%mod_name%"]
   moddetectionmessage: "%prefix% &c%player_name% &7joined using &c%mod_name%"
 
