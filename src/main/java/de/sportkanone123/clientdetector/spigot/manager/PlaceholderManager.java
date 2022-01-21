@@ -50,7 +50,7 @@ public class PlaceholderManager extends PlaceholderExpansion {
         if(identifier.equalsIgnoreCase("client_name")){
             if(ClientDetector.playerClient.get(player.getUniqueId()) != null)
                 return ClientDetector.playerClient.get(player.getUniqueId());
-            return "Vanilla Minecraft / Undetectable Client";
+            return "Vanilla (Undetectable)";
         }
         if(identifier.equalsIgnoreCase("client_version")){
             if(ClientDetector.clientVersion.get(player.getUniqueId()) != null)

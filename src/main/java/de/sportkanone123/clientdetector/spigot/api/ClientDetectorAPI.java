@@ -31,7 +31,7 @@ public class ClientDetectorAPI {
     public static String getPlayerClient(Player player){
         if(ClientDetector.playerClient.get(player.getUniqueId()) != null)
             return ClientDetector.playerClient.get(player.getUniqueId());
-        return "Vanilla Minecraft / Undetectable Client";
+        return "Vanilla (Undetectable)";
     }
 
     public static List<String> getPlayerMods(Player player){

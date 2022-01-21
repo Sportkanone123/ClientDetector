@@ -45,7 +45,7 @@ public class ClientManager {
         ClientDetector.CLIENTS.add(new Client("PX|Version", "", "PXMod", true, false, null, null));
         ClientDetector.CLIENTS.add(new Client("MC|Pixel", "", "Pixel Client", true, false, null, null));
 
-        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "vanilla", "Vanilla Minecraft / Undetectable Client", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "vanilla", "Vanilla (Undetectable)", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "LiteLoader", "LiteLoader", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "PLC18", "PvPLounge Client", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "fabric", "Fabric", false, false, null, null));

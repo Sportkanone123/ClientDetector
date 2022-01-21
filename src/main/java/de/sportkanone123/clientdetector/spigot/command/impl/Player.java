@@ -40,7 +40,7 @@ public class Player {
                     }else if(ClientDetector.playerClient.get(target.getUniqueId()) != null && ClientDetector.clientVersion.get(target.getUniqueId()) != null) {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("player.clientwithversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName()).replace("%player_uuid%", target.getUniqueId().toString()).replace("%client_name%", ClientDetector.playerClient.get(target.getUniqueId())).replace("%client_version%", ClientDetector.clientVersion.get(target.getUniqueId()))));
                     }else{
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("player.clientwithoutversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName()).replace("%player_uuid%", target.getUniqueId().toString()).replace("%client_name%", "Vanilla Minecraft / Undetectable Client")));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("player.clientwithoutversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName()).replace("%player_uuid%", target.getUniqueId().toString()).replace("%client_name%", "Vanilla (Undetectable)")));
                     }
                 }else if(args[1].equalsIgnoreCase("mods")){
                     if(ConfigManager.getConfig("message").getString("player.playermods") != null){

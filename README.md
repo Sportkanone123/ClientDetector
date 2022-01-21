@@ -14,7 +14,7 @@ This project is licensed under the GPLv3 License - see the [LICENSE](https://git
 ClientDetector uses the PacketEvents API. Check it out here: https://github.com/retrooper/packetevents
 
 ### Clients
-* "Vanilla Minecraft / Undetectable Client"
+* "Vanilla (Undetectable)"
 * "Forge"
 * "5zig Mod"
 * "LabyMod"

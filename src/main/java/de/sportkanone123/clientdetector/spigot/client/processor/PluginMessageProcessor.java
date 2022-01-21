@@ -27,7 +27,7 @@ public class PluginMessageProcessor {
     public static void handlePluginMessage(Player player, String channel, byte[] data) {
         for (Client client : ClientDetector.CLIENTS) {
             if (client.isClient(channel, data) && ClientDetector.plugin.getConfig().getBoolean("client.enableClientDetection")) {
-                if (client.getClientName() == "Vanilla Minecraft / Undetectable Client") {
+                if (client.getClientName() == "Vanilla (Undetectable)") {
                     if (ClientDetector.playerClient.get(player.getUniqueId()) == null) {
                         ClientDetector.playerClient.put(player.getUniqueId(), client.getClientName());
 
@@ -38,7 +38,7 @@ public class PluginMessageProcessor {
 
                     }
                 } else {
-                    if (ClientDetector.playerClient.get(player.getUniqueId()) == null || ClientDetector.playerClient.get(player.getUniqueId()) == "Vanilla Minecraft / Undetectable Client" || ClientDetector.playerClient.get(player.getUniqueId()) == "Unknown Client (Not Vanilla Minecraft)") {
+                    if (ClientDetector.playerClient.get(player.getUniqueId()) == null || ClientDetector.playerClient.get(player.getUniqueId()) == "Vanilla (Undetectable)" || ClientDetector.playerClient.get(player.getUniqueId()) == "Unknown Client (Not Vanilla Minecraft)") {
                         ClientDetector.playerClient.put(player.getUniqueId(), client.getClientName());
 
                         if (client.getHasVersion() && client.getVersion(channel, data) != null && ClientDetector.plugin.getConfig().getBoolean("client.enableVersionDetection"))

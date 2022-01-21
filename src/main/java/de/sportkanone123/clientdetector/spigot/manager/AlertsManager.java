@@ -63,7 +63,7 @@ public class AlertsManager {
 
                 if(ClientDetector.playerClient.get(player.getUniqueId()) != null){
                     if(ConfigManager.getConfig("config").getBoolean("discord.limitNotifications") == true) {
-                        if (!ClientDetector.playerClient.get(player.getUniqueId()).equalsIgnoreCase("Vanilla Minecraft / Undetectable Client")) {
+                        if (!ClientDetector.playerClient.get(player.getUniqueId()).equalsIgnoreCase("Vanilla (Undetectable)")) {
                             DiscordManager.handle(player, ClientDetector.playerClient.get(player.getUniqueId()));
                         }
                     }else{
@@ -75,7 +75,7 @@ public class AlertsManager {
                     for(Player player1 : Bukkit.getOnlinePlayers()){
                         if(!disabledNotifications.contains(player1.getName()) && player1.hasPermission(ConfigManager.getConfig("config").getString("alerts.notificationPermission")) && !(ConfigManager.getConfig("config").getBoolean("bungee.enableBungeeClient") && crossServerNotifications)){
                             if(limitedNotifications){
-                                if(!ClientDetector.playerClient.get(player.getUniqueId()).equalsIgnoreCase("Vanilla Minecraft / Undetectable Client")){
+                                if(!ClientDetector.playerClient.get(player.getUniqueId()).equalsIgnoreCase("Vanilla (Undetectable)")){
                                     if(ClientDetector.playerClient.get(player.getUniqueId()) != null && ClientDetector.clientVersion.get(player.getUniqueId()) == null) {
                                         player1.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("detection.clientdetectionmessagewithoutversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString()).replace("%client_name%", ClientDetector.playerClient.get(player.getUniqueId()))));
                                     }else if(ClientDetector.playerClient.get(player.getUniqueId()) != null && ClientDetector.clientVersion.get(player.getUniqueId()) != null) {
@@ -88,7 +88,7 @@ public class AlertsManager {
                                 }else if(ClientDetector.playerClient.get(player.getUniqueId()) != null && ClientDetector.clientVersion.get(player.getUniqueId()) != null) {
                                     player1.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("detection.clientdetectionmessagewithversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString()).replace("%client_name%", ClientDetector.playerClient.get(player.getUniqueId())).replace("%client_version%", ClientDetector.clientVersion.get(player.getUniqueId()))));
                                 }else{
-                                    player1.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("detection.clientdetectionmessagewithoutversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString()).replace("%client_name%", "Vanilla Minecraft / Undetectable Client")));
+                                    player1.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("detection.clientdetectionmessagewithoutversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString()).replace("%client_name%", "Vanilla (Undetectable)")));
                                 }
                             }
                         }
@@ -99,7 +99,7 @@ public class AlertsManager {
                     }else if(ClientDetector.playerClient.get(player.getUniqueId()) != null && ClientDetector.clientVersion.get(player.getUniqueId()) != null) {
                         sendCrossServer(player, ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("detection.clientdetectionmessagewithversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString()).replace("%client_name%", ClientDetector.playerClient.get(player.getUniqueId())).replace("%client_version%", ClientDetector.clientVersion.get(player.getUniqueId()))));
                     }else{
-                        sendCrossServer(player, ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("detection.clientdetectionmessagewithoutversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString()).replace("%client_name%", "Vanilla Minecraft / Undetectable Client")));
+                        sendCrossServer(player, ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("detection.clientdetectionmessagewithoutversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", player.getName()).replace("%player_uuid%", player.getUniqueId().toString()).replace("%client_name%", "Vanilla (Undetectable)")));
                     }
                 }
             }, waitTicks);
@@ -138,7 +138,7 @@ public class AlertsManager {
             for(Player player1 : Bukkit.getOnlinePlayers()) {
                 if (!disabledNotifications.contains(player1.getName()) && player1.hasPermission(ConfigManager.getConfig("config").getString("alerts.notificationPermission"))) {
                     if (limitedNotifications) {
-                        if(!message.contains("Vanilla Minecraft / Undetectable Client"))
+                        if(!message.contains("Vanilla (Undetectable)"))
                             player1.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("detection.clientdetectionmessagecrossserver").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%server_name%", serverName).replace("%cross_server_message%", message)));
                     }else
                         player1.sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigManager.getConfig("message").getString("detection.clientdetectionmessagecrossserver").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%server_name%", serverName).replace("%cross_server_message%", message)));
