@@ -23,10 +23,14 @@ import de.sportkanone123.clientdetector.spigot.client.Client;
 import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
 import org.bukkit.entity.Player;
 
+import java.nio.charset.StandardCharsets;
+
 public class PluginMessageProcessor {
     public static void handlePluginMessage(Player player, String channel, byte[] data) {
+        byte[] customData = new String(data, StandardCharsets.UTF_8).replace("(Velocity)", "").getBytes(StandardCharsets.UTF_8);
+
         for (Client client : ClientDetector.CLIENTS) {
-            if (client.isClient(channel, data) && ClientDetector.plugin.getConfig().getBoolean("client.enableClientDetection")) {
+            if (client.isClient(channel, customData) && ClientDetector.plugin.getConfig().getBoolean("client.enableClientDetection")) {
                 if (client.getClientName() == "Vanilla (Undetectable)") {
                     if (ClientDetector.playerClient.get(player.getUniqueId()) == null) {
                         ClientDetector.playerClient.put(player.getUniqueId(), client.getClientName());
@@ -41,8 +45,8 @@ public class PluginMessageProcessor {
                     if (ClientDetector.playerClient.get(player.getUniqueId()) == null || ClientDetector.playerClient.get(player.getUniqueId()) == "Vanilla (Undetectable)" || ClientDetector.playerClient.get(player.getUniqueId()) == "Unknown Client (Not Vanilla Minecraft)") {
                         ClientDetector.playerClient.put(player.getUniqueId(), client.getClientName());
 
-                        if (client.getHasVersion() && client.getVersion(channel, data) != null && ClientDetector.plugin.getConfig().getBoolean("client.enableVersionDetection"))
-                            ClientDetector.clientVersion.put(player.getUniqueId(), client.getVersion(channel, data));
+                        if (client.getHasVersion() && client.getVersion(channel, customData) != null && ClientDetector.plugin.getConfig().getBoolean("client.enableVersionDetection"))
+                            ClientDetector.clientVersion.put(player.getUniqueId(), client.getVersion(channel, customData));
                         else
                             ClientDetector.clientVersion.put(player.getUniqueId(), null);
 

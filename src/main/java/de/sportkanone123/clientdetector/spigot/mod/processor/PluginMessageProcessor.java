@@ -26,13 +26,16 @@ import de.sportkanone123.clientdetector.spigot.mod.Mod;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class PluginMessageProcessor {
     public static void handlePluginMessage(Player player, String channel, byte[] data){
+        byte[] customData = new String(data, StandardCharsets.UTF_8).replace("(Velocity)", "").getBytes(StandardCharsets.UTF_8);
+
         if(ClientDetector.plugin.getConfig().getBoolean("mods.enableModDetection")){
             for(Mod mod : ClientDetector.MODS){
-                if(mod.isMod(channel, data)){
+                if(mod.isMod(channel, customData)){
                     if(ClientDetector.playerMods.get(player.getUniqueId()) == null)
                         ClientDetector.playerMods.put(player.getUniqueId(), new ArrayList<String>());
 
