@@ -46,13 +46,14 @@ public class ForgeHandler {
 
     public static void handle(PacketLoginReceiveEvent event){
         if(event.getPacketId() == PacketType.Login.Client.START ) {
-            if(ClientDetector.plugin.getConfig().getBoolean("forge.simulateForgeHandshake") && PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13) && !ClientDetector.forgeMods.containsKey(new WrappedPacketLoginInStart(event.getNMSPacket()).getGameProfile().getId())) {
+            if(ClientDetector.plugin.getConfig().getBoolean("forge.simulateForgeHandshake") && PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13) && !ClientDetector.forgeMods.containsKey(new WrappedPacketLoginInStart(event.getNMSPacket()).getGameProfile().getId()) && !ConfigManager.getConfig("config").getBoolean("velocity.enableVelocitySupport")) {
                 ForgeHandshake.sendModList(event.getChannel());
                 channelToName.put(event.getChannel(), new WrappedPacketLoginInStart(event.getNMSPacket()).getGameProfile().getName());
             }
 
         }else if(event.getPacketId() == PacketType.Login.Client.CUSTOM_PAYLOAD) {
-            event.setCancelled(true);
+            if(!ConfigManager.getConfig("config").getBoolean("velocity.enableVelocitySupport"))
+                event.setCancelled(true);
 
             try {
                 nameToModlist.put(channelToName.get(event.getChannel()), getModList(new WrappedPacketLoginInCustomPayload(event.getNMSPacket()).getData()));
