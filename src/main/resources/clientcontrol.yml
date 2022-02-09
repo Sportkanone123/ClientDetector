@@ -1,7 +1,7 @@
 #  ┌─────────────────────────────┐
 #  │     BetterSprinting Mod     │
 #  └─────────────────────────────┘
-#  A popular PvP modification, that allows you to enhance the sprinting behaviour (1.12 - 1.16.3)
+#  A popular PvP modification, that allows you to enhance the sprinting behaviour
 #  This clientcontrol is marked as STABLE
 
 bettersprinting:
@@ -15,7 +15,7 @@ bettersprinting:
 #  ┌─────────────────────────────┐
 #  │      5zig Mod (Reborn)      │
 #  └─────────────────────────────┘
-#  A popular PVP modification, that provides additional information in HUDs, Capes, Friends & Chats (1.8.9-1.12.2)
+#  A popular PVP modification, that provides additional information in HUDs, Capes, Friends & Chats
 #  This clientcontrol is marked as STABLE
 fivezig:
   #Shows a players effect on screen(HUD) (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
@@ -34,7 +34,7 @@ fivezig:
 #  ┌─────────────────────────────┐
 #  │        LabyMod Client       │
 #  └─────────────────────────────┘
-#  An all-in-one modification for minecraft (1.8.9, 1.12.2, 1.16.5)
+#  An all-in-one modification for minecraft
 #  This clientcontrol is marked as STABLE
 labymod:
   #Feature to switch back to the old animations of MC 1.7 (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
@@ -66,7 +66,7 @@ labymod:
 #  ┌─────────────────────────────┐
 #  │       WorldDownloader       │
 #  └─────────────────────────────┘
-#  Popular modification to download minecraft maps (of servers)  (1.9 - 1.16.3)
+#  Popular modification to download minecraft maps (of servers)
 #  This clientcontrol is marked as STABLE
 worlddownloader:
   #Should the whole mod get disabled (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true')
@@ -75,7 +75,7 @@ worlddownloader:
 #  ┌─────────────────────────────┐
 #  │         Lunar Client        │
 #  └─────────────────────────────┘
-#  An all-in-one modification for minecraft (1.7-1.17)
+#  An all-in-one modification for minecraft
 #  This clientcontrol is marked as STABLE
 lunar_disable:
   #Feature to switch back to the old animations of MC 1.7 (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
@@ -166,7 +166,7 @@ lunar_disable:
 #  ┌─────────────────────────────┐
 #  │     Badlion Client (BAC)    │
 #  └─────────────────────────────┘
-#  An all-in-one PVP modification for minecraft (1.7 - 1.17)
+#  An all-in-one PVP modification for minecraft
 #  This clientcontrol is marked as STABLE
 badlion_disable:
   #Feature to customize animations (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
