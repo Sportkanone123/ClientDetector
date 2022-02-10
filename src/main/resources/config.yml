@@ -134,6 +134,8 @@ discord:
   embedTitle: "ClientDetector"
   #Message of the embed message. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%client_name%', '%line_break%'], DEFAULT: ""]
   embedMessage: "%player_name% joined using %client_name%"
+  #Should the footer be disabled. [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
+  disableEmbedFooter: false
   #Should only important notifications be sent to the discord? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
   limitNotifications: false
 

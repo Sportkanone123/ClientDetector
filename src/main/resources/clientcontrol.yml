@@ -76,7 +76,7 @@ worlddownloader:
 #  │         Lunar Client        │
 #  └─────────────────────────────┘
 #  An all-in-one modification for minecraft
-#  This clientcontrol is marked as STABLE
+#  This clientcontrol is marked as UNSTABLE / CURRENTLY NOT WORKING
 lunar_disable:
   #Feature to switch back to the old animations of MC 1.7 (OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false')
   one_seven_visuals: false
