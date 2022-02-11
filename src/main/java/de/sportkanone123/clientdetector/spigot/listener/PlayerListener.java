@@ -50,7 +50,8 @@ public class PlayerListener implements Listener {
             AlertsManager.handleGeyserDetection(event.getPlayer());
 
         /* Needed for Cracked Vape detection */
-        event.getPlayer().sendMessage("§8 §8 §1 §3 §3 §7 §8 ");
+        if(ConfigManager.getConfig("config").getBoolean("hackdetector.detectcrackedvape.enableDetectCrackedVape"))
+            event.getPlayer().sendMessage("§8 §8 §1 §3 §3 §7 §8 ");
 
 
         if (ClientDetector.plugin.getConfig().getBoolean("client.enableMinecraftVersionDetection")) {
