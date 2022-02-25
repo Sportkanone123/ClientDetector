@@ -124,15 +124,13 @@ public class ConfigManager {
                 file.createNewFile();
 
                 if(!getConfig(config).get(path).equals(value) && !getConfig("data" + File.separator + "log").contains("automation.config_optimization." + path.replace(".", "_"))){
-                    String oldValue = getConfig(config).get(path).toString();
-
                     getConfig(config).set(path, value);
                     getConfig("data" + File.separator + "log").set("automation.config_optimization." + path.replace(".", "_"), true);
 
                     saveConfig(config);
                     saveConfig("data" + File.separator + "log");
 
-                    Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aConfigOptimizer&7) &c We detected a problem with your configuration, it will be updated automatically: \n&7        Config file: '" + config + ".yml' \n&7        Path: '" + path + "'\n&7        Old value: '" + oldValue + "'\n&7        New value: '" + value.toString() + "'"));
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aConfigOptimizer&7) &c We detected a problem with your configuration, it will be updated automatically: Config file: '" + config + ".yml', path: '" + path + "'"));
                 }
             } catch (IOException e) {
                     e.printStackTrace();
