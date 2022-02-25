@@ -19,6 +19,8 @@
 package de.sportkanone123.clientdetector.spigot.manager;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -26,6 +28,9 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 public class ConfigManager {
@@ -37,7 +42,11 @@ public class ConfigManager {
         File file = new File(plugin.getDataFolder(), string + ".yml");
         if(!file.exists()){
             file.getParentFile().mkdirs();
-            plugin.saveResource(string + ".yml", false);
+            try {
+                plugin.saveResource(string + ".yml", false);
+            }catch (IllegalArgumentException e){
+
+            }
             FileConfiguration configuration = new YamlConfiguration();
             try{
                 configuration.load(file);
@@ -58,6 +67,7 @@ public class ConfigManager {
                 e.printStackTrace();
             }
         }
+
     }
 
     public static void saveConfig(String string){
@@ -101,6 +111,31 @@ public class ConfigManager {
             loadConfig(string);
             if(files.get(string) != null && configurations.get(string) != null){
                 configurations.put(string, YamlConfiguration.loadConfiguration(files.get(string)));
+            }
+        }
+    }
+
+    public static void optimizeConfig(String config, String path, Object value){
+        File file = new File(plugin.getDataFolder(), "data" + File.separator + "log" + ".yml");
+
+        if(!file.exists()) {
+            try {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+
+                if(!getConfig(config).get(path).equals(value) && !getConfig("data" + File.separator + "log").contains("automation.config_optimization." + path.replace(".", "_"))){
+                    String oldValue = getConfig(config).get(path).toString();
+
+                    getConfig(config).set(path, value);
+                    getConfig("data" + File.separator + "log").set("automation.config_optimization." + path.replace(".", "_"), true);
+
+                    saveConfig(config);
+                    saveConfig("data" + File.separator + "log");
+
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aConfigOptimizer&7) &c We detected a problem with your configuration, it will be updated automatically: \n&7        Config file: '" + config + ".yml' \n&7        Path: '" + path + "'\n&7        Old value: '" + oldValue + "'\n&7        New value: '" + value.toString() + "'"));
+                }
+            } catch (IOException e) {
+                    e.printStackTrace();
             }
         }
     }

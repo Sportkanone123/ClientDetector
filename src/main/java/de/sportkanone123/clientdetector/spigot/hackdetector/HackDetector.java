@@ -36,7 +36,6 @@ public class HackDetector implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event){
         ChatExploit.handleChat(event.getPlayer(), event);
-
     }
 
     @EventHandler

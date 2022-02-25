@@ -21,12 +21,16 @@ package de.sportkanone123.clientdetector.spigot.client.processor;
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.client.Client;
 import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
+import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import org.bukkit.entity.Player;
 
 import java.nio.charset.StandardCharsets;
 
 public class PluginMessageProcessor {
     public static void handlePluginMessage(Player player, String channel, byte[] data) {
+        if(new String(data, StandardCharsets.UTF_8).contains("(Velocity)"))
+            ConfigManager.optimizeConfig("config", "velocity.enableVelocitySupport", true);
+
         byte[] customData = new String(data, StandardCharsets.UTF_8).replace("(Velocity)", "").getBytes(StandardCharsets.UTF_8);
 
         for (Client client : ClientDetector.CLIENTS) {

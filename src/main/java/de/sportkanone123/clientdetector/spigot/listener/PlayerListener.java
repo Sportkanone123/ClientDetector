@@ -99,5 +99,8 @@ public class PlayerListener implements Listener {
         if (ClientDetector.playerCommandsQueue.get(event.getPlayer().getUniqueId()) != null && !ClientDetector.playerCommandsQueue.get(event.getPlayer().getUniqueId()).isEmpty()) {
             ClientDetector.playerCommandsQueue.get(event.getPlayer().getUniqueId()).clear();
         }
+
+        if(event.getQuitMessage().contains("Internal Exception: io.netty.codec.DecoderException: Badly compressed packet - size of 2 is below server threshold of 256") || event.getQuitMessage().contains("mismatched mod channel list"))
+            ConfigManager.optimizeConfig("config", "forge.simulateForgeHandshake", false);
     }
 }
