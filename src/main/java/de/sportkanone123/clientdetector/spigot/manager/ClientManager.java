@@ -66,6 +66,7 @@ public class ClientManager {
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Subsystem", "Easy Minecraft Client", false, false, null, null));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Minecraft-Console-Client", "Console Client", false, true, "/", 1));
         ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Vanilla", "Jigsaw", false, false, null, null));
+        ClientDetector.CLIENTS.add(new Client(Arrays.asList("MC|Brand", "minecraft:brand"), "Feather Fabric", "Feather Client", false, false, null, null));
     }
 
     public static void unLoad(){
