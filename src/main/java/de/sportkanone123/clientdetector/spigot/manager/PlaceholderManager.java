@@ -91,6 +91,12 @@ public class PlaceholderManager extends PlaceholderExpansion {
 
             return string;
         }
+
+        if(identifier.equalsIgnoreCase("minecraft_version")){
+            if(ClientDetector.mcVersion.get(player.getUniqueId()) != null)
+                return ClientDetector.mcVersion.get(player.getUniqueId());
+            return "unknown";
+        }
         return null;
     }
 }
