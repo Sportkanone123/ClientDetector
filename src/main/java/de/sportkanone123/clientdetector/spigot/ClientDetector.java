@@ -146,6 +146,12 @@ public class ClientDetector extends JavaPlugin {
         try {
             ConfigManager.loadConfig("message");
             ConfigManager.loadConfig("clientcontrol");
+
+            if(PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_17)){
+                if(ConfigManager.optimizeConfig("config", "forge.simulateForgeHandshake", false))
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] &cIMPORTANT NOTIFICATION: &aForge modlist detection for 1.17 - 1.18.2 is currently marked as UNSTABLE and therefore will be automatically disabled!!"));
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

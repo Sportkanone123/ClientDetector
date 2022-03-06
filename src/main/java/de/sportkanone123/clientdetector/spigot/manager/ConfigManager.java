@@ -115,7 +115,7 @@ public class ConfigManager {
         }
     }
 
-    public static void optimizeConfig(String config, String path, Object value){
+    public static boolean optimizeConfig(String config, String path, Object value){
         File file = new File(plugin.getDataFolder(), "data" + File.separator + "log" + ".yml");
 
         if(!file.exists()) {
@@ -131,10 +131,14 @@ public class ConfigManager {
                     saveConfig("data" + File.separator + "log");
 
                     Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aConfigOptimizer&7) &c We detected a problem with your configuration, it will be updated automatically: Config file: '" + config + ".yml', path: '" + path + "'"));
+
+                    return true;
                 }
             } catch (IOException e) {
                     e.printStackTrace();
             }
         }
+
+        return false;
     }
 }
