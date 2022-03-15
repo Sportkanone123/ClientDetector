@@ -91,8 +91,9 @@ public class PlayerListener implements Listener {
             AlertsManager.firstDetection.remove(event.getPlayer().getUniqueId());
         }
 
-        if(event.getQuitMessage() != null && event.getQuitMessage().contains("Internal Exception: io.netty.codec.DecoderException: Badly compressed packet - size of 2 is below server threshold of 256") || event.getQuitMessage().contains("mismatched mod channel list"))
-            ConfigManager.optimizeConfig("config", "forge.simulateForgeHandshake", false);
+        if(event.getQuitMessage() != null && !event.getQuitMessage().isEmpty())
+            if(event.getQuitMessage().contains("Internal Exception: io.netty.codec.DecoderException: Badly compressed packet - size of 2 is below server threshold of 256") || event.getQuitMessage().contains("mismatched mod channel list"))
+                ConfigManager.optimizeConfig("config", "forge.simulateForgeHandshake", false);
 
         if (ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))
             event.setQuitMessage(null);
