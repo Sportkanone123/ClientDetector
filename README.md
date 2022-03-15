@@ -32,6 +32,7 @@ ClientDetector uses the PacketEvents API. Check it out here: https://github.com/
 * "Rift"
 * "Cracked Vape"
 * "Winterware"
+* "Feather Client"
 
 ### Mods
 * "5zig Mod"
