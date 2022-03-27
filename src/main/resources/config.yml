@@ -16,6 +16,10 @@ client:
   #Should ClientDetector detect the MC version of a player? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
   enableMinecraftVersionDetection: true
 
+  #List of players that will bypass all client punishments. [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- examplePlayer]]
+  whitelistedPlayers:
+    - examplePlayer
+
   #If a players' client is detected the plugin will check if it is whitelisted, if not the punish command will be executed (only if this is enabled). [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
   enableWhitelist: false
   #Command that will be executed trough the console if it's not on the whitelist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%client_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
@@ -39,6 +43,10 @@ client:
 mods:
   #Should ClientDetector try to detect the mods that a player uses (not only forge mods)? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
   enableModDetection: true
+
+  #List of players that will bypass all mod punishments. [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- examplePlayer]]
+  whitelistedPlayers:
+    - examplePlayer
 
   #If a player joins with mods the plugin will check if all mods are whitelisted, if not the punish command will be executed (only if this is enabled). [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
   enableWhitelist: false
@@ -91,6 +99,11 @@ forge:
   enableNewerVersionDetection: true
   #Should the plugin send a "fake" handshake, this is required to get the modlist of a forge player. [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'true']
   simulateForgeHandshake: true
+
+  #List of players that will bypass all forge punishments. [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- examplePlayer]]
+  whitelistedPlayers:
+    - examplePlayer
+
   #Should all player's that join with forge get kicked? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
   blockForge: false
   #Command that will be executed trough the console if one or more of his mods are on the blacklist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%'], DEFAULT:'kick %player_name% Forge is not allowed on this server']

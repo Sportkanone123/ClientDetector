@@ -32,7 +32,7 @@ public class ForgeHandler {
     public static void handlePluginMessage(Player player, String channel, byte[] data){
         if(channel.equalsIgnoreCase("FML|HS") || channel.equalsIgnoreCase("l:fmlhs") || (channel.equalsIgnoreCase("minecraft:brand") && new String(data).contains("forge")) || (channel.equalsIgnoreCase("MC|Brand") && new String(data).contains("forge"))){
             if(ClientDetector.plugin.getConfig().getBoolean("forge.blockForge")){
-                if(!player.hasPermission("clientdetector.bypass")){
+                if(!player.hasPermission("clientdetector.bypass") && !((ArrayList<String>) ClientDetector.plugin.getConfig().get("forge.whitelistedPlayers")).contains(player.getName())){
                     if(player.isOnline()){
                         Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, new Runnable(){
                             @Override
@@ -55,7 +55,7 @@ public class ForgeHandler {
         if(ClientDetector.plugin.getConfig().getBoolean("forge.enableWhitelist")){
             if(ClientDetector.plugin.getConfig().get("forge.whitelistedMods") != null){
                 List<String> whitelist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("forge.whitelistedMods");
-                if(!whitelist.contains(mod) && !player.hasPermission("clientdetector.bypass")){
+                if(!whitelist.contains(mod) && !player.hasPermission("clientdetector.bypass") && !((ArrayList<String>) ClientDetector.plugin.getConfig().get("forge.whitelistedPlayers")).contains(player.getName())){
                     if(player.isOnline()){
                         Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, new Runnable(){
                             @Override
@@ -76,7 +76,7 @@ public class ForgeHandler {
         if(ClientDetector.plugin.getConfig().getBoolean("forge.enableBlacklist")){
             if(ClientDetector.plugin.getConfig().get("forge.blacklistedMods") != null){
                 List<String> blacklist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("forge.blacklistedMods");
-                if(blacklist.contains(mod) && !player.hasPermission("clientdetector.bypass")){
+                if(blacklist.contains(mod) && !player.hasPermission("clientdetector.bypass") && !((ArrayList<String>) ClientDetector.plugin.getConfig().get("forge.whitelistedPlayers")).contains(player.getName())){
                     if(player.isOnline()){
                         Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, new Runnable(){
                             @Override
