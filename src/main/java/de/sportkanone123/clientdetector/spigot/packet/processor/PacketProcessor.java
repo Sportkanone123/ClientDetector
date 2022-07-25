@@ -18,36 +18,34 @@
 
 package de.sportkanone123.clientdetector.spigot.packet.processor;
 
-import de.sportkanone123.clientdetector.spigot.packet.Packet;
-import io.github.retrooper.packetevents.event.impl.PacketLoginReceiveEvent;
-import io.github.retrooper.packetevents.packetwrappers.play.in.custompayload.WrappedPacketInCustomPayload;
+import com.github.retrooper.packetevents.event.simple.PacketLoginReceiveEvent;
+import com.github.retrooper.packetevents.event.simple.PacketPlayReceiveEvent;
+import com.github.retrooper.packetevents.protocol.packettype.PacketType;
+import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientPluginMessage;
 import org.bukkit.entity.Player;
 
 import java.nio.charset.StandardCharsets;
 
 public class PacketProcessor {
 
-    public static void handlePacket(Player player, Packet packet){
-        if(packet.isCustomPayload()){
-            WrappedPacketInCustomPayload wrappedPacketInCustomPayload = new WrappedPacketInCustomPayload(packet.getRawPacket());
+    public static void handlePacket(PacketPlayReceiveEvent event){
+        if(event.getPacketType() == PacketType.Play.Client.PLUGIN_MESSAGE){
+            WrapperPlayClientPluginMessage wrapperPlayClientPluginMessage = new WrapperPlayClientPluginMessage(event);
 
-            String channel = wrappedPacketInCustomPayload.getChannelName();
-            byte[] data = wrappedPacketInCustomPayload.getData();
+            Player player = (Player) event.getPlayer();
+            String channel = wrapperPlayClientPluginMessage.getChannelName();
+            byte[] data = wrapperPlayClientPluginMessage.getData();
 
-            de.sportkanone123.clientdetector.spigot.client.processor.PacketProcessor.handlePacket(player, channel, data);
-            de.sportkanone123.clientdetector.spigot.mod.processor.PacketProcessor.handlePacket(player, channel, data);
+            if(player != null){
+                de.sportkanone123.clientdetector.spigot.client.processor.PacketProcessor.handlePacket(player, channel, data);
+                de.sportkanone123.clientdetector.spigot.mod.processor.PacketProcessor.handlePacket(player, channel, data);
 
-            de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandler.handle(player, channel, data);
+                de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandler.handle(player, channel, data);
 
-            de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl.handlePacket(player, channel, data);
+                de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl.handlePacket(player, channel, data);
 
-            de.sportkanone123.clientdetector.spigot.forgemod.ForgeHandler.handlePluginMessage(player, channel, data);
-
-            /*System.out.println("-----------[Packet C -> S]-----------");
-            System.out.println("Player: " + player);
-            System.out.println("Channel: '" + wrappedPacketInCustomPayload.getChannelName() + "'");
-            System.out.println("Data: '" + new String(data, StandardCharsets.UTF_8) + "'");
-            System.out.println("-----------[Packet C -> S]-----------");*/
+                de.sportkanone123.clientdetector.spigot.forgemod.ForgeHandler.handlePluginMessage(player, channel, data);
+            }
         }
     }
 

@@ -21,10 +21,10 @@ package de.sportkanone123.clientdetector.spigot.manager;
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.api.events.ClientDetectedEvent;
 import de.sportkanone123.clientdetector.spigot.bungee.DataType;
-import io.github.retrooper.packetevents.PacketEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.spigotmc.SpigotConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class AlertsManager {
             firstDetection.add(player.getUniqueId());
 
             int waitTicks = 4;
-            if(PacketEvents.get().getServerUtils().isBungeeCordEnabled()) waitTicks = 100;
+            if(SpigotConfig.bungee) waitTicks = 100;
 
             Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, () -> {
                 if(ClientDetector.playerClient.get(player.getUniqueId()) != null)

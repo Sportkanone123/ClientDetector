@@ -18,46 +18,27 @@
 
 package de.sportkanone123.clientdetector.spigot.listener;
 
-import de.sportkanone123.clientdetector.spigot.packet.Packet;
+import com.github.retrooper.packetevents.event.PacketListenerPriority;
+import com.github.retrooper.packetevents.event.SimplePacketListenerAbstract;
+import com.github.retrooper.packetevents.event.simple.PacketLoginReceiveEvent;
+import com.github.retrooper.packetevents.event.simple.PacketPlayReceiveEvent;
 import de.sportkanone123.clientdetector.spigot.packet.processor.PacketProcessor;
-import io.github.retrooper.packetevents.event.PacketListenerDynamic;
-import io.github.retrooper.packetevents.event.impl.PacketLoginReceiveEvent;
-import io.github.retrooper.packetevents.event.impl.PacketPlayReceiveEvent;
-import io.github.retrooper.packetevents.event.impl.PacketPlaySendEvent;
-import io.github.retrooper.packetevents.event.priority.PacketEventPriority;
-import io.github.retrooper.packetevents.packettype.PacketType;
-import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
-import org.bukkit.event.Listener;
-
-import java.nio.charset.StandardCharsets;
 
 
-public class NetworkListener extends PacketListenerDynamic implements Listener {
+public class NetworkListener extends SimplePacketListenerAbstract {
 
     public NetworkListener() {
-        super(PacketEventPriority.NORMAL);
+        super(PacketListenerPriority.HIGH);
     }
+
 
     @Override
     public void onPacketPlayReceive(PacketPlayReceiveEvent event) {
-        PacketProcessor.handlePacket(event.getPlayer(), new Packet(event.getNMSPacket(), event.getPacketId()));
+        PacketProcessor.handlePacket(event);
     }
 
     @Override
     public void onPacketLoginReceive(PacketLoginReceiveEvent event) {
         PacketProcessor.handleLoginPacket(event);
     }
-
-    /*@Override
-    public void onPacketPlaySend(PacketPlaySendEvent event) {
-        if(event.getPacketId() == PacketType.Play.Server.CUSTOM_PAYLOAD){
-            WrappedPacketOutCustomPayload wrappedPacketInCustomPayload = new WrappedPacketOutCustomPayload(event.getNMSPacket());
-
-            System.out.println("-----------[Packet S -> C]-----------");
-            System.out.println("Player: " + event.getPlayer());
-            System.out.println("Channel: '" + wrappedPacketInCustomPayload.getChannelName() + "'");
-            System.out.println("Data: '" + new String(wrappedPacketInCustomPayload.getData(), StandardCharsets.UTF_8) + "'");
-            System.out.println("-----------[Packet S -> C]-----------");
-        }
-    }*/
 }

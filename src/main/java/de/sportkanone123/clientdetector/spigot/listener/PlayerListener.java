@@ -18,6 +18,7 @@
 
 package de.sportkanone123.clientdetector.spigot.listener;
 
+import com.github.retrooper.packetevents.PacketEvents;
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandshake;
 import de.sportkanone123.clientdetector.spigot.hackdetector.HackDetector;
@@ -25,12 +26,10 @@ import de.sportkanone123.clientdetector.spigot.hackdetector.impl.ChatExploit;
 import de.sportkanone123.clientdetector.spigot.manager.AlertsManager;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import de.sportkanone123.clientdetector.spigot.manager.GeyserManager;
-import io.github.retrooper.packetevents.PacketEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class PlayerListener implements Listener {
 
 
         if (ClientDetector.plugin.getConfig().getBoolean("client.enableMinecraftVersionDetection")) {
-            ClientDetector.mcVersion.put(event.getPlayer().getUniqueId(), PacketEvents.get().getPlayerUtils().getClientVersion(event.getPlayer()).name().replace("v_", "").replaceAll("_", "."));
+            ClientDetector.mcVersion.put(event.getPlayer().getUniqueId(), PacketEvents.getAPI().getPlayerManager().getClientVersion(event.getPlayer()).name().replace("V_", "").replaceAll("_", "."));
         }
 
         if (ConfigManager.getConfig("config").getBoolean("alerts.disablevanillamessages"))

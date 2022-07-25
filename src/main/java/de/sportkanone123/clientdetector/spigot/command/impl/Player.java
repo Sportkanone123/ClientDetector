@@ -18,9 +18,9 @@
 
 package de.sportkanone123.clientdetector.spigot.command.impl;
 
+import com.github.retrooper.packetevents.PacketEvents;
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
-import io.github.retrooper.packetevents.PacketEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -54,7 +54,7 @@ public class Player {
                         }
                     }
                 }else if(args[1].equalsIgnoreCase("version")){
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&' , ConfigManager.getConfig("message").getString("player.mcversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName()).replace("%mc_version%", PacketEvents.get().getPlayerUtils().getClientVersion(target).name().replace("v_", "").replaceAll("_", "."))));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&' , ConfigManager.getConfig("message").getString("player.mcversion").replace("%prefix%", ConfigManager.getConfig("message").getString("prefix")).replace("%player_name%", target.getName()).replace("%mc_version%", PacketEvents.getAPI().getPlayerManager().getClientVersion(target).name().replace("v_", "").replaceAll("_", "."))));
                 }else if(args[1].equalsIgnoreCase("labyaddons")){
                     if(ConfigManager.getConfig("message").getString("player.playerlabymods") != null){
                         ArrayList<String> message =  (ArrayList<String>) ConfigManager.getConfig("message").get("player.playermods");

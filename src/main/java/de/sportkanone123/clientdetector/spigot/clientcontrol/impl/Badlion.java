@@ -18,13 +18,12 @@
 
 package de.sportkanone123.clientdetector.spigot.clientcontrol.impl;
 
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerPluginMessage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.MemorySection;
 import org.bukkit.entity.Player;
 
@@ -147,8 +146,8 @@ public class Badlion {
         }
 
 
-        WrappedPacketOutCustomPayload costumPayload = new WrappedPacketOutCustomPayload("badlion:mods",  GSON.toJson(modsDisallowed).getBytes());
-        PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+        WrapperPlayServerPluginMessage costumPayload = new WrapperPlayServerPluginMessage("badlion:mods",  GSON.toJson(modsDisallowed).getBytes());
+        PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
     }
 
     private static class DisallowedMods {

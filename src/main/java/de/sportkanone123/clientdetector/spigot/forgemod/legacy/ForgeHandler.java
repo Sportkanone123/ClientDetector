@@ -31,7 +31,7 @@ import java.util.Arrays;
 
 public class ForgeHandler {
     public static void handle(Player player, String channel, byte[] data){
-        if(ClientDetector.plugin.getConfig().getBoolean("forge.enableLegacyDetection")){
+        if(ConfigManager.getConfig("config").getBoolean("forge.enableLegacyDetection")){
             if(channel.equalsIgnoreCase("FML|HS") && data != null && data[0] == 2){
                 ClientDetector.forgeMods.put(player.getUniqueId(), getModList(data));
 

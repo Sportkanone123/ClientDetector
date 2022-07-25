@@ -18,11 +18,10 @@
 
 package de.sportkanone123.clientdetector.spigot.clientcontrol.impl;
 
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
+import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerPluginMessage;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
-import io.github.retrooper.packetevents.utils.player.ClientVersion;
-import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import org.bukkit.entity.Player;
 
 import java.io.ByteArrayOutputStream;
@@ -57,13 +56,13 @@ public class BetterSprinting {
 
 
 
-        WrappedPacketOutCustomPayload costumPayload;
-        if(PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13))
-            costumPayload = new WrappedPacketOutCustomPayload("bsm:settings", msgbytes.toByteArray());
+        WrapperPlayServerPluginMessage costumPayload;
+        if(PacketEvents.getAPI().getServerManager().getVersion().isNewerThanOrEquals(ServerVersion.V_1_13))
+            costumPayload = new WrapperPlayServerPluginMessage("bsm:settings", msgbytes.toByteArray());
         else
-            costumPayload = new WrappedPacketOutCustomPayload("BSM", msgbytes.toByteArray());
+            costumPayload = new WrapperPlayServerPluginMessage("BSM", msgbytes.toByteArray());
 
-        PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+        PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
     }
 
 }

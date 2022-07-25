@@ -6,7 +6,7 @@
 
     <groupId>de.sportkanone123</groupId>
     <artifactId>ClientDetector</artifactId>
-    <version>2.4.8</version>
+    <version>2.5</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -39,6 +39,10 @@
                             <minimizeJar>false</minimizeJar>
                             <finalName>ClientDetector</finalName>
                             <relocations>
+                                <relocation>
+                                    <pattern>com.github.retrooper.packetevents</pattern>
+                                    <shadedPattern>de.sportkanone123.clientdetector.spigot.packetevents</shadedPattern>
+                                </relocation>
                                 <relocation>
                                     <pattern>io.github.retrooper.packetevents</pattern>
                                     <shadedPattern>de.sportkanone123.clientdetector.spigot.packetevents</shadedPattern>
@@ -86,15 +90,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.retrooper</groupId>
-            <artifactId>packetevents</artifactId>
-            <version>v1.8.2</version>
+            <groupId>com.github.retrooper.packetevents</groupId>
+            <artifactId>spigot</artifactId>
+            <version>2.0-c41f1797e8-1</version>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
+            <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
 

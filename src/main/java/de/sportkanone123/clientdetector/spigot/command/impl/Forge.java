@@ -19,14 +19,11 @@
 package de.sportkanone123.clientdetector.spigot.command.impl;
 
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
-import de.sportkanone123.clientdetector.spigot.forgemod.ModList;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
-import io.github.retrooper.packetevents.PacketEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 

@@ -18,10 +18,10 @@
 
 package de.sportkanone123.clientdetector.spigot.clientcontrol.impl;
 
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
+import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerPluginMessage;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
-import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import org.bukkit.entity.Player;
 
 import java.util.BitSet;
@@ -44,17 +44,17 @@ public class FiveZig {
             disableBitSet.set(i, features[i]);
         }
 
-        WrappedPacketOutCustomPayload costumPayload;
+        WrapperPlayServerPluginMessage costumPayload;
 
-        if(PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13)){
-            costumPayload = new WrappedPacketOutCustomPayload("the5zigmod:5zig_set",  disableBitSet.toByteArray());
-            PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+        if(PacketEvents.getAPI().getServerManager().getVersion().isNewerThanOrEquals(ServerVersion.V_1_13)){
+            costumPayload = new WrapperPlayServerPluginMessage("the5zigmod:5zig_set",  disableBitSet.toByteArray());
+            PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
 
-            costumPayload = new WrappedPacketOutCustomPayload("l:5zig_set",  disableBitSet.toByteArray());
-            PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+            costumPayload = new WrapperPlayServerPluginMessage("l:5zig_set",  disableBitSet.toByteArray());
+            PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
         }else{
-            costumPayload = new WrappedPacketOutCustomPayload("5zig_Set",  disableBitSet.toByteArray());
-            PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+            costumPayload = new WrapperPlayServerPluginMessage("5zig_Set",  disableBitSet.toByteArray());
+            PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
         }
 
     }

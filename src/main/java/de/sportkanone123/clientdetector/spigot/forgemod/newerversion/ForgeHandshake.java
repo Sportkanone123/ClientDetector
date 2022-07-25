@@ -18,14 +18,14 @@
 
 package de.sportkanone123.clientdetector.spigot.forgemod.newerversion;
 
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.packetwrappers.login.out.custompayload.WrappedPacketLoginOutCustomPayload;
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.wrapper.login.server.WrapperLoginServerPluginRequest;
 
 public class ForgeHandshake {
     public static void sendModList(Object channel){
 
-        WrappedPacketLoginOutCustomPayload wrappedPacketLoginOutCustomPayload = new WrappedPacketLoginOutCustomPayload(/*Random ID*/111111, "fml:handshake", new byte[] { 1, 0, 0, 0 });
-        PacketEvents.get().getPlayerUtils().sendPacket(channel, wrappedPacketLoginOutCustomPayload);
+        WrapperLoginServerPluginRequest wrappedPacketLoginOutCustomPayload = new WrapperLoginServerPluginRequest(/*Random ID*/111111, "fml:handshake", new byte[] { 1, 0, 0, 0 });
+        PacketEvents.getAPI().getPlayerManager().sendPacket(channel, wrappedPacketLoginOutCustomPayload);
 
     }
 }

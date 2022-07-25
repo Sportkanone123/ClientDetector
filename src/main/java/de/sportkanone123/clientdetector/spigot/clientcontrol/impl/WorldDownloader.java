@@ -18,12 +18,10 @@
 
 package de.sportkanone123.clientdetector.spigot.clientcontrol.impl;
 
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
+import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerPluginMessage;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
-import io.github.retrooper.packetevents.utils.player.ClientVersion;
-import io.github.retrooper.packetevents.utils.server.ServerVersion;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.io.ByteArrayOutputStream;
@@ -45,14 +43,14 @@ public class WorldDownloader {
 
         }
 
-        WrappedPacketOutCustomPayload costumPayload;
+        WrapperPlayServerPluginMessage costumPayload;
 
-        if(PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13)){
-            costumPayload = new WrappedPacketOutCustomPayload("wdl:control", msgbytes.toByteArray());
-            PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+        if(PacketEvents.getAPI().getServerManager().getVersion().isNewerThanOrEquals(ServerVersion.V_1_13)){
+            costumPayload = new WrapperPlayServerPluginMessage("wdl:control", msgbytes.toByteArray());
+            PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
         }else{
-            costumPayload = new WrappedPacketOutCustomPayload("WDL|CONTROL", msgbytes.toByteArray());
-            PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+            costumPayload = new WrapperPlayServerPluginMessage("WDL|CONTROL", msgbytes.toByteArray());
+            PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
         }
     }
 }

@@ -18,13 +18,12 @@
 
 package de.sportkanone123.clientdetector.spigot.clientcontrol.impl;
 
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerPluginMessage;
 import com.google.gson.*;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.MemorySection;
 import org.bukkit.entity.Player;
 
@@ -57,8 +56,8 @@ public class LunarClient {
         final UUID playerId = player.getUniqueId();
         final String channel = "lunarclient:pm";
 
-        WrappedPacketOutCustomPayload costumPayload = new WrappedPacketOutCustomPayload(channel,  LCPacket.getPacketData(packet));
-        PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+        WrapperPlayServerPluginMessage costumPayload = new WrapperPlayServerPluginMessage(channel,  LCPacket.getPacketData(packet));
+        PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
     }
 
 
@@ -376,7 +375,7 @@ public class LunarClient {
             short key = b.buf().readShort();
 
             if (key < 0) {
-                System.out.println("Key was smaller than nothing!  Weird key!");
+                //System.out.println("Key was smaller than nothing!  Weird key!");
             } else {
                 byte[] blob = new byte[key];
                 b.buf().readBytes(blob);

@@ -22,6 +22,7 @@ import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.api.events.ClientDetectedEvent;
 import de.sportkanone123.clientdetector.spigot.bungee.DataType;
 import de.sportkanone123.clientdetector.spigot.client.Client;
+import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -31,20 +32,20 @@ import java.util.List;
 public class ForgeHandler {
     public static void handlePluginMessage(Player player, String channel, byte[] data){
         if(channel.equalsIgnoreCase("FML|HS") || channel.equalsIgnoreCase("l:fmlhs") || (channel.equalsIgnoreCase("minecraft:brand") && new String(data).contains("forge")) || (channel.equalsIgnoreCase("MC|Brand") && new String(data).contains("forge"))){
-            if(ClientDetector.plugin.getConfig().getBoolean("forge.blockForge")){
-                if(!player.hasPermission("clientdetector.bypass") && !((ArrayList<String>) ClientDetector.plugin.getConfig().get("forge.whitelistedPlayers")).contains(player.getName())){
+            if(ConfigManager.getConfig("config").getBoolean("forge.blockForge")){
+                if(!player.hasPermission("clientdetector.bypass") && !((ArrayList<String>) ConfigManager.getConfig("config").get("forge.whitelistedPlayers")).contains(player.getName())){
                     if(player.isOnline()){
                         Bukkit.getScheduler().runTaskLater(ClientDetector.plugin, new Runnable(){
                             @Override
                             public void run() {
-                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("forge.punishCommandForge").replace("%player_name%", player.getName()));
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ConfigManager.getConfig("config").getString("forge.punishCommandForge").replace("%player_name%", player.getName()));
                             }
                         }, 10l);
                     }else{
                         if(ClientDetector.playerCommandsQueue.get(player.getUniqueId()) == null)
                             ClientDetector.playerCommandsQueue.put(player.getUniqueId(), new ArrayList<>());
 
-                        ClientDetector.playerCommandsQueue.get(player.getUniqueId()).add(ClientDetector.plugin.getConfig().getString("forge.punishCommandForge").replace("%player_name%", player.getName()));
+                        ClientDetector.playerCommandsQueue.get(player.getUniqueId()).add(ConfigManager.getConfig("config").getString("forge.punishCommandForge").replace("%player_name%", player.getName()));
                     }
                 }
             }

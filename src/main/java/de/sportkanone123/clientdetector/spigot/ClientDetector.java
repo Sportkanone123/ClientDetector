@@ -18,6 +18,8 @@
 
 package de.sportkanone123.clientdetector.spigot;
 
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
 import de.sportkanone123.clientdetector.spigot.bungee.BungeeManager;
 import de.sportkanone123.clientdetector.spigot.client.Client;
 import de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl;
@@ -30,9 +32,7 @@ import de.sportkanone123.clientdetector.spigot.listener.PlayerListener;
 import de.sportkanone123.clientdetector.spigot.listener.PluginMessageListener;
 import de.sportkanone123.clientdetector.spigot.manager.*;
 import de.sportkanone123.clientdetector.spigot.mod.Mod;
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.settings.PacketEventsSettings;
-import io.github.retrooper.packetevents.utils.server.ServerVersion;
+import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
@@ -58,17 +58,14 @@ public class ClientDetector extends JavaPlugin {
     public static HashMap<UUID, ArrayList<String>> playerCommandsQueue = new HashMap<UUID, ArrayList<String>>();
     public static BungeeManager bungeeManager;
 
-    private PacketEvents instance;
-
     @Override
     public void onLoad() {
-        instance = PacketEvents.create(this);
-        PacketEventsSettings settings = instance.getSettings();
-        settings.checkForUpdates(false)
-                .fallbackServerVersion(ServerVersion.v_1_17_1)
-                .compatInjector(false)
-                .bStats(false);
-        instance.load();
+        PacketEvents.setAPI(SpigotPacketEventsBuilder.build(this));
+        PacketEvents.getAPI().getSettings().readOnlyListeners(false)
+                .checkForUpdates(false)
+                .bStats(true)
+                .debug(false);
+        PacketEvents.getAPI().load();
     }
 
     @Override
@@ -77,12 +74,12 @@ public class ClientDetector extends JavaPlugin {
 
         new MetricsManager(this, 10745);
 
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aVersion&7) &aDetected Version &c" + PacketEvents.get().getServerUtils().getVersion().name()));
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aVersion&7) &aLoading settings for Version &c" + PacketEvents.get().getServerUtils().getVersion().name()));
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aVersion&7) &aDetected Version &c" + PacketEvents.getAPI().getServerManager().getVersion().name()));
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aVersion&7) &aLoading settings for Version &c" + PacketEvents.getAPI().getServerManager().getVersion().name()));
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aProtocol&7) &aLoading protocols..."));
-        instance.registerListener(new NetworkListener());
-        instance.init();
+        PacketEvents.getAPI().getEventManager().registerListener(new NetworkListener());
+        PacketEvents.getAPI().init();
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "clientdetector:sync");
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "lunarclient:pm");
@@ -91,7 +88,7 @@ public class ClientDetector extends JavaPlugin {
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "clientdetector:fix", new PluginMessageListener());
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "lunarclient:pm", new PluginMessageListener());
 
-        if(PacketEvents.get().getServerUtils().getVersion().isOlderThanOrEquals(ServerVersion.v_1_12_2))
+        if(PacketEvents.getAPI().getServerManager().getVersion().isOlderThanOrEquals(ServerVersion.V_1_12_2))
             Bukkit.getMessenger().registerIncomingPluginChannel(this, "CB-Client", new PluginMessageListener());
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] (&aConfig&7) &aLoading config(s)..."));
@@ -147,7 +144,7 @@ public class ClientDetector extends JavaPlugin {
             ConfigManager.loadConfig("message");
             ConfigManager.loadConfig("clientcontrol");
 
-            if(PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_17)){
+            if(PacketEvents.getAPI().getServerManager().getVersion().isNewerThanOrEquals(ServerVersion.V_1_17)){
                 if(ConfigManager.optimizeConfig("config", "forge.simulateForgeHandshake", false))
                     Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&7[&3ClientDetector&7] &cIMPORTANT NOTIFICATION: &aForge modlist detection for 1.17 - 1.18.2 is currently marked as UNSTABLE and therefore will be automatically disabled!!"));
             }
@@ -162,7 +159,7 @@ public class ClientDetector extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        instance.terminate();
+        PacketEvents.getAPI().terminate();
 
         Bukkit.getMessenger().unregisterIncomingPluginChannel(plugin);
         Bukkit.getMessenger().unregisterOutgoingPluginChannel(plugin);

@@ -18,17 +18,12 @@
 
 package de.sportkanone123.clientdetector.spigot.forgemod.legacy;
 
-import de.sportkanone123.clientdetector.spigot.ClientDetector;
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
-import io.github.retrooper.packetevents.utils.player.ClientVersion;
-import io.github.retrooper.packetevents.utils.server.ServerVersion;
-import org.bukkit.entity.Player;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
+import com.github.retrooper.packetevents.protocol.player.ClientVersion;
+import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerPluginMessage;
+import org.bukkit.entity.Player;
 
 public class ForgeHandshake {
 
@@ -39,8 +34,8 @@ public class ForgeHandshake {
     //          ║          ║ FML protocol Version ║	Byte	      ║ Determined from NetworkRegistery. Currently 2.
     //          ║          ║ Override dimension   ║ Optional Int  ║ Only sent if protocol version is greater than 1.
     public static void sendServerHello(Player player, String channel){
-        WrappedPacketOutCustomPayload costumPayload = new WrappedPacketOutCustomPayload(channel,  new byte[] {(byte) 0,(byte) 2,(byte) 0,(byte) 0,(byte) 0,(byte) 0 });
-        PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+        WrapperPlayServerPluginMessage costumPayload = new WrapperPlayServerPluginMessage(channel,  new byte[] {(byte) 0,(byte) 2,(byte) 0,(byte) 0,(byte) 0,(byte) 0 });
+        PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
     }
 
 
@@ -50,8 +45,8 @@ public class ForgeHandshake {
     //          ║          ║ Number of mods       ║	Varint	      ║ Number of mods below
     //          ║          ║ Mods (name+version)  ║	List(Str,Str) ║
     public static void sendModList(Player player, String channel){
-        WrappedPacketOutCustomPayload costumPayload = new WrappedPacketOutCustomPayload(channel,  new byte[] {(byte) 2,(byte) 0,(byte) 0,(byte) 0,(byte) 0 });
-        PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+        WrapperPlayServerPluginMessage costumPayload = new WrapperPlayServerPluginMessage(channel,  new byte[] {(byte) 2,(byte) 0,(byte) 0,(byte) 0,(byte) 0 });
+        PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
     }
 
 
@@ -60,8 +55,8 @@ public class ForgeHandshake {
     // FML|HS	║ Both     ║ Discriminator        ║	Byte	      ║ Always -1 (255) for HandshakeAck
     //          ║          ║ Phase                ║	Byte	      ║ The current phase, which is the ordinal (0-indexed) in the FMLHandshakeClientState or FMLHandshakeServerState enums (if the server is sending it, it is in the ServerState enum, and if the client is sending it, it is the ClientState enum).
     public static void sendHandshakeAck(Player player, Byte phase, String channel){
-        WrappedPacketOutCustomPayload costumPayload = new WrappedPacketOutCustomPayload(channel,  new byte[] {(byte) -1, phase});
-        PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+        WrapperPlayServerPluginMessage costumPayload = new WrapperPlayServerPluginMessage(channel,  new byte[] {(byte) -1, phase});
+        PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
     }
 
 
@@ -69,12 +64,12 @@ public class ForgeHandshake {
     //══════════╬══════════╬══════════════════════╬═══════════════╬════════════
     // FML|HS	║ Client   ║ Discriminator        ║	Byte	      ║ Always -2 (254) for HandshakeReset
     public static void sendHandshakeReset(Player player, String channel){
-        WrappedPacketOutCustomPayload costumPayload = new WrappedPacketOutCustomPayload(channel,  new byte[] {(byte) -2,(byte) 0 });
-        PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+        WrapperPlayServerPluginMessage costumPayload = new WrapperPlayServerPluginMessage(channel,  new byte[] {(byte) -2,(byte) 0 });
+        PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
     }
 
     public static void sendHandshake(Player player){
-        if(PacketEvents.get().getServerUtils().getVersion().isOlderThanOrEquals(ServerVersion.v_1_12_2) && (PacketEvents.get().getPlayerUtils().getClientVersion(player).isNewerThanOrEquals(ClientVersion.v_1_8) && PacketEvents.get().getPlayerUtils().getClientVersion(player).isOlderThanOrEquals(ClientVersion.v_1_12_2))){
+        if(PacketEvents.getAPI().getServerManager().getVersion().isOlderThanOrEquals(ServerVersion.V_1_12_2) && (PacketEvents.getAPI().getPlayerManager().getClientVersion(player).isNewerThanOrEquals(ClientVersion.V_1_8) && PacketEvents.getAPI().getPlayerManager().getClientVersion(player).isOlderThanOrEquals(ClientVersion.V_1_12_2))){
             sendHandshakeReset(player, "FML|HS");
             sendServerHello(player, "FML|HS");
             sendModList(player, "FML|HS");

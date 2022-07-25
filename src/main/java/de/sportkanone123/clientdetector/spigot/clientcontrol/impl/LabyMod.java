@@ -18,13 +18,12 @@
 
 package de.sportkanone123.clientdetector.spigot.clientcontrol.impl;
 
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
+import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerPluginMessage;
 import com.google.gson.JsonObject;
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.packetwrappers.play.out.custompayload.WrappedPacketOutCustomPayload;
-import io.github.retrooper.packetevents.utils.player.ClientVersion;
-import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.EncoderException;
@@ -138,14 +137,14 @@ public class LabyMod {
             }
         }
 
-        WrappedPacketOutCustomPayload costumPayload;
+        WrapperPlayServerPluginMessage costumPayload;
 
-        if(PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13)){
-            costumPayload = new WrappedPacketOutCustomPayload("labymod3:main",  LabyModProtocol.getBytesToSend(modifiedPermissions));
-            PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+        if(PacketEvents.getAPI().getServerManager().getVersion().isNewerThanOrEquals(ServerVersion.V_1_13)){
+            costumPayload = new WrapperPlayServerPluginMessage("labymod3:main",  LabyModProtocol.getBytesToSend(modifiedPermissions));
+            PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
         }else{
-            costumPayload = new WrappedPacketOutCustomPayload("LMC",  LabyModProtocol.getBytesToSend(modifiedPermissions));
-            PacketEvents.get().getPlayerUtils().sendPacket(player, costumPayload);
+            costumPayload = new WrapperPlayServerPluginMessage("LMC",  LabyModProtocol.getBytesToSend(modifiedPermissions));
+            PacketEvents.getAPI().getPlayerManager().sendPacket(player, costumPayload);
         }
     }
 

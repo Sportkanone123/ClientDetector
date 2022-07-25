@@ -18,17 +18,17 @@
 
 package de.sportkanone123.clientdetector.spigot.forgemod.newerversion;
 
+import com.github.retrooper.packetevents.PacketEvents;
+import com.github.retrooper.packetevents.event.simple.PacketLoginReceiveEvent;
+import com.github.retrooper.packetevents.manager.server.ServerVersion;
+import com.github.retrooper.packetevents.protocol.packettype.PacketType;
+import com.github.retrooper.packetevents.wrapper.login.client.WrapperLoginClientLoginStart;
+import com.github.retrooper.packetevents.wrapper.login.client.WrapperLoginClientPluginResponse;
 import de.sportkanone123.clientdetector.spigot.ClientDetector;
 import de.sportkanone123.clientdetector.spigot.api.events.ForgeModlistDetectedEvent;
 import de.sportkanone123.clientdetector.spigot.bungee.DataType;
 import de.sportkanone123.clientdetector.spigot.forgemod.ModList;
 import de.sportkanone123.clientdetector.spigot.manager.ConfigManager;
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.event.impl.PacketLoginReceiveEvent;
-import io.github.retrooper.packetevents.packettype.PacketType;
-import io.github.retrooper.packetevents.packetwrappers.login.in.custompayload.WrappedPacketLoginInCustomPayload;
-import io.github.retrooper.packetevents.packetwrappers.login.in.start.WrappedPacketLoginInStart;
-import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.DecoderException;
@@ -45,18 +45,18 @@ public class ForgeHandler {
 
 
     public static void handle(PacketLoginReceiveEvent event){
-        if(event.getPacketId() == PacketType.Login.Client.START ) {
-            if(ClientDetector.plugin.getConfig().getBoolean("forge.simulateForgeHandshake") && PacketEvents.get().getServerUtils().getVersion().isNewerThanOrEquals(ServerVersion.v_1_13) && !ClientDetector.forgeMods.containsKey(new WrappedPacketLoginInStart(event.getNMSPacket()).getGameProfile().getId()) && !ConfigManager.getConfig("config").getBoolean("velocity.enableVelocitySupport")) {
+        if(event.getPacketType() == PacketType.Login.Client.LOGIN_START ) {
+            if(ConfigManager.getConfig("config").getBoolean("forge.simulateForgeHandshake") && PacketEvents.getAPI().getServerManager().getVersion().isNewerThanOrEquals(ServerVersion.V_1_13) && !ClientDetector.forgeMods.containsKey(new WrapperLoginClientLoginStart(event).readUUID()) && !ConfigManager.getConfig("config").getBoolean("velocity.enableVelocitySupport")) {
                 ForgeHandshake.sendModList(event.getChannel());
-                channelToName.put(event.getChannel(), new WrappedPacketLoginInStart(event.getNMSPacket()).getGameProfile().getName());
+                channelToName.put(event.getChannel(), new WrapperLoginClientLoginStart(event).getUsername());
             }
 
-        }else if(event.getPacketId() == PacketType.Login.Client.CUSTOM_PAYLOAD) {
+        }else if(event.getPacketType() == PacketType.Login.Client.LOGIN_PLUGIN_RESPONSE) {
             if(!ConfigManager.getConfig("config").getBoolean("velocity.enableVelocitySupport"))
                 event.setCancelled(true);
 
             try {
-                nameToModlist.put(channelToName.get(event.getChannel()), getModList(new WrappedPacketLoginInCustomPayload(event.getNMSPacket()).getData()));
+                nameToModlist.put(channelToName.get(event.getChannel()), getModList(new WrapperLoginClientPluginResponse(event).getData()));
             }catch (NullPointerException e){
 
             }

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.sportkanone123.clientdetector.spigot.packet;
+/*package de.sportkanone123.clientdetector.spigot.packet;
 
 import io.github.retrooper.packetevents.packettype.PacketType;
 import io.github.retrooper.packetevents.packetwrappers.NMSPacket;
@@ -36,3 +36,4 @@ public class Packet {
 
     public boolean isCustomPayload() { return packetId == PacketType.Play.Client.CUSTOM_PAYLOAD; }
 }
+*/

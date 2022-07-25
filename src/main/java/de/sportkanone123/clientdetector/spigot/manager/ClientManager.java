@@ -78,43 +78,43 @@ public class ClientManager {
             ClientDetector.bungeeManager.syncList(DataType.CLIENT_LIST, player, client);
         }
 
-        if(ClientDetector.plugin.getConfig().getBoolean("client.enableWhitelist")){
-            if(ClientDetector.plugin.getConfig().get("client.whitelistedClients") != null){
-                List<String> whitelist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("client.whitelistedClients");
+        if(ConfigManager.getConfig("config").getBoolean("client.enableWhitelist")){
+            if(ConfigManager.getConfig("config").get("client.whitelistedClients") != null){
+                List<String> whitelist = (ArrayList<String>) ConfigManager.getConfig("config").get("client.whitelistedClients");
                 if(!whitelist.contains(client) && !player.hasPermission("clientdetector.bypass") && !((ArrayList<String>) ClientDetector.plugin.getConfig().get("client.whitelistedPlayers")).contains(player.getName())) {
                     if(player.isOnline()){
                         Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
                             @Override
                             public void run() {
-                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("client.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ConfigManager.getConfig("config").getString("client.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
                             }
                         });
                     }else{
                         if(ClientDetector.playerCommandsQueue.get(player.getUniqueId()) == null)
                             ClientDetector.playerCommandsQueue.put(player.getUniqueId(), new ArrayList<>());
 
-                        ClientDetector.playerCommandsQueue.get(player.getUniqueId()).add(ClientDetector.plugin.getConfig().getString("client.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
+                        ClientDetector.playerCommandsQueue.get(player.getUniqueId()).add(ConfigManager.getConfig("config").getString("client.punishCommandWhitelist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
                     }
                 }
             }
         }
 
-        if(ClientDetector.plugin.getConfig().getBoolean("client.enableBlacklist")){
+        if(ConfigManager.getConfig("config").getBoolean("client.enableBlacklist")){
             if(ClientDetector.plugin.getConfig().get("client.blacklistedClients") != null){
-                List<String> blacklist = (ArrayList<String>) ClientDetector.plugin.getConfig().get("client.blacklistedClients");
-                if(blacklist.contains(client) && !player.hasPermission("clientdetector.bypass") && !((ArrayList<String>) ClientDetector.plugin.getConfig().get("client.whitelistedPlayers")).contains(player.getName())){
+                List<String> blacklist = (ArrayList<String>) ConfigManager.getConfig("config").get("client.blacklistedClients");
+                if(blacklist.contains(client) && !player.hasPermission("clientdetector.bypass") && !((ArrayList<String>) ConfigManager.getConfig("config").get("client.whitelistedPlayers")).contains(player.getName())){
                     if(player.isOnline()){
                         Bukkit.getScheduler().runTask(ClientDetector.plugin, new Runnable() {
                             @Override
                             public void run() {
-                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClientDetector.plugin.getConfig().getString("client.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ConfigManager.getConfig("config").getString("client.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
                             }
                         });
                     }else{
                         if(ClientDetector.playerCommandsQueue.get(player.getUniqueId()) == null)
                             ClientDetector.playerCommandsQueue.put(player.getUniqueId(), new ArrayList<>());
 
-                        ClientDetector.playerCommandsQueue.get(player.getUniqueId()).add(ClientDetector.plugin.getConfig().getString("client.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
+                        ClientDetector.playerCommandsQueue.get(player.getUniqueId()).add(ConfigManager.getConfig("config").getString("client.punishCommandBlacklist").replace("%player_name%", player.getName()).replace("%client_name%", client).replace("%player_uuid%", player.getUniqueId().toString()));
                     }
                 }
             }
