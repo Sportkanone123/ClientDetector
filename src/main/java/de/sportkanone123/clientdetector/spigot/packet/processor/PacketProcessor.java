@@ -32,18 +32,17 @@ public class PacketProcessor {
         if(event.getPacketType() == PacketType.Play.Client.PLUGIN_MESSAGE){
             WrapperPlayClientPluginMessage wrapperPlayClientPluginMessage = new WrapperPlayClientPluginMessage(event);
 
-            Player player = (Player) event.getPlayer();
-            String channel = wrapperPlayClientPluginMessage.getChannelName();
-            byte[] data = wrapperPlayClientPluginMessage.getData();
+            if(event.getPlayer() != null && ((Player) event.getPlayer()) != null && ((Player) event.getPlayer()).getUniqueId() != null){
+                Player player = (Player) event.getPlayer();
+                String channel = wrapperPlayClientPluginMessage.getChannelName();
+                byte[] data = wrapperPlayClientPluginMessage.getData();
 
-            if(player != null){
                 de.sportkanone123.clientdetector.spigot.client.processor.PacketProcessor.handlePacket(player, channel, data);
                 de.sportkanone123.clientdetector.spigot.mod.processor.PacketProcessor.handlePacket(player, channel, data);
 
                 de.sportkanone123.clientdetector.spigot.forgemod.legacy.ForgeHandler.handle(player, channel, data);
 
                 de.sportkanone123.clientdetector.spigot.clientcontrol.ClientControl.handlePacket(player, channel, data);
-
                 de.sportkanone123.clientdetector.spigot.forgemod.ForgeHandler.handlePluginMessage(player, channel, data);
             }
         }
