@@ -6,7 +6,7 @@
 
     <groupId>de.sportkanone123</groupId>
     <artifactId>ClientDetector</artifactId>
-    <version>2.5</version>
+    <version>2.5.2</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -63,8 +63,8 @@
 
     <repositories>
         <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
+            <id>codemc-snapshots</id>
+            <url>https://repo.codemc.io/repository/maven-snapshots/</url>
         </repository>
 
         <repository>
@@ -92,7 +92,7 @@
         <dependency>
             <groupId>com.github.retrooper.packetevents</groupId>
             <artifactId>spigot</artifactId>
-            <version>2.0-c41f1797e8-1</version>
+            <version>2.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -105,7 +105,7 @@
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>2.10.9</version>
+            <version>2.11.2</version>
             <scope>provided</scope>
         </dependency>
 

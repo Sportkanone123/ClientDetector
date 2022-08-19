@@ -46,7 +46,7 @@ public class ForgeHandler {
 
     public static void handle(PacketLoginReceiveEvent event){
         if(event.getPacketType() == PacketType.Login.Client.LOGIN_START ) {
-            if(ConfigManager.getConfig("config").getBoolean("forge.simulateForgeHandshake") && PacketEvents.getAPI().getServerManager().getVersion().isNewerThanOrEquals(ServerVersion.V_1_13) && !ClientDetector.forgeMods.containsKey(new WrapperLoginClientLoginStart(event).readUUID()) && !ConfigManager.getConfig("config").getBoolean("velocity.enableVelocitySupport")) {
+            if(ConfigManager.getConfig("config").getBoolean("forge.simulateForgeHandshake") && PacketEvents.getAPI().getServerManager().getVersion().isNewerThanOrEquals(ServerVersion.V_1_13) && !ClientDetector.forgeMods.containsKey(new WrapperLoginClientLoginStart(event).getPlayerUUID().get()) && !ConfigManager.getConfig("config").getBoolean("velocity.enableVelocitySupport")) {
                 ForgeHandshake.sendModList(event.getChannel());
                 channelToName.put(event.getChannel(), new WrapperLoginClientLoginStart(event).getUsername());
             }
