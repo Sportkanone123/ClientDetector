@@ -22,15 +22,15 @@ client:
 
   #If a players' client is detected the plugin will check if it is whitelisted, if not the punish command will be executed (only if this is enabled). [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
   enableWhitelist: false
-  #Command that will be executed trough the console if it's not on the whitelist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%client_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
+  #Command that will be executed through the console if it's not on the whitelist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%client_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
   punishCommandWhitelist: "kick %player_name% %client_name% is not allowed on this server"
   #List of whitelisted clients (name of detected clients can be found here: https://github.com/Sportkanone123/ClientDetector/blob/master/README.md). [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- exampleMod]]
   whitelistedClients:
     - exampleClient
 
-  #If a players' client is detected and it is on the blacklist, the punish command will be executed trough the console (only if this is enabled). [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
+  #If a players' client is detected, and it is on the blacklist, the punish command will be executed trough the console (only if this is enabled). [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
   enableBlacklist: false
-  #Command that will be executed trough the console if the client is on the blacklist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%client_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
+  #Command that will be executed through the console if the client is on the blacklist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%client_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
   punishCommandBlacklist: "kick %player_name% %client_name% is not allowed on this server"
   #List of blacklisted clients (name of detected clients can be found here: https://github.com/Sportkanone123/ClientDetector/blob/master/README.md). [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- exampleMod]]
   blacklistedClients:
@@ -50,7 +50,7 @@ mods:
 
   #If a player joins with mods the plugin will check if all mods are whitelisted, if not the punish command will be executed (only if this is enabled). [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
   enableWhitelist: false
-  #Command that will be executed trough the console if not all mods that a player are whitelisted. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
+  #Command that will be executed through the console if not all mods that a player are whitelisted. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
   punishCommandWhitelist: "kick %player_name% %mod_name% is not allowed on this server"
   #List of whitelisted mods (name of detected mods can be found here: https://github.com/Sportkanone123/ClientDetector/blob/master/README.md). [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- exampleMod]]
   whitelistedMods:
@@ -58,7 +58,7 @@ mods:
 
   #If a player join and one or more of his mods are on this list, the punish command will be executed trough the console (only if this is enabled). [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
   enableBlacklist: false
-  #Command that will be executed trough the console if one or more of his mods are on the blacklist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
+  #Command that will be executed through the console if one or more of his mods are on the blacklist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
   punishCommandBlacklist: "kick %player_name% %mod_name% is not allowed on this server"
   #List of blacklisted mods (name of detected mods can be found here: https://github.com/Sportkanone123/ClientDetector/blob/master/README.md). [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- exampleMod]]
   blacklistedMods:
@@ -106,12 +106,12 @@ forge:
 
   #Should all player's that join with forge get kicked? [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
   blockForge: false
-  #Command that will be executed trough the console if one or more of his mods are on the blacklist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%'], DEFAULT:'kick %player_name% Forge is not allowed on this server']
+  #Command that will be executed through the console if one or more of his mods are on the blacklist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%'], DEFAULT:'kick %player_name% Forge is not allowed on this server']
   punishCommandForge: "kick %player_name% Forge is not allowed on this Server"
 
   #If a player joins with forge the plugin will check if all forge mods are whitelisted, if not the punish command will be executed (only if this is enabled). [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
   enableWhitelist: false
-  #Command that will be executed trough the console if not all forge mods that a player are whitelisted. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
+  #Command that will be executed through the console if not all forge mods that a player are whitelisted. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
   punishCommandWhitelist: "kick %player_name% %mod_name% is not allowed on this server"
   #List of whitelisted mods (name = ModID). [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- exampleMod]]
   whitelistedMods:
@@ -119,7 +119,7 @@ forge:
 
   #If a player join and one or more of his forge mods are on this list, the punish command will be executed trough the console (only if this is enabled). [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
   enableBlacklist: false
-  #Command that will be executed trough the console if one or more of his forge mods are on the blacklist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
+  #Command that will be executed through the console if one or more of his forge mods are on the blacklist. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%mod_name%'], DEFAULT:'kick %player_name% %mod_name% is not allowed on this server']
   punishCommandBlacklist: "kick %player_name% %mod_name% is not allowed on this server"
   #List of blacklisted mods (name = ModID). [OPTIONS: 'anyList', PLACEHOLDERS: none, DEFAULT: [- exampleMod]]
   blacklistedMods:
@@ -174,7 +174,7 @@ hackdetector:
     checkAfterCounts: 20
     #Should the player be punished if he uses FastMath (FastMath doesn't indicate a hack client directly, but it doesn't exist in vanilla minecaft) . [OPTIONS: 'true'/'false', PLACEHOLDERS: none, DEFAULT:'false']
     enablePunishment: false
-    #Command that will be executed trough the console if he fails the test. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%prefix%'], DEFAULT:'kick %player_name% %prefix% &aPlease use Vanilla Minecraft!']
+    #Command that will be executed through the console if he fails the test. [OPTIONS: 'anyString', PLACEHOLDERS: ['%player_name%', '%player_uuid%', '%prefix%'], DEFAULT:'kick %player_name% %prefix% &aPlease use Vanilla Minecraft!']
     punishCommand: "kick %player_name% %prefix% &aPlease use Vanilla Minecraft!"
 
   detectcrackedvape:
