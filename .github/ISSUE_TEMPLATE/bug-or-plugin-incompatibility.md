@@ -8,11 +8,9 @@ assignees: Sportkanone123
 ---
 
 **General Information**
-Server version:  ... (e.g.: 1.17.1)
-Server software: ... (e.g.: Paper/Spigot/Bukkit)
-Client version:  ... (e.g.: 1.17.1)
-Client software: ... (e.g.: Vanilla/Lunar/Badlion/Forge)
-Plugin version: ... (e.g.: 2.2.5)
+Server version: (e.g.: Paper/Spigot 1.19.2)
+Client version: (e.g.: Vanilla/Fabric/Forge/Badlion/Lunar 1.19.2)
+Plugin version: (e.g.: 2.5.3)
 
 
 **Describe the bug**
