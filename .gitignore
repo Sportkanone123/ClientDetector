@@ -10,6 +10,7 @@
 *.xml
 
 target
+.fleet
 
 ClientDetector 2.0.iml
 
