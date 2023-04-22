@@ -6,7 +6,7 @@
 
     <groupId>de.sportkanone123</groupId>
     <artifactId>ClientDetector</artifactId>
-    <version>2.5.2</version>
+    <version>2.5.5</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -45,16 +45,6 @@
                         <configuration>
                             <minimizeJar>false</minimizeJar>
                             <finalName>ClientDetector</finalName>
-                            <relocations>
-                                <relocation>
-                                    <pattern>com.github.retrooper.packetevents</pattern>
-                                    <shadedPattern>de.sportkanone123.clientdetector.spigot.packetevents</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>io.github.retrooper.packetevents</pattern>
-                                    <shadedPattern>de.sportkanone123.clientdetector.spigot.packetevents</shadedPattern>
-                                </relocation>
-                            </relocations>
                         </configuration>
                     </execution>
                 </executions>
@@ -110,14 +100,14 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
+            <version>1.18.26</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>2.11.2</version>
+            <version>2.11.3</version>
             <scope>provided</scope>
         </dependency>
 
@@ -139,7 +129,7 @@
         <dependency>
             <groupId>com.velocitypowered</groupId>
             <artifactId>velocity-api</artifactId>
-            <version>3.0.1</version>
+            <version>3.1.1</version>
             <scope>provided</scope>
         </dependency>
 

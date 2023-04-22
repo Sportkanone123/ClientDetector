@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 @com.velocitypowered.api.plugin.Plugin(
         id = "clientdetector",
         name = "ClientDetector",
-        version = "2.5.2",
+        version = "2.5.5",
         description = "A simple plugin to detect and manage a player's client/mods",
         authors = {"Sportkanone123"}
 )

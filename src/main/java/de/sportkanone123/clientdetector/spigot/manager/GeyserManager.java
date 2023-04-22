@@ -19,11 +19,11 @@
 package de.sportkanone123.clientdetector.spigot.manager;
 
 import com.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.util.GeyserUtil;
 import org.bukkit.entity.Player;
 
 public class GeyserManager {
     public static boolean isBedrockPlayer(Player player){
-        return GeyserUtil.isGeyserPlayer(player.getUniqueId());
+        //ToDo
+        return false;
     }
 }

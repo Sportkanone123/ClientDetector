@@ -61,7 +61,7 @@ public class ClientDetector extends JavaPlugin {
     @Override
     public void onLoad() {
         PacketEvents.setAPI(SpigotPacketEventsBuilder.build(this));
-        PacketEvents.getAPI().getSettings().readOnlyListeners(false)
+        PacketEvents.getAPI().getSettings()
                 .checkForUpdates(false)
                 .bStats(true)
                 .debug(false);
