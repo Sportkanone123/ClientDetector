@@ -28,7 +28,6 @@ ClientDetector uses the PacketEvents API. Check it out here: https://github.com/
 * "PvPLounge Client"
 * "Fabric"
 * "Lunar Client"
-* "Forge"
 * "Rift"
 * "Cracked Vape"
 * "Winterware"
